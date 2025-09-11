@@ -114,7 +114,7 @@ export default function PortfolioSite() {
 
       <header className="max-w-7xl mx-auto px-6 pt-10 pb-6">
         <nav className="flex items-center justify-between">
-          <div className="font-semibold tracking-tight">AMAN • PORTFOLIO</div>
+          <div className="font-semibold tracking-tight">Aman Kaur | Guiding Change with Purpose</div>
           <div className="hidden md:flex gap-4 text-sm">
             <a href="#projects" className="hover:underline">Projects</a>
             <a href="#research" className="hover:underline">Research</a>
@@ -134,7 +134,7 @@ export default function PortfolioSite() {
               Hi, I’m <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-rose-600">{name}</span>
             </h1>
             <p className="mt-4 text-xl text-neutral-700">{title}</p>
-            <p className="mt-3 text-neutral-600">I help organisations turn complex identity and data problems into clear, human‑centred solutions that build trust and measurable outcomes.</p>
+            <p className="mt-3 text-neutral-600">I turn complexity into clarity — helping organisations grow with confidence and purpose.</p>
 
             <div className="mt-6 flex flex-wrap gap-3">
               <SocialLink href={`mailto:${email}`}>
@@ -168,7 +168,7 @@ export default function PortfolioSite() {
             </div>
 
             <div className="mt-6 flex items-center gap-2 text-sm text-neutral-600">
-              <ShieldCheck className="h-4 w-4" /> Available for consulting, speaking, and collaborations.
+              <ShieldCheck className="h-4 w-4" /> Partnering with organisations through consulting, speaking, and strategic collaborations.
             </div>
           </div>
 
@@ -180,9 +180,10 @@ export default function PortfolioSite() {
                   Quick Wins for You <Sparkles className="h-4 w-4 text-rose-500" />
                 </h3>
                 <ul className="mt-2 text-sm list-disc pl-4 text-neutral-700 space-y-1">
-                  <li>Audit your identity & data flows; spot gaps impacting compliance and customer trust.</li>
-                  <li>Design a lightweight, evidence‑based UX testing plan your team can run in a week.</li>
-                  <li>Prototype verifiable credentials for workforce/product claims using open standards.</li>
+                  <li>Clarity Check, I’ll map where you are now so you know exactly what needs attention.</li>
+                  <li>Trust Boost, ’ll spot what’s blocking trust and guide you to fix it fast.</li>
+                  <li>Focus Finder, I’ll help you choose the 2–3 areas that will create the biggest impact.</li>              
+                  <li>Pilot Starter, I’ll turn one idea into a simple, safe pilot you can launch quickly.<li>
                 </ul>
                 <a href="#contact" className="mt-3 inline-flex items-center gap-2 text-indigo-700 hover:underline">
                   Book a 20‑min intro <ExternalLink className="h-4 w-4" />
@@ -249,11 +250,17 @@ export default function PortfolioSite() {
           </Card>
           <Card id="teaching">
             <h3 className="font-semibold text-lg">Teaching & Curriculum</h3>
-            <p className="mt-2 text-sm text-neutral-700">I lecture in UX & Design Thinking, Cyber Security, and Business Intelligence—creating practical labs and assessments that build real‑world skills.</p>
+            <p className="mt-2 text-sm text-neutral-700">I empower learners through UX & Design Thinking, Cyber Security, and Business Intelligence - building future-ready skills through innovation and real-world practice.</p>
             <ul className="mt-3 space-y-1 text-sm text-neutral-700 list-disc pl-4">
-              <li>UX: Personas, IA, interaction, <em>usability testing</em></li>
-              <li>Cyber: pfSense, Linux Mint, Wireshark</li>
-              <li>BI: KPIs, dashboards, data ethics</li>
+<li><strong>Business & Data Strategy</strong> — Business analysis, functional requirements, SQL, Power BI/ Tableau, Excel</li>
+    <li><strong>Cybersecurity & Networks</strong> — pfSense, Wireshark, VPNs, secure networking, troubleshooting</li>
+    <li><strong>Systems & Tools</strong> — Linux, Windows Server, virtual machines, Python, remote support tools</li>
+    <li><strong>Collaboration & Dev Platforms</strong> — Jira, Confluence, GitHub, Microsoft 365, Canvas, Moodle</li>
+    <li><strong>Analytics & Insights</strong> — Tableau, Power BI, data visualisation, dashboards</li>
+    <li><strong>Teaching & Learning Design</strong> — Online LMS, Zoom, Teams, Turnitin, rubric design</li>
+    <li><strong>Creative & Coaching Skills</strong> — Design thinking, innovation workshops, mentoring, public speaking, storytelling, curriculum design</li>
+    <li><strong>Professional Capabilities</strong> — Agile, SDLC, documentation, leadership, communication, strategic planning, content creation</li>
+
             </ul>
           </Card>
         </div>
