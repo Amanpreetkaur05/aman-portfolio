@@ -173,24 +173,30 @@ export default function PortfolioSite() {
           </div>
 
           <Card>
-            <div className="flex items-start gap-4">
-              <div className="shrink-0 w-20 h-20 rounded-2xl bg-gradient-to-br from-indigo-500 to-rose-500 text-white flex items-center justify-center text-3xl font-bold">AK</div>
-              <div>
-                <h3 className="font-semibold text-lg flex items-center gap-2">
-                  Quick Wins for You <Sparkles className="h-4 w-4 text-rose-500" />
-                </h3>
-                <ul className="mt-2 text-sm list-disc pl-4 text-neutral-700 space-y-1">
-                  <li>Clarity Check, I’ll map where you are now so you know exactly what needs attention.</li>
-                  <li>Trust Boost, ’ll spot what’s blocking trust and guide you to fix it fast.</li>
-                  <li>Focus Finder, I’ll help you choose the 2–3 areas that will create the biggest impact.</li>              
-                  <li>Pilot Starter, I’ll turn one idea into a simple, safe pilot you can launch quickly.<li>
-                </ul>
-                <a href="#contact" className="mt-3 inline-flex items-center gap-2 text-indigo-700 hover:underline">
-                  Book a 20‑min intro <ExternalLink className="h-4 w-4" />
-                </a>
-              </div>
-            </div>
-          </Card>
+  <div className="flex items-start gap-4">
+    <div className="shrink-0 w-20 h-20 rounded-2xl bg-gradient-to-br from-indigo-500 to-rose-500 text-white flex items-center justify-center text-3xl font-bold">
+      AK
+    </div>
+    <div>
+      <h3 className="font-semibold text-lg flex items-center gap-2">
+        Quick Wins for You <Sparkles className="h-4 w-4 text-rose-500" />
+      </h3>
+
+      {/* ✅ Every <li> now has a matching </li> */}
+      <ul className="mt-2 text-sm list-disc pl-4 text-neutral-700 space-y-1">
+        <li>Audit your identity & data flows; spot gaps impacting compliance and customer trust.</li>
+        <li>Design a lightweight, evidence-based UX testing plan your team can run in a week.</li>
+        <li>Focus Finder, I’ll help you choose the 2–3 areas that will create the biggest impact.</li>
+        <li>Pilot Starter, I’ll turn one idea into a simple, safe pilot you can launch quickly.</li>
+      </ul>
+
+      <a href="#contact" className="mt-3 inline-flex items-center gap-2 text-indigo-700 hover:underline">
+        Book a 20-min intro <ExternalLink className="h-4 w-4" />
+      </a>
+    </div>
+  </div>
+</Card>
+
         </div>
       </section>
 
