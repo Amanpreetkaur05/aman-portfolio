@@ -402,15 +402,10 @@ export default function PortfolioSite() {
         </div>
       </section>
 
-      {/* CONTACT */}
-      <section id="contact" className="max-w-7xl mx-auto px-6 pb-16">
-        <SectionTitle eyebrow="Next Step" title={`Work with ${NAME_SHORT}`}>
-          Consulting, research collaborations, guest lectures, workshops, or product sprints.
-        </SectionTitle>
-       <Card>
+      <Card>
   <div className="rounded-2xl overflow-hidden border border-neutral-200">
     <iframe
-      src="https://docs.google.com/forms/d/e/3bfatSdr7s6gepww5/viewform?embedded=true"
+      src="https://docs.google.com/forms/d/e/1FAIpQLSdLxHpw0tQPLQeYWhJkaJXhFz_P0iK6Vhcnn7xX5nB2rZ7bxg/viewform?embedded=true"
       width="100%"
       height="760"
       frameBorder="0"
@@ -426,7 +421,7 @@ export default function PortfolioSite() {
     Don’t see the form?{" "}
     <a
       className="underline"
-      href="https://docs.google.com/forms/d/e/3bfatSdr7s6gepww5/viewform"
+      href="https://docs.google.com/forms/d/e/1FAIpQLSdLxHpw0tQPLQeYWhJkaJXhFz_P0iK6Vhcnn7xX5nB2rZ7bxg/viewform"
       target="_blank"
       rel="noreferrer noopener"
     >
@@ -434,6 +429,7 @@ export default function PortfolioSite() {
     </a>.
   </div>
 </Card>
+
 
       </section>
 
