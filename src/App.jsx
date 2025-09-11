@@ -401,37 +401,39 @@ export default function PortfolioSite() {
           ))}
         </div>
       </section>
+{/* CONTACT */}
+<section id="contact" className="max-w-7xl mx-auto px-6 pb-16">
+  <SectionTitle eyebrow="Next Step" title={`Work with ${NAME_SHORT}`}>
+    Consulting, collaborations, or speaking.
+  </SectionTitle>
 
-      <Card>
-  <div className="rounded-2xl overflow-hidden border border-neutral-200">
-    <iframe
-      src="https://docs.google.com/forms/d/e/1FAIpQLSdLxHpw0tQPLQeYWhJkaJXhFz_P0iK6Vhcnn7xX5nB2rZ7bxg/viewform?embedded=true"
-      width="100%"
-      height="760"
-      frameBorder="0"
-      marginHeight="0"
-      marginWidth="0"
-      title="Contact Amanpreet Kaur"
-    >
-      Loading…
-    </iframe>
-  </div>
+  <Card>
+    <div className="rounded-2xl overflow-hidden border border-neutral-200">
+      <iframe
+        className="w-full h-[720px] md:h-[760px]"
+        src="https://docs.google.com/forms/d/e/1FAIpQLSdLxHpw0tQPLQeYWhJkaJXhFz_P0iK6Vhcnn7xX5nB2rZ7bxg/viewform?embedded=true"
+        frameBorder="0"
+        marginHeight="0"
+        marginWidth="0"
+        title="Contact Amanpreet Kaur"
+      />
+    </div>
 
-  <div className="mt-3 text-xs text-neutral-500">
-    Don’t see the form?{" "}
-    <a
-      className="underline"
-      href="https://docs.google.com/forms/d/e/1FAIpQLSdLxHpw0tQPLQeYWhJkaJXhFz_P0iK6Vhcnn7xX5nB2rZ7bxg/viewform"
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      Open it in a new tab
-    </a>.
-  </div>
-</Card>
+    <div className="mt-3 text-xs text-neutral-500">
+      Don’t see the form?{" "}
+      <a
+        className="underline"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSdLxHpw0tQPLQeYWhJkaJXhFz_P0iK6Vhcnn7xX5nB2rZ7bxg/viewform"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        Open it in a new tab
+      </a>.
+    </div>
+  </Card>
+</section>
 
 
-      </section>
 
       {/* FOOTER */}
       <footer className="max-w-7xl mx-auto px-6 pb-10 text-sm text-neutral-600">
