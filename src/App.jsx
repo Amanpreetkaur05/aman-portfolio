@@ -3,46 +3,27 @@ import { motion } from "framer-motion";
 import { Mail, Download, Linkedin, Globe, GraduationCap, Briefcase, BookOpen, Cpu, ShieldCheck, Github, ExternalLink, Star, Sparkles } from "lucide-react";
 
 const TAGS = [
-  "AI in UX",
-  "Blockchain Identity",
+  "AI ",
+  "Blockchain ",
+  "identity management",
   "Digital Trust",
   "Agri‑food SMEs",
   "Business Intelligence",
   "Teaching & Curriculum",
-  "Cyber Security (pfSense, Wireshark)",
-  "Research Methods (Qual/Quant)",
+  "Cyber Security (pfSense, Wireshark,nmap)",
+  "Research Methods (Qualitative/Quantitative)",
   "Data Storytelling",
 ];
 
 const PROJECTS = [
   {
-    title: "AIBA‑SME: AI‑Driven Blockchain Identity for Supply Chains",
+    title: "AI‑Driven Blockchain Identity management for Supply Chains in agri-food organisations",
     blurb:
       "Conceptual framework and ongoing PhD research. Explores how AI + blockchain improve identity assurance, traceability, and compliance for SMEs.",
-    tags: ["Research", "Identity", "Supply Chain", "AI", "Blockchain"],
+    tags: ["Research", "Identity management", "Supply Chain", "AI", "Blockchain"],
     link: "#",
-  },
-  {
-    title: "Digital Identity Revolution — Interactive Dashboard",
-    blurb:
-      "A live, presentation‑ready dashboard explaining digital identity building blocks, trust frameworks, and verifiable credentials.",
-    tags: ["Public Speaking", "Visualization", "Web"],
-    link: "#",
-  },
-  {
-    title: "TEC203 UX & Design Thinking — Lecture Series",
-    blurb:
-      "Hands‑on lectures, activities, and assessments aligned to learning outcomes with strong focus on usability testing and iterative design.",
-    tags: ["Teaching", "UX", "Curriculum"],
-    link: "#",
-  },
-  {
-    title: "Confidence Log Book — Digital Product",
-    blurb:
-      "Guided journal + scorecard template to help learners track wins, build confidence, and reflect with evidence.",
-    tags: ["Product", "No‑code", "EdTech"],
-    link: "#",
-  },
+  }
+  
 ];
 
 const ARTICLES = [
@@ -51,11 +32,7 @@ const ARTICLES = [
     outlet: "LinkedIn Articles",
     link: "#",
   },
-  {
-    title: "Usability Testing, Simply Explained (with free tools)",
-    outlet: "Teaching Notes",
-    link: "#",
-  },
+
   {
     title: "From Pilots to Production: Identity Management in Agri‑food",
     outlet: "Medium",
@@ -65,13 +42,18 @@ const ARTICLES = [
 
 const TALKS = [
   {
-    title: "Decentralised Identity: Practical Pathways for Australian SMEs",
-    event: "Guest Lecture / Industry Session",
+    title: "Decentralised Identity: Practical Pathways for  SMEs",
+    event: "Interactive Session",
     link: "#",
   },
   {
-    title: "Design Thinking for Non‑Designers",
+    title: "Design Thinking adn Human centred design",
     event: "Workshop",
+    link: "#",
+  },
+  {
+    title: "Cyber security and its constant changing environment",
+    event: "Interactive Session",
     link: "#",
   },
 ];
@@ -79,13 +61,12 @@ const TALKS = [
 const testimonials = [
   {
     quote:
-      "Aman brings rare clarity to complex topics like AI and digital identity—our students left energised and confident.",
-    by: "Program Lead, Higher Ed",
+      "I choose to see people not just as they are, but as they are becoming — because growth deserves compassion, not judgment",
   },
   {
     quote:
-      "She turns research into action. The sessions were practical, engaging, and immediately useful for our team.",
-    by: "Industry Partner, Agri‑food",
+      "She aims to turn research into action",
+  
   },
 ];
 
@@ -106,10 +87,10 @@ const Card = ({ children }) => (
 
 export default function PortfolioSite() {
   const name = "Amanpreet Kaur (Aman)";
-  const title = "AI × Blockchain Identity | UX & Teaching";
+  const title = "AI × Blockchain Identity x Cyber security";
   const location = "Adelaide, Australia";
-  const email = "your.email@example.com"; // TODO: update
-  const linkedin = "https://www.linkedin.com/in/aman-p-kaur"; // update if needed
+  const email = "amann.preet@outlook.com"; // TODO: update
+  const linkedin = "www.linkedin.com/in/aman-p-kaur"; // update if needed
   const github = "https://github.com/"; // optional
   const website = "https://"; // optional
 
