@@ -1,11 +1,21 @@
 name: Deploy to GitHub Pages
+
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+
+# Required permissions for Pages
 permissions:
   contents: read
   pages: write
   id-token: write
+
+# Avoids race conditions if you push multiple times quickly
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,9 +26,12 @@ jobs:
           node-version: 'lts/*'
       - run: npm ci || npm i
       - run: npm run build
+      # 👇 This step is the missing piece — it sets up the Pages environment correctly
+      - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
