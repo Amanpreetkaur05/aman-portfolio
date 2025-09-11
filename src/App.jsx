@@ -26,7 +26,6 @@ const THEME = {
   brandLight: "indigo-600",
   text: "neutral-900",
   subtext: "neutral-600",
-  card: "white/90",
 };
 
 const NAME_FULL = "Amanpreet Kaur";
@@ -35,8 +34,8 @@ const TITLE = "Innovation · Trust · Digital Futures";
 const LOCATION = "Adelaide, Australia";
 const EMAIL = "amann.preet@outlook.com";
 const LINKEDIN = "https://www.linkedin.com/in/aman-p-kaur";
-const GITHUB = "https://github.com/amanpreetkaur05";
-const WEBSITE = "";
+const GITHUB = "https://github.com/amanpreetkaur05"; // optional
+const WEBSITE = ""; // optional
 
 const TAGS = [
   "Innovation Leadership",
@@ -54,10 +53,12 @@ const TAGS = [
 const PROJECTS = [
   {
     title: "AI‑Driven Blockchain Identity Management for Agri‑food Supply Chains",
-    blurb: "PhD work exploring how AI + blockchain improve identity assurance, traceability, and compliance for SMEs.",
+    blurb:
+      "PhD work exploring how AI + blockchain improve identity assurance, traceability, and compliance for SMEs.",
     tags: ["Research", "Identity", "Supply Chain", "AI", "Blockchain"],
     link: "#",
-    image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1080&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1080&auto=format&fit=crop",
   },
 ];
 
@@ -104,7 +105,8 @@ const TALKS = [
 
 const TESTIMONIALS = [
   {
-    quote: "I choose to see people not just as they are, but as they are becoming — because growth deserves compassion, not judgment.",
+    quote:
+      "I choose to see people not just as they are, but as they are becoming — because growth deserves compassion, not judgment.",
     by: "Personal Principle",
   },
   { quote: "She aims to turn research into action.", by: "Colleague" },
@@ -125,7 +127,7 @@ const SocialLink = ({ href, children }) => (
 );
 
 const Card = ({ className = "", children }) => (
-  <div className={`rounded-2xl border border-neutral-200 shadow-sm hover:shadow-md transition bg-${THEME.card} backdrop-blur p-6 ${className}`}>
+  <div className={`rounded-2xl border border-neutral-200 shadow-sm hover:shadow-md transition bg-white/90 backdrop-blur p-6 ${className}`}>
     {children}
   </div>
 );
@@ -156,6 +158,7 @@ const Monogram = () => (
 export default function PortfolioSite() {
   return (
     <div className={`min-h-screen bg-gradient-to-b ${THEME.bgFrom} ${THEME.bgTo} text-${THEME.text}`}>
+      {/* SEO / Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -209,7 +212,7 @@ export default function PortfolioSite() {
             </h1>
             <p className="mt-3 text-xl text-neutral-700">{TITLE}</p>
             <p className="mt-3 text-neutral-600">
-              Envisioning future-ready ecosystems — transforming innovation into strategy and impact.
+              Envisioning future‑ready ecosystems — transforming innovation into strategy and impact.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -244,11 +247,159 @@ export default function PortfolioSite() {
             </div>
           </div>
 
-          <Card className="relative overflow-hidden p-0">
-            <Ribbon />
-            <img src="https://images.unsplash.com/photo-1551281044-8d8eec5f2313?q=80&w=1200&auto=format&fit=crop" alt="Abstract technology pattern" className="w-full h-64 md:h-[22rem] object-cover" />
-          </Card>
+          <Card className="relative overflow-hidden p-0 flex items-center justify-center h-64 md:h-[22rem]">
+  <Ribbon />
+  <div className="absolute inset-0 bg-gradient-to-br from-slate-200 to-indigo-100" />
+  <div className="relative z-10 w-28 h-28 md:w-40 md:h-40 rounded-2xl bg-gradient-to-br from-slate-700 to-indigo-800 text-white flex items-center justify-center text-5xl md:text-6xl font-extrabold tracking-tight">
+    AK
+  </div>
+</Card>
+
         </motion.div>
+      </section>
+
+      {/* OFFERING */}
+      <section className="max-w-7xl mx-auto px-6 pb-6">
+        <SectionTitle eyebrow="What I Do" title={`Advisory, Delivery & Teaching`}>
+          Evidence‑based, human‑centred, and outcome‑driven.
+        </SectionTitle>
+        <div className="grid md:grid-cols-3 gap-6">
+          <Card>
+            <div className="flex items-center gap-3 mb-2">
+              <Cpu className="h-5 w-5 text-indigo-700" />
+              <h3 className="font-semibold">Advisory & Research</h3>
+            </div>
+            <p className="text-sm text-neutral-700">
+              Guidance on AI + blockchain identity, data governance, and digital trust — tailored for SMEs and education.
+            </p>
+          </Card>
+          <Card>
+            <div className="flex items-center gap-3 mb-2">
+              <Briefcase className="h-5 w-5 text-indigo-700" />
+              <h3 className="font-semibold">Design & Delivery</h3>
+            </div>
+            <p className="text-sm text-neutral-700">
+              Workshops, roadmaps, and rapid prototypes that turn strategy into usable products and measurable outcomes.
+            </p>
+          </Card>
+          <Card>
+            <div className="flex items-center gap-3 mb-2">
+              <GraduationCap className="h-5 w-5 text-indigo-700" />
+              <h3 className="font-semibold">Teaching & Speaking</h3>
+            </div>
+            <p className="text-sm text-neutral-700">
+              Engaging lectures and talks on UX, identity, and responsible AI — built for students, execs, and cross‑functional teams.
+            </p>
+          </Card>
+        </div>
+      </section>
+
+      {/* PROJECTS */}
+      <section id="projects" className="max-w-7xl mx-auto px-6 py-10">
+        <SectionTitle eyebrow="Selected Work" title="Featured Projects" />
+        <div className="grid md:grid-cols-2 gap-6">
+          {PROJECTS.map((p) => (
+            <Card key={p.title} className="overflow-hidden">
+              {p.image && (
+                <img
+                  src={p.image}
+                  alt="Project visual"
+                  className="w-full h-40 object-cover rounded-xl mb-4"
+                  loading="lazy"
+                />
+              )}
+              <h3 className="font-semibold text-lg">{p.title}</h3>
+              <p className="mt-2 text-neutral-700 text-sm">{p.blurb}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {p.tags.map((t) => (
+                  <span key={t} className="text-xs px-2 py-1 rounded-full bg-indigo-50 border border-indigo-100">{t}</span>
+                ))}
+              </div>
+              <a href={p.link} className="mt-3 inline-flex items-center gap-2 text-sm text-neutral-800 hover:underline">
+                Explore <ExternalLink className="h-4 w-4" />
+              </a>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* RESEARCH & TEACHING */}
+      <section id="research" className="max-w-7xl mx-auto px-6 pb-6">
+        <div className="grid md:grid-cols-2 gap-6">
+          <Card>
+            <SectionTitle eyebrow="Focus" title="Research">
+              Mixed‑methods work pairing qualitative insights with practical prototypes.
+            </SectionTitle>
+            <ul className="space-y-1 text-sm text-neutral-700 list-disc pl-4">
+              <li>AIBA‑SME framework (capabilities, governance, ROI pathways)</li>
+              <li>Verifiable credentials for products & workforce</li>
+              <li>Usability & adoption challenges in SMEs</li>
+            </ul>
+          </Card>
+
+          <Card id="teaching">
+            <SectionTitle eyebrow="Practice" title="Teaching & Curriculum">
+              Empowering learners across UX, Cyber Security, and Business Intelligence.
+            </SectionTitle>
+            <ul className="space-y-1 text-sm text-neutral-700 list-disc pl-4">
+              <li><strong>Business & Data Strategy</strong> — Analysis, requirements, SQL, Power BI/Tableau, Excel</li>
+              <li><strong>Cybersecurity & Networks</strong> — pfSense, Wireshark, VPNs, secure networking</li>
+              <li><strong>Systems & Tools</strong> — Linux, Windows Server, VMs, Python</li>
+              <li><strong>Collaboration</strong> — Jira, Confluence, GitHub, Microsoft 365, Canvas/Moodle</li>
+              <li><strong>Analytics & Insights</strong> — Visualisation, dashboards, data ethics</li>
+              <li><strong>Teaching & Learning Design</strong> — Online LMS, rubric design</li>
+              <li><strong>Creative & Coaching</strong> — Design thinking, workshops, mentoring, storytelling</li>
+            </ul>
+          </Card>
+        </div>
+      </section>
+
+      {/* WRITING */}
+      <section id="writing" className="max-w-7xl mx-auto px-6 pb-6">
+        <SectionTitle eyebrow="Notes" title="Articles & Posts" />
+        <div className="grid md:grid-cols-2 gap-6">
+          <Card>
+            <ul className="space-y-3">
+              {ARTICLES.map((a) => (
+                <li key={a.title} className="flex items-start gap-3">
+                  <Star className="h-4 w-4 mt-1 text-amber-500" />
+                  <div>
+                    <a href={a.link} className="font-medium hover:underline">{a.title}</a>
+                    <div className="text-xs text-neutral-600">{a.outlet}</div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </Card>
+
+          <Card>
+            <h3 className="font-semibold text-lg">Talks & Workshops</h3>
+            <ul className="mt-3 space-y-3">
+              {TALKS.map((t) => (
+                <li key={t.title} className="flex items-start gap-3">
+                  <Briefcase className="h-4 w-4 mt-1" />
+                  <div>
+                    <a href={t.link} className="font-medium hover:underline">{t.title}</a>
+                    <div className="text-xs text-neutral-600">{t.event}</div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </Card>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="max-w-7xl mx-auto px-6 pb-10">
+        <SectionTitle eyebrow="Social Proof" title="Testimonials" />
+        <div className="grid md:grid-cols-2 gap-6">
+          {TESTIMONIALS.map((t, i) => (
+            <Card key={i}>
+              <blockquote className="text-neutral-800">“{t.quote}”</blockquote>
+              {t.by && <div className="mt-2 text-sm text-neutral-600">— {t.by}</div>}
+            </Card>
+          ))}
+        </div>
       </section>
 
       {/* CONTACT */}
@@ -256,32 +407,53 @@ export default function PortfolioSite() {
         <SectionTitle eyebrow="Next Step" title={`Work with ${NAME_SHORT}`}>
           Consulting, research collaborations, guest lectures, workshops, or product sprints.
         </SectionTitle>
-        <Card>
-          <div className="grid md:grid-cols-2 gap-6 items-start">
-            <div>
-              <div className="text-lg font-semibold">Let’s talk</div>
-              <p className="mt-2 text-sm text-neutral-700">I respond within 24–48 hours.</p>
-              <div className="mt-4 flex flex-wrap gap-3">
-                <SocialLink href={`mailto:${EMAIL}`}>
-                  <Mail className="h-4 w-4" /> {EMAIL}
-                </SocialLink>
-                <SocialLink href={LINKEDIN}>
-                  <Linkedin className="h-4 w-4" /> LinkedIn Profile
-                </SocialLink>
-              </div>
-            </div>
+       <Card>
+  <div className="rounded-2xl overflow-hidden border border-neutral-200">
+    <iframe
+      src="https://docs.google.com/forms/d/e/3bfatSdr7s6gepww5/viewform?embedded=true"
+      width="100%"
+      height="760"
+      frameBorder="0"
+      marginHeight="0"
+      marginWidth="0"
+      title="Contact Amanpreet Kaur"
+    >
+      Loading…
+    </iframe>
+  </div>
 
-            <form action={`mailto:${EMAIL}`} method="POST" className="bg-neutral-50 rounded-2xl p-4 border border-neutral-200">
-              <div className="grid gap-3">
-                <input className="px-3 py-2 rounded-xl border border-neutral-300 focus:outline-none" placeholder="Your name" name="name" />
-                <input className="px-3 py-2 rounded-xl border border-neutral-300 focus:outline-none" placeholder="Your email" name="email" />
-                <textarea rows={4} className="px-3 py-2 rounded-xl border border-neutral-300 focus:outline-none" placeholder="What would you like to achieve?" name="message" />
-                <button className="rounded-xl px-4 py-2 bg-indigo-800 text-white hover:bg-indigo-700">Send enquiry</button>
-              </div>
-            </form>
-          </div>
-        </Card>
+  <div className="mt-3 text-xs text-neutral-500">
+    Don’t see the form?{" "}
+    <a
+      className="underline"
+      href="https://docs.google.com/forms/d/e/3bfatSdr7s6gepww5/viewform"
+      target="_blank"
+      rel="noreferrer noopener"
+    >
+      Open it in a new tab
+    </a>.
+  </div>
+</Card>
+
       </section>
+
+      {/* FOOTER */}
+      <footer className="max-w-7xl mx-auto px-6 pb-10 text-sm text-neutral-600">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <Monogram />
+            <div>
+              <div className="font-semibold">{NAME_FULL} ({NAME_SHORT})</div>
+              <div className="text-xs text-neutral-500">{TITLE}</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <a href={LINKEDIN} className="inline-flex items-center gap-1 hover:underline"><Linkedin className="h-4 w-4" /> LinkedIn</a>
+            {GITHUB && <a href={GITHUB} className="inline-flex items-center gap-1 hover:underline"><Github className="h-4 w-4" /> GitHub</a>}
+          </div>
+        </div>
+        <div className="mt-4">© {new Date().getFullYear()} {NAME_FULL}. All rights reserved.</div>
+      </footer>
     </div>
   );
 }
