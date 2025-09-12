@@ -23,9 +23,7 @@ const THEME = {
   bgFrom: "from-slate-50",
   bgTo: "to-indigo-50",
   brand: "indigo-800",
-  brandLight: "indigo-600",
   text: "neutral-900",
-  subtext: "neutral-600",
 };
 
 const NAME_FULL = "Amanpreet Kaur";
@@ -34,8 +32,7 @@ const TITLE = "Innovation · Trust · Digital Futures";
 const LOCATION = "Adelaide, Australia";
 const EMAIL = "amann.preet@outlook.com";
 const LINKEDIN = "https://www.linkedin.com/in/aman-p-kaur";
-const GITHUB = "https://github.com/amanpreetkaur05"; // optional
-const WEBSITE = ""; // optional
+const GITHUB = "https://github.com/amanpreetkaur05";
 
 const TAGS = [
   "Innovation Leadership",
@@ -52,19 +49,31 @@ const TAGS = [
 
 const PROJECTS = [
   {
-    title: "AI‑Driven Blockchain Identity Management for Agri‑food Supply Chains",
+    title: "AI-Driven Blockchain Identity Management for Agri-food Supply Chains",
     blurb:
       "PhD work exploring how AI + blockchain improve identity assurance, traceability, and compliance for SMEs.",
     tags: ["Research", "Identity", "Supply Chain", "AI", "Blockchain"],
-    link: "#",
+    link:
+      "https://www.linkedin.com/pulse/unlocking-supply-chain-efficiency-through-ai-driven-blockchain-kaur-glyzc/?trackingId=YKUyz1d7kUZf73OdJcHITg%3D%3D",
     image:
       "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1080&auto=format&fit=crop",
+  },
+  {
+    title: "Lead & Build High-Performance Teams — Whimsical Flow",
+    blurb:
+      "A visual framework for forming, aligning, and scaling high-performance teams using a concise systems-thinking flow.",
+    tags: ["Leadership", "Org Design", "Playbook"],
+    link:
+      "https://www.linkedin.com/pulse/unlocking-supply-chain-efficiency-through-ai-driven-blockchain-kaur-glyzc/?trackingId=YKUyz1d7kUZf73OdJcHITg%3D%3D",
+    image:
+      "https://media.licdn.com/dms/image/v2/D5622AQGd65GtPfEL6Q/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1710246757271?e=1760572800&v=beta&t=byzO8YdfsGghmE8YqxMhQc5TMew0gZGjZkMr71YpJ_Q",
   },
 ];
 
 const ARTICLES = [
   {
-    title: "Why AI + Blockchain are Complementary in SME Supply Chains",
+    title:
+      "Why AI + Blockchain are Complementary in SME Supply Chains",
     outlet: "LinkedIn Articles",
     link: "#",
   },
@@ -72,6 +81,13 @@ const ARTICLES = [
     title: "From Pilots to Production: Identity Management in Agri‑food",
     outlet: "Medium",
     link: "#",
+  },
+  {
+    title:
+      "Revolutionizing Supply Chains with AI-Powered Blockchain Identity Management (Agri-food organisations)",
+    outlet: "LinkedIn",
+    link:
+      "https://www.linkedin.com/pulse/unlocking-supply-chain-efficiency-through-ai-driven-blockchain-kaur-glyzc/?trackingId=YKUyz1d7kUZf73OdJcHITg%3D%3D",
   },
 ];
 
@@ -127,7 +143,9 @@ const SocialLink = ({ href, children }) => (
 );
 
 const Card = ({ className = "", children }) => (
-  <div className={`rounded-2xl border border-neutral-200 shadow-sm hover:shadow-md transition bg-white/90 backdrop-blur p-6 ${className}`}>
+  <div
+    className={`rounded-2xl border border-neutral-200 shadow-sm hover:shadow-md transition bg-white/90 backdrop-blur p-6 ${className}`}
+  >
     {children}
   </div>
 );
@@ -140,14 +158,10 @@ const SectionTitle = ({ eyebrow, title, children }) => (
   </div>
 );
 
-const Ribbon = () => (
-  <div className="absolute -top-3 left-6 rounded-full bg-white shadow px-3 py-1 text-xs font-semibold text-neutral-700 flex items-center gap-1">
-    <ShieldCheck className="h-3.5 w-3.5 text-indigo-800" /> {NAME_SHORT} · Trusted & Available
-  </div>
-);
-
-const Monogram = () => (
-  <div className="shrink-0 w-20 h-20 rounded-2xl bg-gradient-to-br from-slate-700 to-indigo-800 text-white flex items-center justify-center text-3xl font-bold">
+const Monogram = ({ size = "w-64 h-64 text-6xl" }) => (
+  <div
+    className={`shrink-0 ${size} rounded-2xl bg-gradient-to-br from-slate-700 to-indigo-800 text-white flex items-center justify-center font-bold`}
+  >
     AK
   </div>
 );
@@ -157,29 +171,16 @@ const Monogram = () => (
 // ----------------------
 export default function PortfolioSite() {
   return (
-    <div className={`min-h-screen bg-gradient-to-b ${THEME.bgFrom} ${THEME.bgTo} text-${THEME.text}`}>
-      {/* SEO / Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            name: NAME_FULL,
-            jobTitle: TITLE,
-            address: LOCATION,
-            url: WEBSITE || LINKEDIN,
-            sameAs: [LINKEDIN, GITHUB].filter(Boolean),
-            email: `mailto:${EMAIL}`,
-          }),
-        }}
-      />
-
+    <div
+      className={`min-h-screen bg-gradient-to-b ${THEME.bgFrom} ${THEME.bgTo} text-${THEME.text}`}
+    >
       {/* NAV */}
       <header className="max-w-7xl mx-auto px-6 pt-8 pb-4">
         <nav className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-slate-700 to-indigo-800 text-white flex items-center justify-center text-sm font-bold">AK</div>
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-slate-700 to-indigo-800 text-white flex items-center justify-center text-sm font-bold">
+              AK
+            </div>
             <div className="leading-tight">
               <div className="font-semibold tracking-tight">
                 {NAME_FULL} <span className="text-neutral-500">({NAME_SHORT})</span>
@@ -188,6 +189,7 @@ export default function PortfolioSite() {
             </div>
           </div>
           <div className="hidden md:flex gap-4 text-sm">
+            <a href="#wins" className="hover:underline">Quick Wins</a>
             <a href="#projects" className="hover:underline">Projects</a>
             <a href="#research" className="hover:underline">Research</a>
             <a href="#teaching" className="hover:underline">Teaching</a>
@@ -206,9 +208,14 @@ export default function PortfolioSite() {
           className="grid md:grid-cols-2 gap-10 items-center"
         >
           <div>
-            <p className="text-xs uppercase tracking-widest text-neutral-500">{LOCATION}</p>
+            <p className="text-xs uppercase tracking-widest text-neutral-500">
+              {LOCATION}
+            </p>
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight mt-2">
-              Hi, I’m <span className="bg-clip-text text-transparent bg-gradient-to-r from-slate-700 to-indigo-800">{NAME_FULL}</span>
+              Hi, I’m
+              <span className="ml-2 bg-clip-text text-transparent bg-gradient-to-r from-slate-700 to-indigo-800">
+                {NAME_FULL}
+              </span>
             </h1>
             <p className="mt-3 text-xl text-neutral-700">{TITLE}</p>
             <p className="mt-3 text-neutral-600">
@@ -227,69 +234,75 @@ export default function PortfolioSite() {
                   <Github className="h-4 w-4" /> GitHub
                 </SocialLink>
               )}
-              {WEBSITE && (
-                <SocialLink href={WEBSITE}>
-                  <Globe className="h-4 w-4" /> Website
-                </SocialLink>
-              )}
-              <a
-                href="#cv"
-                className="inline-flex items-center gap-2 rounded-xl px-4 py-2 bg-neutral-900 text-white hover:bg-neutral-800 shadow"
-              >
-                <Download className="h-4 w-4" /> Download CV
-              </a>
             </div>
 
             <div className="mt-6 flex flex-wrap gap-2">
               {TAGS.map((t) => (
-                <span key={t} className="text-sm px-3 py-1 rounded-full bg-white border border-neutral-200 shadow-sm">{t}</span>
+                <span
+                  key={t}
+                  className="text-sm px-3 py-1 rounded-full bg-white border border-neutral-200 shadow-sm"
+                >
+                  {t}
+                </span>
               ))}
             </div>
           </div>
 
-          <Card className="relative overflow-hidden p-0 flex items-center justify-center h-64 md:h-[22rem]">
-  <Ribbon />
-  <div className="absolute inset-0 bg-gradient-to-br from-slate-200 to-indigo-100" />
-  <div className="relative z-10 w-28 h-28 md:w-40 md:h-40 rounded-2xl bg-gradient-to-br from-slate-700 to-indigo-800 text-white flex items-center justify-center text-5xl md:text-6xl font-extrabold tracking-tight">
-    AK
-  </div>
-</Card>
-
+          <Card className="flex items-center justify-center">
+            <Monogram />
+          </Card>
         </motion.div>
       </section>
 
-      {/* OFFERING */}
-      <section className="max-w-7xl mx-auto px-6 pb-6">
-        <SectionTitle eyebrow="What I Do" title={`Advisory, Delivery & Teaching`}>
-          Evidence‑based, human‑centred, and outcome‑driven.
-        </SectionTitle>
-        <div className="grid md:grid-cols-3 gap-6">
+     {/* QUICK WINS */}
+<section id="wins" className="max-w-7xl mx-auto px-6 pb-10">
+  <SectionTitle eyebrow="Why Contact Me" title="Quick Wins I Deliver">
+    Fast, practical outcomes you can apply immediately.
+  </SectionTitle>
+
+  <div className="grid md:grid-cols-2 gap-6">
+    <Card>
+      <h3 className="font-semibold text-lg flex items-center gap-2">
+        High-impact actions <Sparkles className="h-4 w-4 text-indigo-700" />
+      </h3>
+
+      <ul className="mt-3 space-y-2 text-sm text-neutral-700 list-disc pl-4">
+        <li>
+          <strong>Insight Distiller:</strong> Transform messy research and ideas into
+          crisp, actionable briefs that drive smart decisions.
+        </li>
+        <li>
+          <strong>Strategy Sketch Session:</strong> Co-create a clear, one-page plan
+          that links learning goals to real business impact.
+        </li>
+        <li>
+          <strong>Learning Launch Kit:</strong> Build bite-sized, engaging learning
+          tools that upskill teams quickly and confidently.
+        </li>
+        <li>
+          <strong>Thought Partnership:</strong> Coach leaders and educators to spark
+          fresh thinking and ignite meaningful change.
+        </li>
+      </ul>
+
+      <a
+        href="#contact"
+        className="mt-4 inline-flex items-center gap-2 text-indigo-700 hover:underline"
+      >
+        Book a 20-min consult <ExternalLink className="h-4 w-4" />
+      </a>
+    </Card>
+  </div>
+</section>
+
           <Card>
-            <div className="flex items-center gap-3 mb-2">
-              <Cpu className="h-5 w-5 text-indigo-700" />
-              <h3 className="font-semibold">Advisory & Research</h3>
-            </div>
-            <p className="text-sm text-neutral-700">
-              Guidance on AI + blockchain identity, data governance, and digital trust — tailored for SMEs and education.
-            </p>
-          </Card>
-          <Card>
-            <div className="flex items-center gap-3 mb-2">
-              <Briefcase className="h-5 w-5 text-indigo-700" />
-              <h3 className="font-semibold">Design & Delivery</h3>
-            </div>
-            <p className="text-sm text-neutral-700">
-              Workshops, roadmaps, and rapid prototypes that turn strategy into usable products and measurable outcomes.
-            </p>
-          </Card>
-          <Card>
-            <div className="flex items-center gap-3 mb-2">
-              <GraduationCap className="h-5 w-5 text-indigo-700" />
-              <h3 className="font-semibold">Teaching & Speaking</h3>
-            </div>
-            <p className="text-sm text-neutral-700">
-              Engaging lectures and talks on UX, identity, and responsible AI — built for students, execs, and cross‑functional teams.
-            </p>
+            <h3 className="font-semibold text-lg">Why {NAME_SHORT}?</h3>
+            <ul className="mt-3 space-y-2 text-sm text-neutral-700 list-disc pl-4">
+              <li>Bridges research and delivery: PhD depth with practical shipping mindset.</li>
+              <li>SME‑friendly: lean methods that fit constraints without sacrificing quality.</li>
+              <li>Clear storytelling: align execs, teams, and partners with evidence‑based narratives.</li>
+              <li>Coaching: 1:1 or team sessions to unblock decisions and momentum.</li>
+            </ul>
           </Card>
         </div>
       </section>
@@ -299,31 +312,44 @@ export default function PortfolioSite() {
         <SectionTitle eyebrow="Selected Work" title="Featured Projects" />
         <div className="grid md:grid-cols-2 gap-6">
           {PROJECTS.map((p) => (
-            <Card key={p.title} className="overflow-hidden">
-              {p.image && (
-                <img
-                  src={p.image}
-                  alt="Project visual"
-                  className="w-full h-40 object-cover rounded-xl mb-4"
-                  loading="lazy"
-                />
-              )}
-              <h3 className="font-semibold text-lg">{p.title}</h3>
-              <p className="mt-2 text-neutral-700 text-sm">{p.blurb}</p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {p.tags.map((t) => (
-                  <span key={t} className="text-xs px-2 py-1 rounded-full bg-indigo-50 border border-indigo-100">{t}</span>
-                ))}
-              </div>
-              <a href={p.link} className="mt-3 inline-flex items-center gap-2 text-sm text-neutral-800 hover:underline">
-                Explore <ExternalLink className="h-4 w-4" />
-              </a>
-            </Card>
+            <a
+              key={p.title}
+              href={p.link}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="group block"
+            >
+              <Card className="overflow-hidden transition-transform group-hover:-translate-y-0.5">
+                {p.image && (
+                  <img
+                    src={p.image}
+                    alt="Project visual"
+                    className="w-full h-40 object-cover rounded-xl mb-4"
+                    loading="lazy"
+                  />
+                )}
+                <h3 className="font-semibold text-lg">{p.title}</h3>
+                <p className="mt-2 text-neutral-700 text-sm">{p.blurb}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {p.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="text-xs px-2 py-1 rounded-full bg-indigo-50 border border-indigo-100"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-3 inline-flex items-center gap-2 text-sm text-neutral-800">
+                  Explore <ExternalLink className="h-4 w-4" />
+                </div>
+              </Card>
+            </a>
           ))}
         </div>
       </section>
 
-      {/* RESEARCH & TEACHING */}
+      {/* RESEARCH */}
       <section id="research" className="max-w-7xl mx-auto px-6 pb-6">
         <div className="grid md:grid-cols-2 gap-6">
           <Card>
@@ -336,27 +362,49 @@ export default function PortfolioSite() {
               <li>Usability & adoption challenges in SMEs</li>
             </ul>
           </Card>
+        </div>
+      </section>
 
-          <Card id="teaching">
-            <SectionTitle eyebrow="Practice" title="Teaching & Curriculum">
-              Empowering learners across UX, Cyber Security, and Business Intelligence.
+      {/* TEACHING */}
+      <section id="teaching" className="max-w-7xl mx-auto px-6 pb-6">
+        <div className="grid md:grid-cols-2 gap-6">
+          <Card>
+            <SectionTitle eyebrow="Practice" title="Teaching, Curriculum & Coaching">
+              I design tailored learning resources and coach teams & individuals to accelerate outcomes.
             </SectionTitle>
             <ul className="space-y-1 text-sm text-neutral-700 list-disc pl-4">
-              <li><strong>Business & Data Strategy</strong> — Analysis, requirements, SQL, Power BI/Tableau, Excel</li>
-              <li><strong>Cybersecurity & Networks</strong> — pfSense, Wireshark, VPNs, secure networking</li>
+              <li>
+                <strong>Business & Data Strategy</strong> — Analysis, requirements, SQL, Power BI/Tableau, Excel
+              </li>
+              <li>
+                <strong>Cybersecurity & Networks</strong> — pfSense, Wireshark, VPNs, secure networking
+              </li>
               <li><strong>Systems & Tools</strong> — Linux, Windows Server, VMs, Python</li>
-              <li><strong>Collaboration</strong> — Jira, Confluence, GitHub, Microsoft 365, Canvas/Moodle</li>
-              <li><strong>Analytics & Insights</strong> — Visualisation, dashboards, data ethics</li>
-              <li><strong>Teaching & Learning Design</strong> — Online LMS, rubric design</li>
-              <li><strong>Creative & Coaching</strong> — Design thinking, workshops, mentoring, storytelling</li>
+              <li>
+                <strong>Collaboration</strong> — Jira, Confluence, GitHub, Microsoft 365, Canvas/Moodle
+              </li>
+              <li>
+                <strong>Analytics & Insights</strong> — Visualisation, dashboards, data ethics
+              </li>
+              <li>
+                <strong>Teaching & Learning Design</strong> — Online LMS, rubric design
+              </li>
+              <li>
+                <strong>Coaching & Mentorship</strong> — 1:1 and team coaching, facilitation, decision support
+              </li>
             </ul>
+            <a href="#contact" className="mt-4 inline-flex items-center gap-2 text-indigo-700 hover:underline">
+              Book a coaching chat <ExternalLink className="h-4 w-4" />
+            </a>
           </Card>
         </div>
       </section>
 
       {/* WRITING */}
       <section id="writing" className="max-w-7xl mx-auto px-6 pb-6">
-        <SectionTitle eyebrow="Notes" title="Articles & Posts" />
+        <SectionTitle eyebrow="Notes" title="Articles & Posts">
+          I also create tailored learning resources — guides, slides, and exercises — matching your team’s context.
+        </SectionTitle>
         <div className="grid md:grid-cols-2 gap-6">
           <Card>
             <ul className="space-y-3">
@@ -364,7 +412,9 @@ export default function PortfolioSite() {
                 <li key={a.title} className="flex items-start gap-3">
                   <Star className="h-4 w-4 mt-1 text-amber-500" />
                   <div>
-                    <a href={a.link} className="font-medium hover:underline">{a.title}</a>
+                    <a href={a.link} target="_blank" rel="noreferrer noopener" className="font-medium hover:underline">
+                      {a.title}
+                    </a>
                     <div className="text-xs text-neutral-600">{a.outlet}</div>
                   </div>
                 </li>
@@ -379,7 +429,9 @@ export default function PortfolioSite() {
                 <li key={t.title} className="flex items-start gap-3">
                   <Briefcase className="h-4 w-4 mt-1" />
                   <div>
-                    <a href={t.link} className="font-medium hover:underline">{t.title}</a>
+                    <a href={t.link} className="font-medium hover:underline">
+                      {t.title}
+                    </a>
                     <div className="text-xs text-neutral-600">{t.event}</div>
                   </div>
                 </li>
@@ -401,53 +453,62 @@ export default function PortfolioSite() {
           ))}
         </div>
       </section>
-{/* CONTACT */}
-<section id="contact" className="max-w-7xl mx-auto px-6 pb-16">
-  <SectionTitle eyebrow="Next Step" title={`Work with ${NAME_SHORT}`}>
-    Consulting, collaborations, or speaking.
-  </SectionTitle>
 
-  <Card>
-    <div className="rounded-2xl overflow-hidden border border-neutral-200">
-      <iframe
-        className="w-full h-[720px] md:h-[760px]"
-        src="https://docs.google.com/forms/d/e/1FAIpQLSdLxHpw0tQPLQeYWhJkaJXhFz_P0iK6Vhcnn7xX5nB2rZ7bxg/viewform?embedded=true"
-        frameBorder="0"
-        marginHeight="0"
-        marginWidth="0"
-        title="Contact Amanpreet Kaur"
-      />
-    </div>
+      {/* CONTACT */}
+      <section id="contact" className="max-w-7xl mx-auto px-6 pb-16">
+        <SectionTitle eyebrow="Next Step" title={`Work with ${NAME_SHORT}`}>
+          Consulting, collaborations, or speaking.
+        </SectionTitle>
+        <Card>
+          <div className="rounded-2xl overflow-hidden border border-neutral-200">
+            <iframe
+              className="w-full h-[720px] md:h-[760px]"
+              src="https://docs.google.com/forms/d/e/1FAIpQLSdLxHpw0tQPLQeYWhJkaJXhFz_P0iK6Vhcnn7xX5nB2rZ7bxg/viewform?embedded=true"
+              frameBorder="0"
+              marginHeight="0"
+              marginWidth="0"
+              title="Contact Amanpreet Kaur"
+            />
+          </div>
 
-    <div className="mt-3 text-xs text-neutral-500">
-      Don’t see the form?{" "}
-      <a
-        className="underline"
-        href="https://docs.google.com/forms/d/e/1FAIpQLSdLxHpw0tQPLQeYWhJkaJXhFz_P0iK6Vhcnn7xX5nB2rZ7bxg/viewform"
-        target="_blank"
-        rel="noreferrer noopener"
-      >
-        Open it in a new tab
-      </a>.
-    </div>
-  </Card>
-</section>
-
-
+          <div className="mt-3 text-xs text-neutral-500">
+            Don’t see the form?{" "}
+            <a
+              className="underline"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdLxHpw0tQPLQeYWhJkaJXhFz_P0iK6Vhcnn7xX5nB2rZ7bxg/viewform"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Open it in a new tab
+            </a>
+            .
+          </div>
+        </Card>
+      </section>
 
       {/* FOOTER */}
       <footer className="max-w-7xl mx-auto px-6 pb-10 text-sm text-neutral-600">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <Monogram />
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-slate-700 to-indigo-800 text-white flex items-center justify-center text-sm font-bold">
+              AK
+            </div>
             <div>
-              <div className="font-semibold">{NAME_FULL} ({NAME_SHORT})</div>
+              <div className="font-semibold">
+                {NAME_FULL} ({NAME_SHORT})
+              </div>
               <div className="text-xs text-neutral-500">{TITLE}</div>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <a href={LINKEDIN} className="inline-flex items-center gap-1 hover:underline"><Linkedin className="h-4 w-4" /> LinkedIn</a>
-            {GITHUB && <a href={GITHUB} className="inline-flex items-center gap-1 hover:underline"><Github className="h-4 w-4" /> GitHub</a>}
+            <a href={LINKEDIN} className="inline-flex items-center gap-1 hover:underline">
+              <Linkedin className="h-4 w-4" /> LinkedIn
+            </a>
+            {GITHUB && (
+              <a href={GITHUB} className="inline-flex items-center gap-1 hover:underline">
+                <Github className="h-4 w-4" /> GitHub
+              </a>
+            )}
           </div>
         </div>
         <div className="mt-4">© {new Date().getFullYear()} {NAME_FULL}. All rights reserved.</div>
