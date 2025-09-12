@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import {
   Mail,
-  Download,
   Linkedin,
   Globe,
   GraduationCap,
@@ -57,8 +56,6 @@ const PROJECTS = [
     blurb:
       "PhD work exploring how AI + blockchain improve identity assurance, traceability, and compliance for SMEs.",
     tags: ["Research", "Identity", "Supply Chain", "AI", "Blockchain"],
-    link:
-      "https://www.linkedin.com/pulse/unlocking-supply-chain-efficiency-through-ai-driven-blockchain-kaur-glyzc/?trackingId=YKUyz1d7kUZf73OdJcHITg%3D%3D",
     image:
       "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1080&auto=format&fit=crop",
   },
@@ -67,8 +64,6 @@ const PROJECTS = [
     blurb:
       "A visual framework for forming, aligning, and scaling high-performance teams using a concise systems-thinking flow.",
     tags: ["Leadership", "Org Design", "Playbook"],
-    link:
-      "https://www.linkedin.com/pulse/unlocking-supply-chain-efficiency-through-ai-driven-blockchain-kaur-glyzc/?trackingId=YKUyz1d7kUZf73OdJcHITg%3D%3D",
     image:
       "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1080&auto=format&fit=crop",
   },
@@ -152,40 +147,56 @@ const Monogram = ({ size = "w-28 h-28 md:w-40 md:h-40 text-5xl md:text-6xl" }) =
 );
 
 /* ------------------------------------------------
-   QUICK WINS (component)
+   QUICK WINS (simpler language)
 -------------------------------------------------*/
 function QuickWins() {
   const items = [
     {
-      title: "Page Speed Boost",
-      bullets: ["Compress images & lazy-load", "Minify CSS/JS", "Core Web Vitals ≥ 90"],
+      title: "Insight Distiller",
+      bullets: [
+        "Turn complex research or data into clear, simple summaries",
+        "Deliver short, action-ready briefs anyone can use",
+        "Share next steps with owners and timelines",
+      ],
       impact: "High",
-      time: "1–2 days",
+      time: "1 day",
     },
     {
-      title: "UX Polish",
-      bullets: ["Hierarchy & spacing", "Clear CTAs, microcopy", "Accessible color contrast"],
+      title: "Strategy Sketch Session",
+      bullets: [
+        "Co-create a one-page plan with you",
+        "Connect learning goals to real outcomes",
+        "Make priorities, risks, and metrics obvious",
+      ],
       impact: "Med–High",
       time: "1–2 days",
     },
     {
-      title: "SEO Essentials",
-      bullets: ["Meta & Open Graph", "Semantic headings", "Sitemap & robots.txt"],
+      title: "Learning Launch Kit",
+      bullets: [
+        "Design small, engaging resources (videos, checklists, quizzes)",
+        "Help teams learn fast and apply quickly",
+        "Measure improvements with simple trackers",
+      ],
       impact: "Medium",
       time: "0.5–1 day",
     },
     {
-      title: "Analytics Setup",
-      bullets: ["GA4 events", "Heatmaps/session replay", "Goal tracking"],
-      impact: "High (insights)",
-      time: "0.5–1 day",
+      title: "Thought Partnership",
+      bullets: [
+        "Coach leaders and educators with reflective questions",
+        "Unblock decisions and spark new ideas",
+        "Leave with 2–3 practical actions",
+      ],
+      impact: "High (clarity)",
+      time: "1 hour",
     },
   ];
 
   return (
     <section id="wins" className="max-w-7xl mx-auto px-6 pb-10">
       <SectionTitle eyebrow="Fast Value" title="Quick Wins I Deliver">
-        Small, high-impact improvements — perfect for tight timelines and visible results.
+        Small, high-impact improvements — simple language, clear outcomes.
       </SectionTitle>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -223,7 +234,7 @@ function QuickWins() {
 }
 
 /* ------------------------------------------------
-   VALUE STRIP (bonus)
+   VALUE STRIP with colored dividers (soft)
 -------------------------------------------------*/
 function ValueStrip() {
   const points = [
@@ -233,9 +244,12 @@ function ValueStrip() {
   ];
   return (
     <div className="bg-gradient-to-r from-indigo-600 to-violet-500 text-white">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row gap-3 md:gap-6 items-center justify-center">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row gap-3 md:gap-0 items-stretch justify-center">
         {points.map((p, i) => (
-          <div key={i} className="flex items-center gap-2 text-sm">
+          <div
+            key={i}
+            className={`flex items-center gap-2 text-sm px-4 py-2 ${i < points.length - 1 ? "md:border-r md:border-white/30" : ""}`}
+          >
             {p.icon}
             <span className="font-medium">{p.text}</span>
           </div>
@@ -286,6 +300,7 @@ export default function PortfolioSite() {
             <a href="#research" className="hover:underline">Research</a>
             <a href="#teaching" className="hover:underline">Teaching</a>
             <a href="#writing" className="hover:underline">Writing</a>
+            <a href="#ask" className="hover:underline">Ask a Question</a>
             <a href="#contact" className="hover:underline">Contact</a>
           </div>
         </nav>
@@ -329,12 +344,6 @@ export default function PortfolioSite() {
                   <Globe className="h-4 w-4" /> Website
                 </SocialLink>
               )}
-              <a
-                href="#cv"
-                className="inline-flex items-center gap-2 rounded-xl px-4 py-2 bg-neutral-900 text-white hover:bg-neutral-800 shadow"
-              >
-                <Download className="h-4 w-4" /> Download CV
-              </a>
             </div>
 
             <div className="mt-6 flex flex-wrap gap-2">
@@ -356,7 +365,7 @@ export default function PortfolioSite() {
         </motion.div>
       </section>
 
-      {/* VALUE STRIP (bonus) */}
+      {/* VALUE STRIP */}
       <ValueStrip />
 
       {/* QUICK WINS */}
@@ -367,28 +376,24 @@ export default function PortfolioSite() {
         <SectionTitle eyebrow="Selected Work" title="Featured Projects" />
         <div className="grid md:grid-cols-2 gap-6">
           {PROJECTS.map((p) => (
-            <a key={p.title} href={p.link} target="_blank" rel="noreferrer noopener" className="group block">
-              <Card className="overflow-hidden transition-transform group-hover:-translate-y-0.5">
-                {p.image && (
-                  <img
-                    src={p.image}
-                    alt="Project visual"
-                    className="w-full h-40 object-cover rounded-xl mb-4"
-                    loading="lazy"
-                  />
-                )}
-                <h3 className="font-semibold text-lg">{p.title}</h3>
-                <p className="mt-2 text-neutral-700 text-sm">{p.blurb}</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {p.tags.map((t) => (
-                    <span key={t} className="text-xs px-2 py-1 rounded-full bg-indigo-50 border border-indigo-100">{t}</span>
-                  ))}
-                </div>
-                <div className="mt-3 inline-flex items-center gap-2 text-sm text-neutral-800">
-                  Explore <ExternalLink className="h-4 w-4" />
-                </div>
-              </Card>
-            </a>
+            <Card key={p.title} className="overflow-hidden">
+              {p.image && (
+                <img
+                  src={p.image}
+                  alt="Project visual"
+                  className="w-full h-40 object-cover rounded-xl mb-4"
+                  loading="lazy"
+                />
+              )}
+              <h3 className="font-semibold text-lg">{p.title}</h3>
+              <p className="mt-2 text-neutral-700 text-sm">{p.blurb}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {p.tags.map((t) => (
+                  <span key={t} className="text-xs px-2 py-1 rounded-full bg-indigo-50 border border-indigo-100">{t}</span>
+                ))}
+              </div>
+              {/* Explore: image only as requested; no link */}
+            </Card>
           ))}
         </div>
       </section>
@@ -407,7 +412,7 @@ export default function PortfolioSite() {
             </ul>
           </Card>
 
-          <Card>
+          <Card id="teaching">
             <SectionTitle eyebrow="Practice" title="Teaching & Curriculum">
               Empowering learners across UX, Cyber Security, and Business Intelligence.
             </SectionTitle>
@@ -465,7 +470,7 @@ export default function PortfolioSite() {
         </div>
       </section>
 
-      {/* EMPATHY QUOTES (bonus) */}
+      {/* EMPATHY QUOTES */}
       <section className="max-w-7xl mx-auto px-6 pb-8">
         <SectionTitle eyebrow="Principles" title="Empathy in Practice">
           Clear communication, active listening, and shared outcomes.
@@ -477,6 +482,43 @@ export default function PortfolioSite() {
             </Card>
           ))}
         </div>
+      </section>
+
+      {/* ASK A QUESTION (Free) */}
+      <section id="ask" className="max-w-7xl mx-auto px-6 pb-12">
+        <SectionTitle eyebrow="Free Service" title="Ask a Public Question">
+          Have a question about UX, identity, AI or teaching? Ask — I’ll answer publicly to help more people.
+        </SectionTitle>
+        <Card>
+          {/* Option A: Simple form to email */}
+          <form
+            className="grid gap-4"
+            action={`mailto:${EMAIL}`}
+            method="POST"
+            encType="text/plain"
+          >
+            <div>
+              <label className="block text-sm text-neutral-700 mb-1">Your Name</label>
+              <input className="w-full border border-neutral-300 rounded-lg px-3 py-2" name="name" placeholder="Your name" required />
+            </div>
+            <div>
+              <label className="block text-sm text-neutral-700 mb-1">Your Question</label>
+              <textarea className="w-full border border-neutral-300 rounded-lg px-3 py-2 h-28" name="question" placeholder="Ask anything…" required />
+            </div>
+            <button
+              type="submit"
+              className="inline-flex items-center gap-2 rounded-xl px-4 py-2 bg-neutral-900 text-white hover:bg-neutral-800 shadow"
+              title="Send via email"
+            >
+              Submit Question
+            </button>
+          </form>
+
+          {/* Option B: If you later prefer Google Form, replace the form above with an iframe embed */}
+        </Card>
+        <p className="mt-3 text-xs text-neutral-500">
+          By submitting, you’re happy for a summarized version of your question and my answer to appear on my site (no personal details shared).
+        </p>
       </section>
 
       {/* CONTACT */}
