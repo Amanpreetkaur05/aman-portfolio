@@ -15,15 +15,15 @@ import {
 } from "lucide-react";
 
 /* -----------------------------------------------
-   THEME — modern, calm, professional (earthy)
+   THEME — earthy (stone · amber · emerald)
    ----------------------------------------------- */
 const THEME = {
-  bgFrom: "from-stone-50",      // soft warm background
-  bgTo: "to-amber-50",          // pale earthy amber blend
-  brand: "text-stone-800",      // main brand text
-  brandLight: "text-stone-600", // hover/secondary
-  accent: "text-emerald-600",   // highlight color
-  text: "text-neutral-900",     // default text color
+  bgFrom: "from-stone-50",       // warm paper
+  bgTo: "to-amber-50",           // soft clay light
+  brand: "text-stone-900",       // deep taupe for headings
+  brandLight: "text-stone-600",  // secondary/hover
+  accent: "text-emerald-600",    // sage highlight
+  text: "text-neutral-900",      // body text
 };
 
 const NAME_FULL = "Amanpreet Kaur (APK)";
@@ -127,7 +127,7 @@ const Card = ({ className = "", children }) => (
 const SectionTitle = ({ eyebrow, title, children }) => (
   <div className="mb-6">
     <div className="text-xs uppercase tracking-widest text-neutral-500">{eyebrow}</div>
-    <h2 className="text-2xl md:text-3xl font-bold mt-1">{title}</h2>
+    <h2 className={`text-2xl md:text-3xl font-bold mt-1 ${THEME.brand}`}>{title}</h2>
     {children && <p className="mt-2 text-sm text-neutral-600">{children}</p>}
   </div>
 );
@@ -141,7 +141,7 @@ function WaveDivider() {
       <svg preserveAspectRatio="none" viewBox="0 0 1200 120" className="w-full h-16">
         <path
           d="M0,0 C150,100 350,-50 600,40 C850,130 1050,10 1200,60 L1200,120 L0,120 Z"
-          className="fill-teal-100"
+          className="fill-amber-100"
         />
       </svg>
     </div>
@@ -149,7 +149,7 @@ function WaveDivider() {
 }
 
 /* -----------------------------------------------
-   VALUE STRIP (softer, on glass panel)
+   VALUE STRIP (glass panel)
    ----------------------------------------------- */
 function ValueStrip() {
   const points = [
@@ -158,7 +158,7 @@ function ValueStrip() {
     { icon: <ShieldCheck className="h-5 w-5" />, text: "Trust, identity & compliance" },
   ];
   return (
-    <div className="bg-gradient-to-r from-teal-700 to-fuchsia-600 text-white">
+    <div className="bg-gradient-to-r from-emerald-800 to-amber-700 text-white">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="rounded-2xl bg-white/10 backdrop-blur-md p-4 grid md:grid-cols-3 gap-3">
           {points.map((p, i) => (
@@ -175,7 +175,7 @@ function ValueStrip() {
 }
 
 /* -----------------------------------------------
-   QUICK WINS — tabs + new offers
+   QUICK WINS — tabs + offers
    ----------------------------------------------- */
 function QuickWins() {
   const items = [
@@ -251,12 +251,12 @@ function QuickWins() {
       time: "1 day",
     },
 
-    // Organisations / Teams
+    // Organisations / Teams (earthy: emerald)
     {
       title: "AI Readiness & Role Map",
       audience: "Organisations",
       audienceKey: "organisations",
-      audienceStyle: "bg-teal-50 border-teal-200 text-teal-800",
+      audienceStyle: "bg-emerald-50 border-emerald-200 text-emerald-800",
       icon: "🏢",
       bullets: [
         "60-min strategy workshop: align goals, metrics, and risks",
@@ -270,7 +270,7 @@ function QuickWins() {
       title: "Learning Launch Kit (AI + Social)",
       audience: "Organisations",
       audienceKey: "organisations",
-      audienceStyle: "bg-teal-50 border-teal-200 text-teal-800",
+      audienceStyle: "bg-emerald-50 border-emerald-200 text-emerald-800",
       icon: "📣",
       bullets: [
         "1-page cheat sheet + 60-sec explainer for Reels/Shorts/LinkedIn",
@@ -284,7 +284,7 @@ function QuickWins() {
       title: "MicroCourse Sprint (48h)",
       audience: "Organisations",
       audienceKey: "organisations",
-      audienceStyle: "bg-teal-50 border-teal-200 text-teal-800",
+      audienceStyle: "bg-emerald-50 border-emerald-200 text-emerald-800",
       icon: "📚",
       bullets: [
         "Outcome-based outline with activities and quick assessments",
@@ -298,7 +298,7 @@ function QuickWins() {
       title: "Focus & Automation Playbook",
       audience: "Organisations",
       audienceKey: "organisations",
-      audienceStyle: "bg-teal-50 border-teal-200 text-teal-800",
+      audienceStyle: "bg-emerald-50 border-emerald-200 text-emerald-800",
       icon: "⚡",
       bullets: [
         "Prioritisation board: what’s in vs out + weekly planner template",
@@ -460,7 +460,7 @@ function QuickWins() {
             <Card className="relative hover:shadow-lg transition-shadow bg-white">
               {/* Ribbon */}
               <div className="absolute -top-3 left-6 rounded-full bg-white shadow px-3 py-1 text-xs font-semibold text-neutral-700 flex items-center gap-1">
-                <Zap className="h-3.5 w-3.5 text-teal-700" /> {NAME_SHORT}
+                <Zap className="h-3.5 w-3.5 text-emerald-700" /> {NAME_SHORT}
               </div>
 
               {/* Audience Tag */}
@@ -487,7 +487,7 @@ function QuickWins() {
       <div className="mt-8 text-center">
         <a
           href="#contact"
-          className="inline-flex items-center gap-2 rounded-xl px-6 py-3 bg-gradient-to-r from-teal-700 to-fuchsia-600 text-white font-semibold hover:from-teal-800 hover:to-fuchsia-700 shadow-md"
+          className="inline-flex items-center gap-2 rounded-xl px-6 py-3 bg-gradient-to-r from-emerald-700 to-amber-600 text-white font-semibold hover:from-emerald-800 hover:to-amber-700 shadow-md"
         >
           Not sure where to start? Book a 20-min fit call <ExternalLink className="h-4 w-4" />
         </a>
@@ -523,22 +523,22 @@ export default function PortfolioSite() {
       <header className="max-w-7xl mx-auto px-6 pt-8 pb-4">
         <nav className="flex items-center justify-between">
           <a href="#top" className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-700 to-fuchsia-600 text-white flex items-center justify-center text-sm font-bold">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-700 to-amber-600 text-white flex items-center justify-center text-sm font-bold">
               AK
             </div>
             <div className="leading-tight">
-              <div className="font-semibold tracking-tight">Amanpreet Kaur</div>
+              <div className={`font-semibold tracking-tight ${THEME.brand}`}>Amanpreet Kaur</div>
               <div className="text-xs text-neutral-500">Innovation · Trust · Digital Futures</div>
             </div>
           </a>
           <div className="hidden md:flex gap-4 text-sm">
-            <a href="#wins" className="hover:underline">Quick Wins</a>
-            <a href="#projects" className="hover:underline">Projects</a>
-            <a href="#research" className="hover:underline">Research</a>
-            <a href="#teaching" className="hover:underline">Teaching</a>
-            <a href="#writing" className="hover:underline">Writing</a>
-            <a href="#ask" className="hover:underline">Ask a Question</a>
-            <a href="#contact" className="hover:underline">Contact</a>
+            <a href="#wins" className={`hover:underline ${THEME.brandLight}`}>Quick Wins</a>
+            <a href="#projects" className={`hover:underline ${THEME.brandLight}`}>Projects</a>
+            <a href="#research" className={`hover:underline ${THEME.brandLight}`}>Research</a>
+            <a href="#teaching" className={`hover:underline ${THEME.brandLight}`}>Teaching</a>
+            <a href="#writing" className={`hover:underline ${THEME.brandLight}`}>Writing</a>
+            <a href="#ask" className={`hover:underline ${THEME.brandLight}`}>Ask a Question</a>
+            <a href="#contact" className={`hover:underline ${THEME.brandLight}`}>Contact</a>
           </div>
         </nav>
       </header>
@@ -554,7 +554,7 @@ export default function PortfolioSite() {
           <div>
             <p className="text-xs uppercase tracking-widest text-neutral-500">{LOCATION}</p>
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight mt-2">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-700 to-fuchsia-600">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-700 to-amber-600">
                 {NAME_FULL}
               </span>
             </h1>
@@ -581,11 +581,11 @@ export default function PortfolioSite() {
 
           <Card className="relative overflow-hidden p-0 flex items-center justify-center h-64 md:h-[22rem]">
             <div className="absolute -top-3 left-6 rounded-full bg-white shadow px-3 py-1 text-xs font-semibold text-neutral-700 flex items-center gap-1">
-              <ShieldCheck className="h-3.5 w-3.5 text-teal-700" /> Trusted & Available
+              <ShieldCheck className="h-3.5 w-3.5 text-emerald-700" /> Trusted & Available
             </div>
-            <div className="absolute inset-0 bg-gradient-to-br from-teal-100 to-fuchsia-100" />
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-100 to-amber-100" />
             <div className="relative z-10">
-              <div className="shrink-0 w-28 h-28 md:w-40 md:h-40 rounded-2xl bg-gradient-to-br from-teal-700 to-fuchsia-600 text-white flex items-center justify-center text-5xl md:text-6xl font-extrabold tracking-tight">
+              <div className="shrink-0 w-28 h-28 md:w-40 md:h-40 rounded-2xl bg-gradient-to-br from-emerald-700 to-amber-600 text-white flex items-center justify-center text-5xl md:text-6xl font-extrabold tracking-tight">
                 AK
               </div>
             </div>
@@ -593,7 +593,7 @@ export default function PortfolioSite() {
         </motion.div>
       </section>
 
-      {/* CREATIVE VALUE STRIP + WAVE */}
+      {/* VALUE STRIP + WAVE */}
       <ValueStrip />
 
       {/* QUICK WINS */}
@@ -629,7 +629,7 @@ export default function PortfolioSite() {
               <p className="mt-2 text-neutral-700 text-sm">{p.blurb}</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {p.tags.map((t) => (
-                  <span key={t} className="text-xs px-2 py-1 rounded-full bg-teal-50 border border-teal-100">
+                  <span key={t} className="text-xs px-2 py-1 rounded-full bg-emerald-50 border border-emerald-100">
                     {t}
                   </span>
                 ))}
@@ -788,11 +788,11 @@ export default function PortfolioSite() {
         </Card>
       </section>
 
-      {/* FOOTER — your full name shown */}
+      {/* FOOTER */}
       <footer className="max-w-7xl mx-auto px-6 pb-10 text-sm text-neutral-600">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal-700 to-fuchsia-600 text-white flex items-center justify-center text-sm font-bold">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-700 to-amber-600 text-white flex items-center justify-center text-sm font-bold">
               AK
             </div>
             <div>
