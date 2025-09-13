@@ -23,12 +23,15 @@ import {
    THEME — modern, calm, professional
    ----------------------------------------------- */
 const THEME = {
-  bgFrom: "from-stone-50",
-  bgTo: "to-cyan-50",
-  brand: "teal-800",
-  brandLight: "teal-600",
-  accent: "fuchsia-600",
-  text: "neutral-900",
+  const THEME = {
+  bgFrom: "from-stone-50",   // soft warm background
+  bgTo: "to-amber-50",       // pale earthy amber blend
+  brand: "stone-800",        // deep taupe for main brand text
+  brandLight: "stone-600",   // lighter taupe for hover/secondary
+  accent: "emerald-600",     // earthy green as a highlight color
+  text: "neutral-900",       // default text color
+};
+
 };
 
 const NAME_FULL = "Amanpreet Kaur (APK)";
