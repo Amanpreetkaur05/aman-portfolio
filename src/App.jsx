@@ -687,28 +687,30 @@ export default function PortfolioSite() {
           Consulting, collaborations, or speaking.
         </SectionTitle>
         <Card>
-          <div className="rounded-2xl overflow-hidden border border-neutral-200">
-            <iframe
-              className="w-full h-[720px] md:h-[760px]"
-              src="https://docs.google.com/forms/d/e/1FAIpQLSdLxHpw0tQPLQeYWhJkaJXhFz_P0iK6Vhcnn7xX5nB2rZ7bxg/viewform?embedded=true"
-              frameBorder="0"
-              marginHeight="0"
-              marginWidth="0"
-              title="Contact Amanpreet Kaur"
-            />
-          </div>
-          <div className="mt-3 text-xs text-neutral-500">
-            Don’t see the form?{" "}
-            <a
-              className="underline"
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdLxHpw0tQPLQeYWhJkaJXhFz_P0iK6Vhcnn7xX5nB2rZ7bxg/viewform"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              Open it in a new tab
-            </a>.
-          </div>
-        </Card>
+  <div className="rounded-2xl overflow-hidden border border-neutral-200">
+    <iframe
+      className="w-full h-[900px] md:h-[1000px]"
+      src="https://docs.google.com/forms/d/e/1FAIpQLSdLxHpw0tQPLQeYWhJkaJXhFz_P0iK6Vhcnn7xX5nB2rZ7bxg/viewform?embedded=true"
+      title="Contact Enquiry"
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+      sandbox="allow-forms allow-scripts allow-same-origin allow-popups"
+    />
+  </div>
+
+  <div className="mt-3 text-xs text-neutral-500">
+    If you see a Google account banner at the top, open this page in an incognito/private window
+    or <a
+      className="underline"
+      href="https://docs.google.com/forms/d/e/1FAIpQLSdLxHpw0tQPLQeYWhJkaJXhFz_P0iK6Vhcnn7xX5nB2rZ7bxg/viewform"
+      target="_blank"
+      rel="noreferrer noopener"
+    >
+      open the form in a new tab
+    </a>.
+  </div>
+</Card>
+
       </section>
 
       {/* FOOTER — your full name shown */}
