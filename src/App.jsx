@@ -4,9 +4,7 @@ import {
   Mail,
   Linkedin,
   Globe,
-  GraduationCap,
   Briefcase,
-  Cpu,
   ShieldCheck,
   Github,
   ExternalLink,
@@ -14,24 +12,18 @@ import {
   Zap,
   HeartHandshake,
   CheckCircle2,
-  PenTool,
-  FileText,
-  BookOpen,
 } from "lucide-react";
 
 /* -----------------------------------------------
-   THEME — modern, calm, professional
+   THEME — modern, calm, professional (earthy)
    ----------------------------------------------- */
 const THEME = {
-  const THEME = {
-  bgFrom: "from-stone-50",   // soft warm background
-  bgTo: "to-amber-50",       // pale earthy amber blend
-  brand: "stone-800",        // deep taupe for main brand text
-  brandLight: "stone-600",   // lighter taupe for hover/secondary
-  accent: "emerald-600",     // earthy green as a highlight color
-  text: "neutral-900",       // default text color
-};
-
+  bgFrom: "from-stone-50",      // soft warm background
+  bgTo: "to-amber-50",          // pale earthy amber blend
+  brand: "text-stone-800",      // main brand text
+  brandLight: "text-stone-600", // hover/secondary
+  accent: "text-emerald-600",   // highlight color
+  text: "text-neutral-900",     // default text color
 };
 
 const NAME_FULL = "Amanpreet Kaur (APK)";
@@ -141,16 +133,12 @@ const SectionTitle = ({ eyebrow, title, children }) => (
 );
 
 /* -----------------------------------------------
-   CREATIVE DIVIDER — wavy gradient (replaces line)
+   CREATIVE DIVIDER — wavy gradient
    ----------------------------------------------- */
 function WaveDivider() {
   return (
     <div className="relative">
-      <svg
-        preserveAspectRatio="none"
-        viewBox="0 0 1200 120"
-        className="w-full h-16"
-      >
+      <svg preserveAspectRatio="none" viewBox="0 0 1200 120" className="w-full h-16">
         <path
           d="M0,0 C150,100 350,-50 600,40 C850,130 1050,10 1200,60 L1200,120 L0,120 Z"
           className="fill-teal-100"
@@ -188,217 +176,211 @@ function ValueStrip() {
 
 /* -----------------------------------------------
    QUICK WINS — tabs + new offers
-   Hash preselect: #wins, #wins:students, #wins:organisations, #wins:beginners
    ----------------------------------------------- */
 function QuickWins() {
   const items = [
-    // Students / Early Researchers — UPDATED
-[
-  {
-    title: "Digital Tools Starter Lab",
-    audience: "Students",
-    audienceKey: "students",
-    audienceStyle: "bg-sky-50 border-sky-200 text-sky-800",
-    icon: "🧩",
-    bullets: [
-      "1:1 setup of core tools: Notion, Zotero, Obsidian",
-      "Simple capture → organise → use study system",
-      "Reusable research & revision templates"
-    ],
-    impact: "Study smarter, not harder",
-    time: "1 hour"
-  },
-  {
-    title: "Career Compass (Tech & Beyond)",
-    audience: "Students",
-    audienceKey: "students",
-    audienceStyle: "bg-sky-50 border-sky-200 text-sky-800",
-    icon: "🧭",
-    bullets: [
-      "Identify 2–3 career paths aligned to your strengths",
-      "Mini action plan: skills, projects, and proof points",
-      "Personal brand refresh: :contentReference[oaicite:0]{index=0} + portfolio checklist"
-    ],
-    impact: "Clear next moves",
-    time: "1.5 hours"
-  },
-  {
-    title: "AI-Powered Writing Studio",
-    audience: "Students",
-    audienceKey: "students",
-    audienceStyle: "bg-sky-50 border-sky-200 text-sky-800",
-    icon: "🤖",
-    bullets: [
-      "Use :contentReference[oaicite:1]{index=1} + :contentReference[oaicite:2]{index=2} for faster drafting",
-      "Templates for essays, abstracts, and discussions",
-      "Feedback loop: get clarity, structure, and style"
-    ],
-    impact: "Better writing in less time",
-    time: "0.5–1 day"
-  },
-  {
-    title: "Research Visibility Kit",
-    audience: "Students",
-    audienceKey: "students",
-    audienceStyle: "bg-sky-50 border-sky-200 text-sky-800",
-    icon: "📣",
-    bullets: [
-      "Turn projects into social-ready content (posts, visuals, reels)",
-      "AI content planner for :contentReference[oaicite:3]{index=3} / :contentReference[oaicite:4]{index=4}",
-      "Build a mini personal academic portfolio"
-    ],
-    impact: "Build your reputation early",
-    time: "1 day"
-  },
-  {
-    title: "Self-Reflection & Confidence Log",
-    audience: "Students",
-    audienceKey: "students",
-    audienceStyle: "bg-sky-50 border-sky-200 text-sky-800",
-    icon: "🌱",
-    bullets: [
-      "Guided reflection session to uncover strengths",
-      "Confidence log book + growth tracker",
-      "2 micro-habits to boost focus and follow-through"
-    ],
-    impact: "Stronger mindset, stronger outcomes",
-    time: "1 day"
-  }
-];
-
+    // Students / Early Researchers
+    {
+      title: "Digital Tools Starter Lab",
+      audience: "Students",
+      audienceKey: "students",
+      audienceStyle: "bg-sky-50 border-sky-200 text-sky-800",
+      icon: "🧩",
+      bullets: [
+        "1:1 setup of core tools: Notion, Zotero, Obsidian",
+        "Simple capture → organise → use study system",
+        "Reusable research & revision templates",
+      ],
+      impact: "Study smarter, not harder",
+      time: "1 hour",
+    },
+    {
+      title: "Career Compass (Tech & Beyond)",
+      audience: "Students",
+      audienceKey: "students",
+      audienceStyle: "bg-sky-50 border-sky-200 text-sky-800",
+      icon: "🧭",
+      bullets: [
+        "Identify 2–3 career paths aligned to your strengths",
+        "Mini action plan: skills, projects, and proof points",
+        "Personal brand refresh: LinkedIn + portfolio checklist",
+      ],
+      impact: "Clear next moves",
+      time: "1.5 hours",
+    },
+    {
+      title: "AI-Powered Writing Studio",
+      audience: "Students",
+      audienceKey: "students",
+      audienceStyle: "bg-sky-50 border-sky-200 text-sky-800",
+      icon: "🤖",
+      bullets: [
+        "Use ChatGPT + Grammarly for faster drafting",
+        "Templates for essays, abstracts, and discussions",
+        "Feedback loop: get clarity, structure, and style",
+      ],
+      impact: "Better writing in less time",
+      time: "0.5–1 day",
+    },
+    {
+      title: "Research Visibility Kit",
+      audience: "Students",
+      audienceKey: "students",
+      audienceStyle: "bg-sky-50 border-sky-200 text-sky-800",
+      icon: "📣",
+      bullets: [
+        "Turn projects into social-ready content (posts, visuals, reels)",
+        "AI content planner for LinkedIn / Instagram",
+        "Build a mini personal academic portfolio",
+      ],
+      impact: "Build your reputation early",
+      time: "1 day",
+    },
+    {
+      title: "Self-Reflection & Confidence Log",
+      audience: "Students",
+      audienceKey: "students",
+      audienceStyle: "bg-sky-50 border-sky-200 text-sky-800",
+      icon: "🌱",
+      bullets: [
+        "Guided reflection session to uncover strengths",
+        "Confidence log book + growth tracker",
+        "2 micro-habits to boost focus and follow-through",
+      ],
+      impact: "Stronger mindset, stronger outcomes",
+      time: "1 day",
+    },
 
     // Organisations / Teams
-{
-  title: "AI Readiness & Role Map",
-  audience: "Organisations",
-  audienceKey: "organisations",
-  audienceStyle: "bg-teal-50 border-teal-200 text-teal-800",
-  icon: "🏢",
-  bullets: [
-    "60-min strategy workshop: align goals, metrics, and risks",
-    "Workflow audit to spot AI/automation quick wins (content, admin, reporting)",
-    "Role-by-role skill map + 90-day upskilling plan with owners and timelines"
-  ],
-  impact: "Faster delivery, lower cost",
-  time: "1 day"
-},
-{
-  title: "Learning Launch Kit (AI + Social)",
-  audience: "Organisations",
-  audienceKey: "organisations",
-  audienceStyle: "bg-teal-50 border-teal-200 text-teal-800",
-  icon: "📣",
-  bullets: [
-    "1-page cheat sheet + 60-sec explainer for Reels/Shorts/LinkedIn",
-    "AI-drafted script, captions, alt text + micro-quiz for retention",
-    "Engagement tracker: views, completions, call-to-action follow-through"
-  ],
-  impact: "Skills that stick & spread",
-  time: "1 day"
-},
-{
-  title: "MicroCourse Sprint (48h)",
-  audience: "Organisations",
-  audienceKey: "organisations",
-  audienceStyle: "bg-teal-50 border-teal-200 text-teal-800",
-  icon: "📚",
-  bullets: [
-    "Outcome-based outline with activities and quick assessments",
-    "Slide skeleton + facilitator notes + AI question bank",
-    "LMS/Share-ready package and adoption plan"
-  ],
-  impact: "Ready to run in 48h",
-  time: "2 days"
-},
-{
-  title: "Focus & Automation Playbook",
-  audience: "Organisations",
-  audienceKey: "organisations",
-  audienceStyle: "bg-teal-50 border-teal-200 text-teal-800",
-  icon: "⚡",
-  bullets: [
-    "Prioritisation board: what’s in vs out + weekly planner template",
-    "No-code automations for repetitive tasks (e.g., briefs → posts, forms → sheets)",
-    "Operating cadence: 30-min weekly review + KPI snapshot"
-  ],
-  impact: "Hours saved weekly; consistent output",
-  time: "1 day"
-}
+    {
+      title: "AI Readiness & Role Map",
+      audience: "Organisations",
+      audienceKey: "organisations",
+      audienceStyle: "bg-teal-50 border-teal-200 text-teal-800",
+      icon: "🏢",
+      bullets: [
+        "60-min strategy workshop: align goals, metrics, and risks",
+        "Workflow audit to spot AI/automation quick wins",
+        "Role-by-role skill map + 90-day upskilling plan",
+      ],
+      impact: "Faster delivery, lower cost",
+      time: "1 day",
+    },
+    {
+      title: "Learning Launch Kit (AI + Social)",
+      audience: "Organisations",
+      audienceKey: "organisations",
+      audienceStyle: "bg-teal-50 border-teal-200 text-teal-800",
+      icon: "📣",
+      bullets: [
+        "1-page cheat sheet + 60-sec explainer for Reels/Shorts/LinkedIn",
+        "AI-drafted script, captions, alt text + micro-quiz",
+        "Engagement tracker: views, completions, CTA follow-through",
+      ],
+      impact: "Skills that stick & spread",
+      time: "1 day",
+    },
+    {
+      title: "MicroCourse Sprint (48h)",
+      audience: "Organisations",
+      audienceKey: "organisations",
+      audienceStyle: "bg-teal-50 border-teal-200 text-teal-800",
+      icon: "📚",
+      bullets: [
+        "Outcome-based outline with activities and quick assessments",
+        "Slide skeleton + facilitator notes + AI question bank",
+        "LMS/Share-ready package and adoption plan",
+      ],
+      impact: "Ready to run in 48h",
+      time: "2 days",
+    },
+    {
+      title: "Focus & Automation Playbook",
+      audience: "Organisations",
+      audienceKey: "organisations",
+      audienceStyle: "bg-teal-50 border-teal-200 text-teal-800",
+      icon: "⚡",
+      bullets: [
+        "Prioritisation board: what’s in vs out + weekly planner template",
+        "No-code automations for repetitive tasks",
+        "Operating cadence: 30-min weekly review + KPI snapshot",
+      ],
+      impact: "Hours saved weekly; consistent output",
+      time: "1 day",
+    },
 
-   // Digital Beginners (any individual)
-[
-  {
-    title: "AI Tools Jumpstart",
-    audience: "Beginners",
-    audienceKey: "beginners",
-    audienceStyle: "bg-emerald-50 border-emerald-200 text-emerald-800",
-    icon: "🤖",
-    bullets: [
-      "1:1 walkthrough of must-know AI tools (ChatGPT, Canva, Notion)",
-      "Personal use cases: content, study, research, admin",
-      "Mini action plan to save 3–5 hours per week"
-    ],
-    impact: "Tech confidence + time saved",
-    time: "1.5 hours"
-  },
-  {
-    title: "Digital Confidence Lab",
-    audience: "Beginners",
-    audienceKey: "beginners",
-    audienceStyle: "bg-emerald-50 border-emerald-200 text-emerald-800",
-    icon: "🌱",
-    bullets: [
-      "Reflective session: map your skills, fears, and digital goals",
-      "Build your personalised confidence log book",
-      "Set 2 daily habits for sustainable progress"
-    ],
-    impact: "Clarity + consistent growth",
-    time: "1 day"
-  },
-  {
-    title: "Social Edge Practice Kit",
-    audience: "Beginners",
-    audienceKey: "beginners",
-    audienceStyle: "bg-emerald-50 border-emerald-200 text-emerald-800",
-    icon: "📣",
-    bullets: [
-      "Personal content plan for :contentReference[oaicite:3]{index=3} / :contentReference[oaicite:4]{index=4}",
-      "AI-drafted post templates, captions & visuals",
-      "Confidence-focused posting routine (15 min/day)"
-    ],
-    impact: "Visibility + credibility",
-    time: "1 day"
-  },
-  {
-    title: "Communicate with Impact",
-    audience: "Beginners",
-    audienceKey: "beginners",
-    audienceStyle: "bg-emerald-50 border-emerald-200 text-emerald-800",
-    icon: "🎤",
-    bullets: [
-      "Polish your writing voice with AI support",
-      "One-on-one speaking practice with feedback",
-      "Mini toolkit for emails, pitches, and presentations"
-    ],
-    impact: "Sharp writing & speaking",
-    time: "1–2 days"
-  },
-  {
-    title: "Personal Productivity System",
-    audience: "Beginners",
-    audienceKey: "beginners",
-    audienceStyle: "bg-emerald-50 border-emerald-200 text-emerald-800",
-    icon: "⚡",
-    bullets: [
-      "30-min audit of your tasks and routines",
-      "Build a simple digital planner + focus board",
-      "Automate repetitive admin with free tools"
-    ],
-    impact: "More done, less stress",
-    time: "1 day"
-  }
-];
-
+    // Digital Beginners (any individual)
+    {
+      title: "AI Tools Jumpstart",
+      audience: "Beginners",
+      audienceKey: "beginners",
+      audienceStyle: "bg-emerald-50 border-emerald-200 text-emerald-800",
+      icon: "🤖",
+      bullets: [
+        "1:1 walkthrough of must-know AI tools (ChatGPT, Canva, Notion)",
+        "Personal use cases: content, study, research, admin",
+        "Mini action plan to save 3–5 hours per week",
+      ],
+      impact: "Tech confidence + time saved",
+      time: "1.5 hours",
+    },
+    {
+      title: "Digital Confidence Lab",
+      audience: "Beginners",
+      audienceKey: "beginners",
+      audienceStyle: "bg-emerald-50 border-emerald-200 text-emerald-800",
+      icon: "🌱",
+      bullets: [
+        "Reflective session: map your skills, fears, and digital goals",
+        "Build your personalised confidence log book",
+        "Set 2 daily habits for sustainable progress",
+      ],
+      impact: "Clarity + consistent growth",
+      time: "1 day",
+    },
+    {
+      title: "Social Edge Practice Kit",
+      audience: "Beginners",
+      audienceKey: "beginners",
+      audienceStyle: "bg-emerald-50 border-emerald-200 text-emerald-800",
+      icon: "📣",
+      bullets: [
+        "Personal content plan for LinkedIn / Instagram",
+        "AI-drafted post templates, captions & visuals",
+        "Confidence-focused posting routine (15 min/day)",
+      ],
+      impact: "Visibility + credibility",
+      time: "1 day",
+    },
+    {
+      title: "Communicate with Impact",
+      audience: "Beginners",
+      audienceKey: "beginners",
+      audienceStyle: "bg-emerald-50 border-emerald-200 text-emerald-800",
+      icon: "🎤",
+      bullets: [
+        "Polish your writing voice with AI support",
+        "One-on-one speaking practice with feedback",
+        "Mini toolkit for emails, pitches, and presentations",
+      ],
+      impact: "Sharp writing & speaking",
+      time: "1–2 days",
+    },
+    {
+      title: "Personal Productivity System",
+      audience: "Beginners",
+      audienceKey: "beginners",
+      audienceStyle: "bg-emerald-50 border-emerald-200 text-emerald-800",
+      icon: "⚡",
+      bullets: [
+        "30-min audit of your tasks and routines",
+        "Build a simple digital planner + focus board",
+        "Automate repetitive admin with free tools",
+      ],
+      impact: "More done, less stress",
+      time: "1 day",
+    },
+  ];
 
   const tabs = [
     { key: "all", label: "All" },
@@ -519,7 +501,7 @@ function QuickWins() {
    ----------------------------------------------- */
 export default function PortfolioSite() {
   return (
-    <div className={`min-h-screen bg-gradient-to-b ${THEME.bgFrom} ${THEME.bgTo} text-${THEME.text}`}>
+    <div className={`min-h-screen bg-gradient-to-b ${THEME.bgFrom} ${THEME.bgTo} ${THEME.text}`}>
       {/* Schema */}
       <script
         type="application/ld+json"
@@ -779,30 +761,31 @@ export default function PortfolioSite() {
           Consulting, collaborations, or speaking.
         </SectionTitle>
         <Card>
-  <div className="rounded-2xl overflow-hidden border border-neutral-200">
-    <iframe
-      className="w-full h-[900px] md:h-[1000px]"
-      src="https://docs.google.com/forms/d/e/1FAIpQLSd0Lr0lRCdfSJeYEplBbO8eokAWYFTYfitfrFNeW5tjPvFT7g/viewform?embedded=true"
-      title="Contact Enquiry"
-      loading="lazy"
-      referrerPolicy="no-referrer-when-downgrade"
-      sandbox="allow-forms allow-scripts allow-same-origin allow-popups"
-    />
-  </div>
+          <div className="rounded-2xl overflow-hidden border border-neutral-200">
+            <iframe
+              className="w-full h-[900px] md:h-[1000px]"
+              src="https://docs.google.com/forms/d/e/1FAIpQLSd0Lr0lRCdfSJeYEplBbO8eokAWYFTYfitfrFNeW5tjPvFT7g/viewform?embedded=true"
+              title="Contact Enquiry"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              sandbox="allow-forms allow-scripts allow-same-origin allow-popups"
+            />
+          </div>
 
-  <div className="mt-3 text-xs text-neutral-500">
-    If you see a Google account banner at the top, open this page in an incognito/private window
-    or <a
-      className="underline"
-      href="https://docs.google.com/forms/d/e/1FAIpQLSdLxHpw0tQPLQeYWhJkaJXhFz_P0iK6Vhcnn7xX5nB2rZ7bxg/viewform"
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      open the form in a new tab
-    </a>.
-  </div>
-</Card>
-
+          <div className="mt-3 text-xs text-neutral-500">
+            If you see a Google account banner at the top, open this page in an incognito/private window
+            or{" "}
+            <a
+              className="underline"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdLxHpw0tQPLQeYWhJkaJXhFz_P0iK6Vhcnn7xX5nB2rZ7bxg/viewform"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              open the form in a new tab
+            </a>
+            .
+          </div>
+        </Card>
       </section>
 
       {/* FOOTER — your full name shown */}
