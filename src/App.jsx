@@ -11,38 +11,37 @@ import {
   Github,
   ExternalLink,
   Star,
-  Sparkles,
   Zap,
   HeartHandshake,
   CheckCircle2,
+  PenTool,
+  FileText,
+  BookOpen,
 } from "lucide-react";
 
-/* ------------------------------------------------
-   THEME & BRAND
--------------------------------------------------*/
+/* -----------------------------------------------
+   THEME — modern, calm, professional
+   ----------------------------------------------- */
 const THEME = {
-  // subtle, modern, soft neutrals
-  bgFrom: "from-zinc-50",
-  bgTo: "to-slate-100",
-  brand: "indigo-900",
-  brandLight: "indigo-600",
+  bgFrom: "from-stone-50",
+  bgTo: "to-cyan-50",
+  brand: "teal-800",
+  brandLight: "teal-600",
+  accent: "fuchsia-600",
   text: "neutral-900",
 };
 
-const BUSINESS_NAME = "APK Advisory";
-
-const NAME_FULL = "Amanpreet Kaur";
+const NAME_FULL = "Amanpreet Kaur (APK)";
 const NAME_SHORT = "Aman";
-const TITLE = "Innovation · Trust · Digital Futures";
 const LOCATION = "Adelaide, Australia";
+const TITLE = "Innovation · Trust · Digital Futures";
 const EMAIL = "amann.preet@outlook.com";
 const LINKEDIN = "https://www.linkedin.com/in/aman-p-kaur";
 const GITHUB = "https://github.com/amanpreetkaur05";
 const WEBSITE = ""; // optional
 
-// Place the whimsical image as /public/whimsical-hpt.png
+// If you deploy to GitHub Pages with base /aman-portfolio/ this is safest:
 const WHIMSICAL_IMAGE = `${import.meta.env.BASE_URL}whimsical-hpt.png`;
-
 
 const TAGS = [
   "Innovation Leadership",
@@ -71,7 +70,8 @@ const PROJECTS = [
     blurb:
       "A visual framework for forming, aligning, and scaling high-performance teams using a concise systems-thinking flow.",
     tags: ["Leadership", "Org Design", "Playbook"],
-    image: WHIMSICAL_IMAGE,
+    image: WHIMSICAL_IMAGE, // opens in new tab below
+    imageLink: WHIMSICAL_IMAGE,
   },
 ];
 
@@ -103,24 +103,15 @@ const TALKS = [
   { title: "Leadership in Digital Transformation", event: "Keynote Talk", link: "#" },
 ];
 
-const TESTIMONIALS = [
-  {
-    quote:
-      "I choose to see people not just as they are, but as they are becoming — because growth deserves compassion, not judgment.",
-    by: "Personal Principle",
-  },
-  { quote: "She aims to turn research into action.", by: "Colleague" },
-];
-
 const EMPATHY_QUOTES = [
-  "Empathy turns information into understanding and decisions into trust.",
-  "Design with people, not for them — empathy is our shortest path to impact.",
+  "Empathy turns information into understanding — and decisions into trust.",
+  "We design with people, not for them — empathy is the shortest path to impact.",
   "When we feel seen, we move faster together.",
 ];
 
-/* ------------------------------------------------
+/* -----------------------------------------------
    PRIMITIVES
--------------------------------------------------*/
+   ----------------------------------------------- */
 const SocialLink = ({ href, children }) => (
   <a
     href={href}
@@ -133,9 +124,7 @@ const SocialLink = ({ href, children }) => (
 );
 
 const Card = ({ className = "", children }) => (
-  <div
-    className={`rounded-2xl border border-neutral-200 shadow-sm hover:shadow-md transition bg-white/90 backdrop-blur p-6 ${className}`}
-  >
+  <div className={`rounded-2xl border border-neutral-200 shadow-sm hover:shadow-md transition bg-white/90 backdrop-blur p-6 ${className}`}>
     {children}
   </div>
 );
@@ -148,40 +137,100 @@ const SectionTitle = ({ eyebrow, title, children }) => (
   </div>
 );
 
-/* ------------------------------------------------
-   QUICK WINS (tabs + framer-motion + pro colors)
+/* -----------------------------------------------
+   CREATIVE DIVIDER — wavy gradient (replaces line)
+   ----------------------------------------------- */
+function WaveDivider() {
+  return (
+    <div className="relative">
+      <svg
+        preserveAspectRatio="none"
+        viewBox="0 0 1200 120"
+        className="w-full h-16"
+      >
+        <path
+          d="M0,0 C150,100 350,-50 600,40 C850,130 1050,10 1200,60 L1200,120 L0,120 Z"
+          className="fill-teal-100"
+        />
+      </svg>
+    </div>
+  );
+}
+
+/* -----------------------------------------------
+   VALUE STRIP (softer, on glass panel)
+   ----------------------------------------------- */
+function ValueStrip() {
+  const points = [
+    { icon: <CheckCircle2 className="h-5 w-5" />, text: "Research depth → shipped outcomes" },
+    { icon: <HeartHandshake className="h-5 w-5" />, text: "Empathy-led, evidence-based" },
+    { icon: <ShieldCheck className="h-5 w-5" />, text: "Trust, identity & compliance" },
+  ];
+  return (
+    <div className="bg-gradient-to-r from-teal-700 to-fuchsia-600 text-white">
+      <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="rounded-2xl bg-white/10 backdrop-blur-md p-4 grid md:grid-cols-3 gap-3">
+          {points.map((p, i) => (
+            <div key={i} className="flex items-center gap-2 text-sm">
+              {p.icon}
+              <span className="font-medium">{p.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <WaveDivider />
+    </div>
+  );
+}
+
+/* -----------------------------------------------
+   QUICK WINS — tabs + new offers
    Hash preselect: #wins, #wins:students, #wins:organisations, #wins:beginners
--------------------------------------------------*/
+   ----------------------------------------------- */
 function QuickWins() {
   const items = [
-    // Students / Early Researchers
+    // Students / Early Researchers — UPDATED per your ask
     {
-      title: "Assignment Clarity Call",
+      title: "Student Digital Tools Starter",
       audience: "Students",
       audienceKey: "students",
       audienceStyle: "bg-sky-50 border-sky-200 text-sky-800",
       icon: "🎓",
       bullets: [
-        "Understand the brief and marking guide",
-        "3 clear steps to start, progress, and finish",
-        "Mini checklist to self-review before submission",
+        "Set up Notion/Zotero/Obsidian for easy studying",
+        "Simple workflow: capture → organise → use",
+        "Reusable templates to stay on track",
       ],
-      impact: "Confidence to start",
-      time: "45 mins",
+      impact: "Confidence with tools",
+      time: "1 hour",
     },
     {
-      title: "Study Strategy Blueprint",
+      title: "Career-in-Tech Map",
       audience: "Students",
       audienceKey: "students",
       audienceStyle: "bg-sky-50 border-sky-200 text-sky-800",
       icon: "🎓",
       bullets: [
-        "Weekly plan that fits real life",
-        "Focus techniques that reduce stress",
-        "Template you can reuse every term",
+        "Find 2–3 roles that fit your strengths",
+        "Mini plan: skills, projects, and proof points",
+        "Simple LinkedIn cleanup checklist",
       ],
-      impact: "Less stress, more progress",
+      impact: "Clear next moves",
       time: "1 hour",
+    },
+    {
+      title: "Writing Resources Pack",
+      audience: "Students",
+      audienceKey: "students",
+      audienceStyle: "bg-sky-50 border-sky-200 text-sky-800",
+      icon: "📝",
+      bullets: [
+        "Templates for abstracts, intros, and discussions",
+        "Common phrasing patterns that read clearly",
+        "Referencing & structure cheatsheets",
+      ],
+      impact: "Better writing, faster",
+      time: "0.5 day",
     },
 
     // Organisations / Teams
@@ -189,7 +238,7 @@ function QuickWins() {
       title: "Strategy Sketch Session",
       audience: "Organisations",
       audienceKey: "organisations",
-      audienceStyle: "bg-indigo-50 border-indigo-200 text-indigo-800",
+      audienceStyle: "bg-teal-50 border-teal-200 text-teal-800",
       icon: "🏢",
       bullets: [
         "One-page plan: goals, metrics, risks",
@@ -203,18 +252,46 @@ function QuickWins() {
       title: "Learning Launch Kit",
       audience: "Organisations",
       audienceKey: "organisations",
-      audienceStyle: "bg-indigo-50 border-indigo-200 text-indigo-800",
+      audienceStyle: "bg-teal-50 border-teal-200 text-teal-800",
       icon: "🏢",
       bullets: [
-        "1-page cheat sheet on one topic",
-        "3-min video or script + mini quiz",
-        "Simple tracker to see adoption",
+        "1-page cheat sheet on a topic",
+        "3-min video/script + mini quiz",
+        "Simple tracker to measure use",
       ],
       impact: "Skills that stick",
       time: "1 day",
     },
+    {
+      title: "Course/Module Mini-Design",
+      audience: "Organisations",
+      audienceKey: "organisations",
+      audienceStyle: "bg-teal-50 border-teal-200 text-teal-800",
+      icon: "📚",
+      bullets: [
+        "Outcome-based module outline",
+        "Activities + quick assessments",
+        "Rubric starter and slides skeleton",
+      ],
+      impact: "Ready to run",
+      time: "1 day",
+    },
 
     // Digital Beginners (any individual)
+    {
+      title: "Report Polish & Data Story",
+      audience: "Beginners",
+      audienceKey: "beginners",
+      audienceStyle: "bg-emerald-50 border-emerald-200 text-emerald-800",
+      icon: "📈",
+      bullets: [
+        "Turn raw content into a crisp report",
+        "Visuals/checklists for clarity",
+        "Executive summary that sells the story",
+      ],
+      impact: "Professional finish",
+      time: "0.5–1 day",
+    },
     {
       title: "Digital Confidence Starter",
       audience: "Beginners",
@@ -240,7 +317,6 @@ function QuickWins() {
 
   const [activeTab, setActiveTab] = React.useState("all");
 
-  // Preselect tab from hash (#wins:students etc.)
   React.useEffect(() => {
     const pickFromHash = () => {
       const hash = window.location.hash || "";
@@ -248,9 +324,7 @@ function QuickWins() {
         const part = hash.split(":")[1]?.toLowerCase();
         if (["students", "organisations", "beginners"].includes(part)) {
           setActiveTab(part);
-        } else {
-          setActiveTab("all");
-        }
+        } else setActiveTab("all");
       }
     };
     pickFromHash();
@@ -261,29 +335,26 @@ function QuickWins() {
   const filtered =
     activeTab === "all" ? items : items.filter((it) => it.audienceKey === activeTab);
 
-  // Framer Motion variants
   const container = {
     hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08 },
-    },
+    show: { opacity: 1, transition: { staggerChildren: 0.08 } },
   };
   const item = {
     hidden: { opacity: 0, y: 12 },
     show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
   };
 
-  // Tab styles
   const baseTab =
     "px-3 py-1.5 rounded-full text-sm border transition inline-flex items-center gap-2";
-  const activeStyles = "bg-neutral-900 text-white border-neutral-900 shadow";
-  const inactiveStyles = "bg-white text-neutral-700 border-neutral-200 hover:border-neutral-300";
+  const activeStyles =
+    "bg-neutral-900 text-white border-neutral-900 shadow";
+  const inactiveStyles =
+    "bg-white text-neutral-700 border-neutral-200 hover:border-neutral-300";
 
   return (
     <section id="wins" className="max-w-7xl mx-auto px-6 pb-14">
       <SectionTitle eyebrow="Fast Value" title="Quick Wins I Deliver">
-        For students, organisations, and anyone starting fresh in the digital world — clear, supportive, and fast.
+        For students, organisations, and anyone starting fresh — simple, practical, fast.
       </SectionTitle>
 
       {/* Tabs */}
@@ -315,7 +386,7 @@ function QuickWins() {
             <Card className="relative hover:shadow-lg transition-shadow bg-white">
               {/* Ribbon */}
               <div className="absolute -top-3 left-6 rounded-full bg-white shadow px-3 py-1 text-xs font-semibold text-neutral-700 flex items-center gap-1">
-                <Zap className="h-3.5 w-3.5 text-indigo-800" /> {NAME_SHORT}
+                <Zap className="h-3.5 w-3.5 text-teal-700" /> {NAME_SHORT}
               </div>
 
               {/* Audience Tag */}
@@ -342,7 +413,7 @@ function QuickWins() {
       <div className="mt-8 text-center">
         <a
           href="#contact"
-          className="inline-flex items-center gap-2 rounded-xl px-6 py-3 bg-gradient-to-r from-indigo-700 to-violet-500 text-white font-semibold hover:from-indigo-800 hover:to-violet-600 shadow-md"
+          className="inline-flex items-center gap-2 rounded-xl px-6 py-3 bg-gradient-to-r from-teal-700 to-fuchsia-600 text-white font-semibold hover:from-teal-800 hover:to-fuchsia-700 shadow-md"
         >
           Not sure where to start? Book a 20-min fit call <ExternalLink className="h-4 w-4" />
         </a>
@@ -351,65 +422,39 @@ function QuickWins() {
   );
 }
 
-/* ------------------------------------------------
-   VALUE STRIP (soft dividers)
--------------------------------------------------*/
-function ValueStrip() {
-  const points = [
-    { icon: <CheckCircle2 className="h-5 w-5" />, text: "Research depth → shipped outcomes" },
-    { icon: <HeartHandshake className="h-5 w-5" />, text: "Empathy-led, evidence-based" },
-    { icon: <ShieldCheck className="h-5 w-5" />, text: "Trust, identity & compliance" },
-  ];
-  return (
-    <div className="bg-gradient-to-r from-indigo-700 to-violet-600 text-white">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row gap-3 md:gap-0 items-stretch justify-center">
-        {points.map((p, i) => (
-          <div
-            key={i}
-            className={`flex items-center gap-2 text-sm px-4 py-2 ${i < points.length - 1 ? "md:border-r md:border-white/30" : ""}`}
-          >
-            {p.icon}
-            <span className="font-medium">{p.text}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/* ------------------------------------------------
+/* -----------------------------------------------
    PAGE
--------------------------------------------------*/
+   ----------------------------------------------- */
 export default function PortfolioSite() {
   return (
     <div className={`min-h-screen bg-gradient-to-b ${THEME.bgFrom} ${THEME.bgTo} text-${THEME.text}`}>
-      {/* SEO / Schema */}
+      {/* Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Organization",
-            name: BUSINESS_NAME,
-            founder: NAME_FULL,
+            "@type": "Person",
+            name: NAME_FULL,
+            jobTitle: TITLE,
             address: LOCATION,
             url: WEBSITE || LINKEDIN,
             sameAs: [LINKEDIN, GITHUB].filter(Boolean),
-            contactPoint: [{ "@type": "ContactPoint", email: EMAIL, contactType: "business" }],
+            email: `mailto:${EMAIL}`,
           }),
         }}
       />
 
-      {/* NAV (brand-forward, seamless name placement) */}
+      {/* NAV — simple personal brand */}
       <header className="max-w-7xl mx-auto px-6 pt-8 pb-4">
         <nav className="flex items-center justify-between">
           <a href="#top" className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-800 to-indigo-600 text-white flex items-center justify-center text-sm font-bold">
-              APK
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-700 to-fuchsia-600 text-white flex items-center justify-center text-sm font-bold">
+              AK
             </div>
             <div className="leading-tight">
-              <div className="font-semibold tracking-tight">{BUSINESS_NAME}</div>
-              <div className="text-xs text-neutral-500">by {NAME_FULL}</div>
+              <div className="font-semibold tracking-tight">Amanpreet Kaur</div>
+              <div className="text-xs text-neutral-500">Innovation · Trust · Digital Futures</div>
             </div>
           </a>
           <div className="hidden md:flex gap-4 text-sm">
@@ -435,13 +480,10 @@ export default function PortfolioSite() {
           <div>
             <p className="text-xs uppercase tracking-widest text-neutral-500">{LOCATION}</p>
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight mt-2">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-800 to-violet-600">
-                {BUSINESS_NAME}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-700 to-fuchsia-600">
+                {NAME_FULL}
               </span>
             </h1>
-            <p className="mt-2 text-neutral-700">
-              by <span className="font-semibold">{NAME_FULL}</span>
-            </p>
             <p className="mt-3 text-lg text-neutral-700">{TITLE}</p>
             <p className="mt-3 text-neutral-600">
               Envisioning future-ready ecosystems — transforming innovation into strategy and impact.
@@ -465,22 +507,22 @@ export default function PortfolioSite() {
 
           <Card className="relative overflow-hidden p-0 flex items-center justify-center h-64 md:h-[22rem]">
             <div className="absolute -top-3 left-6 rounded-full bg-white shadow px-3 py-1 text-xs font-semibold text-neutral-700 flex items-center gap-1">
-              <ShieldCheck className="h-3.5 w-3.5 text-indigo-800" /> Trusted & Available
+              <ShieldCheck className="h-3.5 w-3.5 text-teal-700" /> Trusted & Available
             </div>
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-200 to-indigo-100" />
+            <div className="absolute inset-0 bg-gradient-to-br from-teal-100 to-fuchsia-100" />
             <div className="relative z-10">
-              <div className="shrink-0 w-28 h-28 md:w-40 md:h-40 rounded-2xl bg-gradient-to-br from-indigo-800 to-violet-600 text-white flex items-center justify-center text-5xl md:text-6xl font-extrabold tracking-tight">
-                APK
+              <div className="shrink-0 w-28 h-28 md:w-40 md:h-40 rounded-2xl bg-gradient-to-br from-teal-700 to-fuchsia-600 text-white flex items-center justify-center text-5xl md:text-6xl font-extrabold tracking-tight">
+                AK
               </div>
             </div>
           </Card>
         </motion.div>
       </section>
 
-      {/* VALUE STRIP */}
+      {/* CREATIVE VALUE STRIP + WAVE */}
       <ValueStrip />
 
-      {/* QUICK WINS (tabs) */}
+      {/* QUICK WINS */}
       <QuickWins />
 
       {/* PROJECTS */}
@@ -489,24 +531,36 @@ export default function PortfolioSite() {
         <div className="grid md:grid-cols-2 gap-6">
           {PROJECTS.map((p) => (
             <Card key={p.title} className="overflow-hidden">
-              {p.image && (
-                <img
-                  src={p.image}
-                  alt="Project visual"
-                  className="w-full h-40 object-cover rounded-xl mb-4"
-                  loading="lazy"
-                />
+              {/* Make the Whimsical image open in a new tab */}
+              {p.image && p.imageLink ? (
+                <a href={p.imageLink} target="_blank" rel="noreferrer noopener">
+                  <img
+                    src={p.image}
+                    alt="Project visual"
+                    className="w-full h-40 object-cover rounded-xl mb-4 transition hover:opacity-90"
+                    loading="lazy"
+                  />
+                </a>
+              ) : (
+                p.image && (
+                  <img
+                    src={p.image}
+                    alt="Project visual"
+                    className="w-full h-40 object-cover rounded-xl mb-4"
+                    loading="lazy"
+                  />
+                )
               )}
               <h3 className="font-semibold text-lg">{p.title}</h3>
               <p className="mt-2 text-neutral-700 text-sm">{p.blurb}</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {p.tags.map((t) => (
-                  <span key={t} className="text-xs px-2 py-1 rounded-full bg-indigo-50 border border-indigo-100">
+                  <span key={t} className="text-xs px-2 py-1 rounded-full bg-teal-50 border border-teal-100">
                     {t}
                   </span>
                 ))}
               </div>
-              {/* Explore: image only as requested; no external link */}
+              {/* No external "Explore" link — image already clickable */}
             </Card>
           ))}
         </div>
@@ -546,7 +600,7 @@ export default function PortfolioSite() {
       {/* WRITING */}
       <section id="writing" className="max-w-7xl mx-auto px-6 pb-6">
         <SectionTitle eyebrow="Notes" title="Articles & Posts">
-          I also create tailored learning resources — guides, slides, and exercises — matching your team’s context.
+          I create tailored learning resources — guides, slides, and exercises — matching your context.
         </SectionTitle>
         <div className="grid md:grid-cols-2 gap-6">
           <Card>
@@ -657,16 +711,16 @@ export default function PortfolioSite() {
         </Card>
       </section>
 
-      {/* FOOTER */}
+      {/* FOOTER — your full name shown */}
       <footer className="max-w-7xl mx-auto px-6 pb-10 text-sm text-neutral-600">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-800 to-violet-600 text-white flex items-center justify-center text-sm font-bold">
-              APK
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal-700 to-fuchsia-600 text-white flex items-center justify-center text-sm font-bold">
+              AK
             </div>
             <div>
-              <div className="font-semibold">{BUSINESS_NAME}</div>
-              <div className="text-xs text-neutral-500">by {NAME_FULL}</div>
+              <div className="font-semibold">{NAME_FULL}</div>
+              <div className="text-xs text-neutral-500">{TITLE}</div>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -680,7 +734,7 @@ export default function PortfolioSite() {
             )}
           </div>
         </div>
-        <div className="mt-4">© {new Date().getFullYear()} {BUSINESS_NAME}. All rights reserved.</div>
+        <div className="mt-4">© {new Date().getFullYear()} {NAME_FULL}. All rights reserved.</div>
       </footer>
     </div>
   );
