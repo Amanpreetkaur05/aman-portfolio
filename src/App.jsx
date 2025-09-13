@@ -41,7 +41,8 @@ const GITHUB = "https://github.com/amanpreetkaur05";
 const WEBSITE = ""; // optional
 
 // Place the whimsical image as /public/whimsical-hpt.png
-const WHIMSICAL_IMAGE = "/whimsical-hpt.png";
+const WHIMSICAL_IMAGE = `${import.meta.env.BASE_URL}whimsical-hpt.png`;
+
 
 const TAGS = [
   "Innovation Leadership",
