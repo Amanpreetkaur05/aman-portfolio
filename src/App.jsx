@@ -18,15 +18,18 @@ import {
 } from "lucide-react";
 
 /* ------------------------------------------------
-   THEME & CONTENT
+   THEME & BRAND
 -------------------------------------------------*/
 const THEME = {
-  bgFrom: "from-slate-50",
-  bgTo: "to-indigo-50",
-  brand: "indigo-800",
+  // subtle, modern, soft neutrals
+  bgFrom: "from-zinc-50",
+  bgTo: "to-slate-100",
+  brand: "indigo-900",
   brandLight: "indigo-600",
   text: "neutral-900",
 };
+
+const BUSINESS_NAME = "APK Advisory";
 
 const NAME_FULL = "Amanpreet Kaur";
 const NAME_SHORT = "Aman";
@@ -36,6 +39,9 @@ const EMAIL = "amann.preet@outlook.com";
 const LINKEDIN = "https://www.linkedin.com/in/aman-p-kaur";
 const GITHUB = "https://github.com/amanpreetkaur05";
 const WEBSITE = ""; // optional
+
+// Place the whimsical image as /public/whimsical-hpt.png
+const WHIMSICAL_IMAGE = "/whimsical-hpt.png";
 
 const TAGS = [
   "Innovation Leadership",
@@ -64,8 +70,7 @@ const PROJECTS = [
     blurb:
       "A visual framework for forming, aligning, and scaling high-performance teams using a concise systems-thinking flow.",
     tags: ["Leadership", "Org Design", "Playbook"],
-    image:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1080&auto=format&fit=crop",
+    image: WHIMSICAL_IMAGE,
   },
 ];
 
@@ -85,7 +90,7 @@ const ARTICLES = [
       "Revolutionizing Supply Chains with AI-Powered Blockchain Identity Management (Agri-food organisations)",
     outlet: "LinkedIn",
     link:
-      "https://www.linkedin.com/pulse/unlocking-supply-chain-efficiency-through-ai-driven-blockchain-kaur-glyzc/?trackingId=YKUyz1d7kUZf73OdJcHITg%3D%3D",
+      "https://www.linkedin.com/pulse/unlocking-supply-chain-efficiency-through-ai-driven-blockchain-kaur-glyzc/?trackingId=x50ddaqTBAaQ9rbKNV%2FW6A%3D%3D",
   },
 ];
 
@@ -113,7 +118,7 @@ const EMPATHY_QUOTES = [
 ];
 
 /* ------------------------------------------------
-   SMALL UI PRIMITIVES
+   PRIMITIVES
 -------------------------------------------------*/
 const SocialLink = ({ href, children }) => (
   <a
@@ -127,7 +132,9 @@ const SocialLink = ({ href, children }) => (
 );
 
 const Card = ({ className = "", children }) => (
-  <div className={`rounded-2xl border border-neutral-200 shadow-sm hover:shadow-md transition bg-white/90 backdrop-blur p-6 ${className}`}>
+  <div
+    className={`rounded-2xl border border-neutral-200 shadow-sm hover:shadow-md transition bg-white/90 backdrop-blur p-6 ${className}`}
+  >
     {children}
   </div>
 );
@@ -140,93 +147,203 @@ const SectionTitle = ({ eyebrow, title, children }) => (
   </div>
 );
 
-const Monogram = ({ size = "w-28 h-28 md:w-40 md:h-40 text-5xl md:text-6xl" }) => (
-  <div className={`shrink-0 ${size} rounded-2xl bg-gradient-to-br from-slate-700 to-indigo-800 text-white flex items-center justify-center font-extrabold tracking-tight`}>
-    AK
-  </div>
-);
-
 /* ------------------------------------------------
-   QUICK WINS (simpler language)
+   QUICK WINS (tabs + framer-motion + pro colors)
+   Hash preselect: #wins, #wins:students, #wins:organisations, #wins:beginners
 -------------------------------------------------*/
 function QuickWins() {
   const items = [
+    // Students / Early Researchers
     {
-      title: "Insight Distiller",
+      title: "Assignment Clarity Call",
+      audience: "Students",
+      audienceKey: "students",
+      audienceStyle: "bg-sky-50 border-sky-200 text-sky-800",
+      icon: "🎓",
       bullets: [
-        "Turn complex research or data into clear, simple summaries",
-        "Deliver short, action-ready briefs anyone can use",
-        "Share next steps with owners and timelines",
+        "Understand the brief and marking guide",
+        "3 clear steps to start, progress, and finish",
+        "Mini checklist to self-review before submission",
       ],
-      impact: "High",
-      time: "1 day",
+      impact: "Confidence to start",
+      time: "45 mins",
     },
     {
-      title: "Strategy Sketch Session",
+      title: "Study Strategy Blueprint",
+      audience: "Students",
+      audienceKey: "students",
+      audienceStyle: "bg-sky-50 border-sky-200 text-sky-800",
+      icon: "🎓",
       bullets: [
-        "Co-create a one-page plan with you",
-        "Connect learning goals to real outcomes",
-        "Make priorities, risks, and metrics obvious",
+        "Weekly plan that fits real life",
+        "Focus techniques that reduce stress",
+        "Template you can reuse every term",
       ],
-      impact: "Med–High",
-      time: "1–2 days",
+      impact: "Less stress, more progress",
+      time: "1 hour",
+    },
+
+    // Organisations / Teams
+    {
+      title: "Strategy Sketch Session",
+      audience: "Organisations",
+      audienceKey: "organisations",
+      audienceStyle: "bg-indigo-50 border-indigo-200 text-indigo-800",
+      icon: "🏢",
+      bullets: [
+        "One-page plan: goals, metrics, risks",
+        "Live 1-hour workshop to align the team",
+        "Priorities board: what’s in vs out",
+      ],
+      impact: "Fast alignment",
+      time: "1.5 hours",
     },
     {
       title: "Learning Launch Kit",
+      audience: "Organisations",
+      audienceKey: "organisations",
+      audienceStyle: "bg-indigo-50 border-indigo-200 text-indigo-800",
+      icon: "🏢",
       bullets: [
-        "Design small, engaging resources (videos, checklists, quizzes)",
-        "Help teams learn fast and apply quickly",
-        "Measure improvements with simple trackers",
+        "1-page cheat sheet on one topic",
+        "3-min video or script + mini quiz",
+        "Simple tracker to see adoption",
       ],
-      impact: "Medium",
-      time: "0.5–1 day",
+      impact: "Skills that stick",
+      time: "1 day",
     },
+
+    // Digital Beginners (any individual)
     {
-      title: "Thought Partnership",
+      title: "Digital Confidence Starter",
+      audience: "Beginners",
+      audienceKey: "beginners",
+      audienceStyle: "bg-emerald-50 border-emerald-200 text-emerald-800",
+      icon: "🌱",
       bullets: [
-        "Coach leaders and educators with reflective questions",
-        "Unblock decisions and spark new ideas",
-        "Leave with 2–3 practical actions",
+        "Explore interests and map 2–3 directions",
+        "Set up basic tools and habits",
+        "Personal starter kit to begin today",
       ],
-      impact: "High (clarity)",
+      impact: "Clarity to begin",
       time: "1 hour",
     },
   ];
 
+  const tabs = [
+    { key: "all", label: "All" },
+    { key: "students", label: "Students" },
+    { key: "organisations", label: "Organisations" },
+    { key: "beginners", label: "Beginners" },
+  ];
+
+  const [activeTab, setActiveTab] = React.useState("all");
+
+  // Preselect tab from hash (#wins:students etc.)
+  React.useEffect(() => {
+    const pickFromHash = () => {
+      const hash = window.location.hash || "";
+      if (hash.startsWith("#wins")) {
+        const part = hash.split(":")[1]?.toLowerCase();
+        if (["students", "organisations", "beginners"].includes(part)) {
+          setActiveTab(part);
+        } else {
+          setActiveTab("all");
+        }
+      }
+    };
+    pickFromHash();
+    window.addEventListener("hashchange", pickFromHash);
+    return () => window.removeEventListener("hashchange", pickFromHash);
+  }, []);
+
+  const filtered =
+    activeTab === "all" ? items : items.filter((it) => it.audienceKey === activeTab);
+
+  // Framer Motion variants
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.08 },
+    },
+  };
+  const item = {
+    hidden: { opacity: 0, y: 12 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
+  };
+
+  // Tab styles
+  const baseTab =
+    "px-3 py-1.5 rounded-full text-sm border transition inline-flex items-center gap-2";
+  const activeStyles = "bg-neutral-900 text-white border-neutral-900 shadow";
+  const inactiveStyles = "bg-white text-neutral-700 border-neutral-200 hover:border-neutral-300";
+
   return (
-    <section id="wins" className="max-w-7xl mx-auto px-6 pb-10">
+    <section id="wins" className="max-w-7xl mx-auto px-6 pb-14">
       <SectionTitle eyebrow="Fast Value" title="Quick Wins I Deliver">
-        Small, high-impact improvements — simple language, clear outcomes.
+        For students, organisations, and anyone starting fresh in the digital world — clear, supportive, and fast.
       </SectionTitle>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {items.map((it) => (
-          <Card key={it.title} className="relative">
-            <div className="absolute -top-3 left-6 rounded-full bg-white shadow px-3 py-1 text-xs font-semibold text-neutral-700 flex items-center gap-1">
-              <Zap className="h-3.5 w-3.5 text-indigo-800" /> {NAME_SHORT}
-            </div>
-
-            <h3 className="font-semibold">{it.title}</h3>
-            <ul className="mt-2 text-sm text-neutral-700 list-disc pl-4 space-y-1">
-              {it.bullets.map((b) => (
-                <li key={b}>{b}</li>
-              ))}
-            </ul>
-
-            <div className="mt-3 flex items-center justify-between text-xs text-neutral-600">
-              <span>Impact: <strong>{it.impact}</strong></span>
-              <span>Time: <strong>{it.time}</strong></span>
-            </div>
-          </Card>
+      {/* Tabs */}
+      <div className="mb-6 flex flex-wrap gap-2">
+        {tabs.map((t) => (
+          <a
+            key={t.key}
+            href={t.key === "all" ? "#wins" : `#wins:${t.key}`}
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.hash = t.key === "all" ? "#wins" : `#wins:${t.key}`;
+            }}
+            className={`${baseTab} ${activeTab === t.key ? activeStyles : inactiveStyles}`}
+          >
+            {t.label}
+          </a>
         ))}
       </div>
 
-      <div className="mt-6">
+      {/* Cards */}
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        {filtered.map((it) => (
+          <motion.div key={it.title} variants={item}>
+            <Card className="relative hover:shadow-lg transition-shadow bg-white">
+              {/* Ribbon */}
+              <div className="absolute -top-3 left-6 rounded-full bg-white shadow px-3 py-1 text-xs font-semibold text-neutral-700 flex items-center gap-1">
+                <Zap className="h-3.5 w-3.5 text-indigo-800" /> {NAME_SHORT}
+              </div>
+
+              {/* Audience Tag */}
+              <div className={`inline-flex items-center gap-1 text-xs border rounded-full px-2 py-0.5 ${it.audienceStyle}`}>
+                <span>{it.icon}</span> {it.audience}
+              </div>
+
+              <h3 className="mt-2 font-semibold text-lg">{it.title}</h3>
+              <ul className="mt-2 text-sm text-neutral-700 list-disc pl-4 space-y-1">
+                {it.bullets.map((b) => (
+                  <li key={b}>{b}</li>
+                ))}
+              </ul>
+
+              <div className="mt-3 flex items-center justify-between text-xs text-neutral-600">
+                <span>Impact: <strong>{it.impact}</strong></span>
+                <span>Time: <strong>{it.time}</strong></span>
+              </div>
+            </Card>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      <div className="mt-8 text-center">
         <a
           href="#contact"
-          className="inline-flex items-center gap-2 rounded-xl px-4 py-2 bg-neutral-900 text-white hover:bg-neutral-800 shadow"
+          className="inline-flex items-center gap-2 rounded-xl px-6 py-3 bg-gradient-to-r from-indigo-700 to-violet-500 text-white font-semibold hover:from-indigo-800 hover:to-violet-600 shadow-md"
         >
-          Book a 20-min consult <ExternalLink className="h-4 w-4" />
+          Not sure where to start? Book a 20-min fit call <ExternalLink className="h-4 w-4" />
         </a>
       </div>
     </section>
@@ -234,7 +351,7 @@ function QuickWins() {
 }
 
 /* ------------------------------------------------
-   VALUE STRIP with colored dividers (soft)
+   VALUE STRIP (soft dividers)
 -------------------------------------------------*/
 function ValueStrip() {
   const points = [
@@ -243,7 +360,7 @@ function ValueStrip() {
     { icon: <ShieldCheck className="h-5 w-5" />, text: "Trust, identity & compliance" },
   ];
   return (
-    <div className="bg-gradient-to-r from-indigo-600 to-violet-500 text-white">
+    <div className="bg-gradient-to-r from-indigo-700 to-violet-600 text-white">
       <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row gap-3 md:gap-0 items-stretch justify-center">
         {points.map((p, i) => (
           <div
@@ -271,29 +388,29 @@ export default function PortfolioSite() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Person",
-            name: NAME_FULL,
-            jobTitle: TITLE,
+            "@type": "Organization",
+            name: BUSINESS_NAME,
+            founder: NAME_FULL,
             address: LOCATION,
             url: WEBSITE || LINKEDIN,
             sameAs: [LINKEDIN, GITHUB].filter(Boolean),
-            email: `mailto:${EMAIL}`,
+            contactPoint: [{ "@type": "ContactPoint", email: EMAIL, contactType: "business" }],
           }),
         }}
       />
 
-      {/* NAV */}
+      {/* NAV (brand-forward, seamless name placement) */}
       <header className="max-w-7xl mx-auto px-6 pt-8 pb-4">
         <nav className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-slate-700 to-indigo-800 text-white flex items-center justify-center text-sm font-bold">AK</div>
-            <div className="leading-tight">
-              <div className="font-semibold tracking-tight">
-                {NAME_FULL} <span className="text-neutral-500">({NAME_SHORT})</span>
-              </div>
-              <div className="text-xs text-neutral-500">{TITLE}</div>
+          <a href="#top" className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-800 to-indigo-600 text-white flex items-center justify-center text-sm font-bold">
+              APK
             </div>
-          </div>
+            <div className="leading-tight">
+              <div className="font-semibold tracking-tight">{BUSINESS_NAME}</div>
+              <div className="text-xs text-neutral-500">by {NAME_FULL}</div>
+            </div>
+          </a>
           <div className="hidden md:flex gap-4 text-sm">
             <a href="#wins" className="hover:underline">Quick Wins</a>
             <a href="#projects" className="hover:underline">Projects</a>
@@ -307,9 +424,9 @@ export default function PortfolioSite() {
       </header>
 
       {/* HERO */}
-      <section className="max-w-7xl mx-auto px-6 pb-10">
+      <section id="top" className="max-w-7xl mx-auto px-6 pb-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="grid md:grid-cols-2 gap-10 items-center"
@@ -317,49 +434,43 @@ export default function PortfolioSite() {
           <div>
             <p className="text-xs uppercase tracking-widest text-neutral-500">{LOCATION}</p>
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight mt-2">
-              Hi, I’m{" "}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-slate-700 to-indigo-800">
-                {NAME_FULL}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-800 to-violet-600">
+                {BUSINESS_NAME}
               </span>
             </h1>
-            <p className="mt-3 text-xl text-neutral-700">{TITLE}</p>
+            <p className="mt-2 text-neutral-700">
+              by <span className="font-semibold">{NAME_FULL}</span>
+            </p>
+            <p className="mt-3 text-lg text-neutral-700">{TITLE}</p>
             <p className="mt-3 text-neutral-600">
               Envisioning future-ready ecosystems — transforming innovation into strategy and impact.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <SocialLink href={`mailto:${EMAIL}`}>
-                <Mail className="h-4 w-4" /> Email
-              </SocialLink>
-              <SocialLink href={LINKEDIN}>
-                <Linkedin className="h-4 w-4" /> LinkedIn
-              </SocialLink>
-              {GITHUB && (
-                <SocialLink href={GITHUB}>
-                  <Github className="h-4 w-4" /> GitHub
-                </SocialLink>
-              )}
-              {WEBSITE && (
-                <SocialLink href={WEBSITE}>
-                  <Globe className="h-4 w-4" /> Website
-                </SocialLink>
-              )}
+              <SocialLink href={`mailto:${EMAIL}`}><Mail className="h-4 w-4" /> Email</SocialLink>
+              <SocialLink href={LINKEDIN}><Linkedin className="h-4 w-4" /> LinkedIn</SocialLink>
+              {GITHUB && <SocialLink href={GITHUB}><Github className="h-4 w-4" /> GitHub</SocialLink>}
+              {WEBSITE && <SocialLink href={WEBSITE}><Globe className="h-4 w-4" /> Website</SocialLink>}
             </div>
 
             <div className="mt-6 flex flex-wrap gap-2">
               {TAGS.map((t) => (
-                <span key={t} className="text-sm px-3 py-1 rounded-full bg-white border border-neutral-200 shadow-sm">{t}</span>
+                <span key={t} className="text-sm px-3 py-1 rounded-full bg-white border border-neutral-200 shadow-sm">
+                  {t}
+                </span>
               ))}
             </div>
           </div>
 
           <Card className="relative overflow-hidden p-0 flex items-center justify-center h-64 md:h-[22rem]">
             <div className="absolute -top-3 left-6 rounded-full bg-white shadow px-3 py-1 text-xs font-semibold text-neutral-700 flex items-center gap-1">
-              <ShieldCheck className="h-3.5 w-3.5 text-indigo-800" /> {NAME_SHORT} · Trusted & Available
+              <ShieldCheck className="h-3.5 w-3.5 text-indigo-800" /> Trusted & Available
             </div>
             <div className="absolute inset-0 bg-gradient-to-br from-slate-200 to-indigo-100" />
             <div className="relative z-10">
-              <Monogram />
+              <div className="shrink-0 w-28 h-28 md:w-40 md:h-40 rounded-2xl bg-gradient-to-br from-indigo-800 to-violet-600 text-white flex items-center justify-center text-5xl md:text-6xl font-extrabold tracking-tight">
+                APK
+              </div>
             </div>
           </Card>
         </motion.div>
@@ -368,7 +479,7 @@ export default function PortfolioSite() {
       {/* VALUE STRIP */}
       <ValueStrip />
 
-      {/* QUICK WINS */}
+      {/* QUICK WINS (tabs) */}
       <QuickWins />
 
       {/* PROJECTS */}
@@ -389,16 +500,18 @@ export default function PortfolioSite() {
               <p className="mt-2 text-neutral-700 text-sm">{p.blurb}</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {p.tags.map((t) => (
-                  <span key={t} className="text-xs px-2 py-1 rounded-full bg-indigo-50 border border-indigo-100">{t}</span>
+                  <span key={t} className="text-xs px-2 py-1 rounded-full bg-indigo-50 border border-indigo-100">
+                    {t}
+                  </span>
                 ))}
               </div>
-              {/* Explore: image only as requested; no link */}
+              {/* Explore: image only as requested; no external link */}
             </Card>
           ))}
         </div>
       </section>
 
-      {/* RESEARCH */}
+      {/* RESEARCH & TEACHING */}
       <section id="research" className="max-w-7xl mx-auto px-6 pb-6">
         <div className="grid md:grid-cols-2 gap-6">
           <Card>
@@ -490,13 +603,7 @@ export default function PortfolioSite() {
           Have a question about UX, identity, AI or teaching? Ask — I’ll answer publicly to help more people.
         </SectionTitle>
         <Card>
-          {/* Option A: Simple form to email */}
-          <form
-            className="grid gap-4"
-            action={`mailto:${EMAIL}`}
-            method="POST"
-            encType="text/plain"
-          >
+          <form className="grid gap-4" action={`mailto:${EMAIL}`} method="POST" encType="text/plain">
             <div>
               <label className="block text-sm text-neutral-700 mb-1">Your Name</label>
               <input className="w-full border border-neutral-300 rounded-lg px-3 py-2" name="name" placeholder="Your name" required />
@@ -513,8 +620,6 @@ export default function PortfolioSite() {
               Submit Question
             </button>
           </form>
-
-          {/* Option B: If you later prefer Google Form, replace the form above with an iframe embed */}
         </Card>
         <p className="mt-3 text-xs text-neutral-500">
           By submitting, you’re happy for a summarized version of your question and my answer to appear on my site (no personal details shared).
@@ -555,10 +660,12 @@ export default function PortfolioSite() {
       <footer className="max-w-7xl mx-auto px-6 pb-10 text-sm text-neutral-600">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-slate-700 to-indigo-800 text-white flex items-center justify-center text-sm font-bold">AK</div>
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-800 to-violet-600 text-white flex items-center justify-center text-sm font-bold">
+              APK
+            </div>
             <div>
-              <div className="font-semibold">{NAME_FULL} ({NAME_SHORT})</div>
-              <div className="text-xs text-neutral-500">{TITLE}</div>
+              <div className="font-semibold">{BUSINESS_NAME}</div>
+              <div className="text-xs text-neutral-500">by {NAME_FULL}</div>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -572,7 +679,7 @@ export default function PortfolioSite() {
             )}
           </div>
         </div>
-        <div className="mt-4">© {new Date().getFullYear()} {NAME_FULL}. All rights reserved.</div>
+        <div className="mt-4">© {new Date().getFullYear()} {BUSINESS_NAME}. All rights reserved.</div>
       </footer>
     </div>
   );
