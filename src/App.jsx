@@ -1,5 +1,4 @@
 import React from "react";
-import "./brand.css"; // ← add this
 import { motion } from "framer-motion";
 import {
   Mail,
@@ -21,27 +20,46 @@ import {
   Sparkles,
   Activity,
   Accessibility,
-  LineChart,
   ArrowRight,
   Image as ImageIcon,
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
 
+/* -------------------------------------------------
+   INLINE BRAND STYLES (earthy palette) — single file
+   ------------------------------------------------- */
+const BrandStyles = () => (
+  <style>{`
+    :root{
+      --bg:#F6F1E7; --bg-2:#EFE7D9;
+      --accent:#065F46; --accent-hover:#047857; --accent-strong:#064E3B;
+      --on-accent:#fff;
+      --chip-bg:#f5f5f4; --chip-text:#1f2937; --chip-border:#e5e7eb;
+    }
+    .brand-bg{ background-color:var(--bg); }
+    .brand-bg-2{ background-color:var(--bg-2); }
+    .brand-logo{ background-color:var(--accent); color:var(--on-accent); }
+    .brand-cta-bar{ background-color:var(--accent-strong); }
+    .brand-btn{ background-color:var(--accent); color:var(--on-accent); }
+    .brand-btn:hover{ background-color:var(--accent-hover); }
+    .brand-outline-btn{ border:1px solid var(--accent); color:#1f2937; background:transparent; }
+    .brand-outline-btn:hover{ background:rgba(6,95,70,.06); }
+    .brand-chip{ background-color:var(--chip-bg); color:var(--chip-text); border:1px solid var(--chip-border); }
+  `}</style>
+);
+
 /* -----------------------------------------------
-   THEME — EARTHY palette (uses brand.css classes)
+   THEME — EARTHY palette (uses the classes above)
    ----------------------------------------------- */
 const THEME = {
-  pageBg: "brand-bg",          // uses CSS var
+  pageBg: "brand-bg",
   text: "text-stone-900",
   brand: "text-stone-900",
   brandSubtle: "text-stone-700",
   border: "border-stone-200",
-
-  // primary accents now use custom classes
   accentBg: "brand-logo",
   accentText: "text-white",
-
   chipBg: "brand-chip",
   chipText: "",
   chipBorder: "",
@@ -61,7 +79,7 @@ const TITLE = "Modern RTO Resources Publisher";
 const EMAIL = "amann.preet@outlook.com";
 const LINKEDIN = "https://www.linkedin.com/in/aman-p-kaur";
 const GITHUB = "https://github.com/amanpreetkaur05";
-const WEBSITE = ""; // optional
+const WEBSITE = "";
 const LOGO_MONO = "APK";
 const CALENDLY = "https://calendly.com/your-link/intro-20"; // replace with your real link
 
@@ -374,7 +392,7 @@ function OfferGrid() {
 function WhyUs() {
   const points = [
     { icon: <Bot className="h-5 w-5" />, title: "AI contextualiser + mapping checks", desc: "Speed up contextualising and catch coverage gaps early.", tone: "sage" },
-    { icon: <LineChart className="h-5 w-5" />, title: "xAPI analytics (not just SCORM)", desc: "See learning signals and completion trends.", tone: "sky" },
+    { icon: <Activity className="h-5 w-5" />, title: "xAPI analytics (not just SCORM)", desc: "See learning signals and completion trends.", tone: "sky" },
     { icon: <FileText className="h-5 w-5" />, title: "Version-diff changelogs", desc: "Know exactly what changed when a package updates.", tone: "clay" },
     { icon: <Accessibility className="h-5 w-5" />, title: "Accessibility mindset", desc: "WCAG-minded layouts and writing patterns.", tone: "sage" },
     { icon: <ClipboardList className="h-5 w-5" />, title: "Trainer micro-onboarding", desc: "Short modules so trainers implement consistently.", tone: "sky" },
@@ -560,7 +578,9 @@ function Catalogue() {
           <button
             key={t.key}
             onClick={() => setActive(t.key)}
-            className={`px-3 py-1.5 rounded-full text-sm border ${active === t.key ? "brand-btn border-0" : "bg-white text-stone-700 border-stone-200 hover:border-stone-300"}`}
+            className={`px-3 py-1.5 rounded-full text-sm border ${
+              active === t.key ? "brand-btn border-0" : "bg-white text-stone-700 border-stone-200 hover:border-stone-300"
+            }`}
           >
             {t.label}
           </button>
@@ -599,7 +619,7 @@ function Catalogue() {
 }
 
 /* -----------------------------------------------
-   FAQ — accordion
+   FAQ — accordion (simple language)
    ----------------------------------------------- */
 function FAQ() {
   const [open, setOpen] = React.useState(null);
@@ -654,7 +674,6 @@ function FAQ() {
    ----------------------------------------------- */
 function CalendlyInline() {
   React.useEffect(() => {
-    // load Calendly assets once
     const linkId = "calendly-css";
     const scriptId = "calendly-js";
     if (!document.getElementById(linkId)) {
@@ -681,7 +700,10 @@ function CalendlyInline() {
         style={{ minWidth: "320px", height: "720px" }}
       />
       <div className="mt-2 text-xs text-stone-600">
-        Having issues loading? <a className="underline" href={CALENDLY} target="_blank" rel="noreferrer noopener">Open Calendly in a new tab</a>.
+        Having issues loading?{" "}
+        <a className="underline" href={CALENDLY} target="_blank" rel="noreferrer noopener">
+          Open Calendly in a new tab
+        </a>.
       </div>
     </div>
   );
@@ -718,6 +740,8 @@ function CtaBar() {
 export default function PortfolioSite() {
   return (
     <div className={`min-h-screen ${THEME.pageBg} ${THEME.text}`}>
+      <BrandStyles />
+
       {/* Schema.org Organization */}
       <script
         type="application/ld+json"
@@ -861,6 +885,9 @@ export default function PortfolioSite() {
           </div>
         </Card>
       </section>
+
+      {/* FAQ */}
+      <FAQ />
 
       {/* FOOTER */}
       <footer className="max-w-7xl mx-auto px-6 pb-10 text-sm text-stone-700">
