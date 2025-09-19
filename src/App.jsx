@@ -673,7 +673,10 @@ function FAQ() {
    Calendly Inline (embed)
    ----------------------------------------------- */
 function CalendlyInline() {
+  const WIDGET_URL = "https://calendly.com/amanpeace52/30min";
+
   React.useEffect(() => {
+    // Load Calendly assets once
     const linkId = "calendly-css";
     const scriptId = "calendly-js";
     if (!document.getElementById(linkId)) {
@@ -691,6 +694,30 @@ function CalendlyInline() {
       document.body.appendChild(s);
     }
   }, []);
+
+  return (
+    <div className="rounded-xl border border-stone-200 bg-white p-4">
+      {/* This is your snippet converted to JSX */}
+      <div
+        className="calendly-inline-widget"
+        data-url={WIDGET_URL}
+        style={{ minWidth: "320px", height: "700px" }}
+      />
+      <div className="mt-2 text-xs text-stone-600">
+        Having issues loading?{" "}
+        <a
+          className="underline"
+          href={WIDGET_URL}
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          Open Calendly in a new tab
+        </a>.
+      </div>
+    </div>
+  );
+}
+
 
   return (
     <div className="rounded-xl border border-stone-200 bg-white p-4">
