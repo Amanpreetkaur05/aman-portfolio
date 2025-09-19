@@ -4,20 +4,21 @@ import {
   Mail,
   Linkedin,
   Globe,
-  Briefcase,
   ShieldCheck,
-  Github,
   ExternalLink,
-  Star,
-  Zap,
-  CheckCircle2,
-  FileText,
   Layers,
   Package,
   Bot,
   LifeBuoy,
+  FileText,
   Database,
   Lock,
+  CheckCircle2,
+  Star,
+  Sparkles,
+  ClipboardList,
+  PhoneCall,
+  BadgeCheck,
 } from "lucide-react";
 
 /* -----------------------------------------------
@@ -36,6 +37,9 @@ const THEME = {
   chipBorder: "border-stone-200",
 };
 
+/* -----------------------------------------------
+   BRAND / LINKS
+   ----------------------------------------------- */
 const NAME_FULL = "Amanpreet Kaur (APK)";
 const NAME_SHORT = "Aman";
 const LOCATION = "Adelaide, Australia";
@@ -45,18 +49,20 @@ const LINKEDIN = "https://www.linkedin.com/in/aman-p-kaur";
 const GITHUB = "https://github.com/amanpreetkaur05";
 const WEBSITE = ""; // optional
 const LOGO_MONO = "AK"; // simple monogram
+const CALENDLY = "https://calendly.com/your-link/intro-20"; // replace with your real link
 
-// Business positioning tags (no colour noise)
 const TAGS = [
   "Audit-Ready Assessment Design",
   "SCORM/xAPI eLearning",
-  "Mapping & Validation",
-  "AI-Assisted Contextualisation",
+  "Traceable Mapping",
+  "AI Contextualisation (Beta)",
   "Updates & Version Control",
   "Australian VET Standards",
 ];
 
-// Offer cards (your productised services)
+/* -----------------------------------------------
+   SELLABLE CONTENT
+   ----------------------------------------------- */
 const OFFERS = [
   {
     icon: <Package className="h-4 w-4" />,
@@ -66,14 +72,14 @@ const OFFERS = [
       "Assessment Tools + Marking Guides",
       "Traceable Mapping Matrix",
     ],
-    footer: "From $350 per unit / $2.5k per qualification",
+    footer: "From $350 per unit · $2.5k per qualification",
   },
   {
     icon: <Layers className="h-4 w-4" />,
-    title: "eLearning (SCORM / xAPI)",
+    title: "eLearning (SCORM/xAPI)",
     bullets: [
       "Interactive modules & quizzes",
-      "LMS-ready packages (1.2/2004)",
+      "LMS-ready (SCORM 1.2/2004)",
       "xAPI analytics option",
     ],
     footer: "Add-on from $800 per unit",
@@ -84,7 +90,7 @@ const OFFERS = [
     bullets: [
       "Pre-audit resource review",
       "Rectification guidance",
-      "Implementation tips for trainers",
+      "Trainer implementation tips",
     ],
     footer: "Retainers from $3k/year",
   },
@@ -92,37 +98,49 @@ const OFFERS = [
     icon: <Bot className="h-4 w-4" />,
     title: "AI Contextualiser (Beta)",
     bullets: [
-      "Fast industry/role contextualisation",
-      "Guardrails to protect competency intent",
+      "Faster industry/role contextualising",
+      "Guardrails protect competency intent",
       "Mapping gap checks",
     ],
     footer: "Pilot with selected partners",
   },
   {
     icon: <LifeBuoy className="h-4 w-4" />,
-    title: "Updates & Subscription",
+    title: "Updates Subscription",
     bullets: [
       "Monthly change monitoring",
-      "Versioning & diffs",
+      "Versioned updates + diffs",
       "Priority support",
     ],
-    footer: "From $249/month",
+    footer: "From $249/month (Pro from $599)",
   },
 ];
 
-// Case studies (short & concrete)
 const CASE_STUDIES = [
   {
     title: "Hospitality RTO — Assessment Refresh",
     result:
-      "Mapped & modernised 7 units; reduced audit findings to zero in follow-up check; LMS first-time pass.",
+      "Mapped & modernised 7 units; zero audit findings on follow-up; first-time LMS pass.",
     proof: "Lead trainer testimonial on clarity & mapping traceability.",
   },
   {
     title: "Community Services — eLearning Lift",
     result:
-      "Converted workbook-heavy delivery to interactive SCORM; completion rates +23% in 90 days.",
+      "Converted workbook delivery to interactive SCORM; +23% completion in 90 days.",
     proof: "LMS analytics + learner feedback excerpts.",
+  },
+];
+
+const TESTIMONIALS = [
+  {
+    quote:
+      "The assessment mapping was crystal-clear. Our rectification workload dropped dramatically.",
+    author: "Academic Manager, SA",
+  },
+  {
+    quote:
+      "Learners finally enjoy the modules—clean design, relevant tasks, and easy LMS setup.",
+    author: "eLearning Lead, VIC",
   },
 ];
 
@@ -132,8 +150,8 @@ const FAQS = [
     a: "No. We sell to RTOs and providers. We don’t deliver or assess nationally recognised training ourselves.",
   },
   {
-    q: "Are files editable?",
-    a: "Yes. You receive editable source (e.g., DOCX, PPTX) plus packaged SCORM/xAPI for eLearning add-ons.",
+    q: "Are the files editable?",
+    a: "Yes. You receive editable source (e.g., DOCX, PPTX) plus SCORM/xAPI packages for eLearning add-ons.",
   },
   {
     q: "How do updates work?",
@@ -141,7 +159,7 @@ const FAQS = [
   },
   {
     q: "Do you guarantee audit outcomes?",
-    a: "We provide defensible mapping, validation, and support. Final audit outcomes depend on RTO implementation.",
+    a: "We provide defensible mapping, validation and support. Final outcomes depend on RTO implementation.",
   },
 ];
 
@@ -175,14 +193,32 @@ function ThinDivider() {
   return <div className={`h-px w-full border-t ${THEME.border}`} />;
 }
 
+function Badge({ icon, text }) {
+  return (
+    <div className="flex items-center gap-2 border border-stone-200 bg-white rounded-lg px-3 py-2">
+      {icon}
+      <span className="text-sm text-stone-800">{text}</span>
+    </div>
+  );
+}
+
+function Stat({ k, v }) {
+  return (
+    <div className="text-center">
+      <div className="text-3xl font-semibold">{k}</div>
+      <div className="text-xs text-stone-600 mt-1">{v}</div>
+    </div>
+  );
+}
+
 /* -----------------------------------------------
-   CREDIBILITY STRIP (compliance cues)
+   CREDIBILITY STRIP
    ----------------------------------------------- */
 function CredibilityStrip() {
   const points = [
     { icon: <CheckCircle2 className="h-4 w-4" />, text: "Audit-ready mapping & validation" },
-    { icon: <ShieldCheck className="h-4 w-4" />, text: "Privacy-aware portal & versioning" },
-    { icon: <Lock className="h-4 w-4" />, text: "Clear licences & implementation guides" },
+    { icon: <Lock className="h-4 w-4" />, text: "Privacy-aware portal & versioning" },
+    { icon: <BadgeCheck className="h-4 w-4" />, text: "Clear licences & implementation guides" },
   ];
   return (
     <div className="w-full bg-stone-100">
@@ -210,7 +246,7 @@ function OfferGrid() {
   return (
     <section id="offers" className="max-w-7xl mx-auto px-6 pb-12">
       <SectionTitle eyebrow="Solutions" title="What We Deliver">
-        Editable resources, LMS-ready eLearning, and ongoing update support — designed for Australian VET.
+        Editable resources, LMS-ready eLearning, and ongoing updates — designed for Australian VET.
       </SectionTitle>
       <motion.div variants={container} initial="hidden" animate="show" className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {OFFERS.map((o) => (
@@ -241,7 +277,36 @@ function OfferGrid() {
 }
 
 /* -----------------------------------------------
-   MICRO PRICING (transparent anchors)
+   PROCESS — how you work (clear & reassuring)
+   ----------------------------------------------- */
+function Process() {
+  const steps = [
+    { k: "01", t: "Discovery", d: "Clarify quals/units, delivery context, and audit priorities." },
+    { k: "02", t: "Design", d: "Draft learner/assessment with traceable mapping." },
+    { k: "03", t: "Validate", d: "Peer review + compliance checks + pilot feedback." },
+    { k: "04", t: "Deliver", d: "Editable files & SCORM/xAPI; implementation guidance." },
+    { k: "05", t: "Update", d: "Monitor changes; versioned updates with diffs for subscribers." },
+  ];
+  return (
+    <section id="process" className="max-w-7xl mx-auto px-6 pb-12">
+      <SectionTitle eyebrow="How It Works" title="A Clean, Defensible Workflow">
+        Designed to minimise audit risk and accelerate delivery.
+      </SectionTitle>
+      <div className="grid md:grid-cols-5 gap-4">
+        {steps.map((s) => (
+          <Card key={s.k} className="flex flex-col">
+            <div className="text-xs text-stone-500">{s.k}</div>
+            <div className="text-lg font-semibold mt-1">{s.t}</div>
+            <p className="text-sm text-stone-700 mt-2">{s.d}</p>
+          </Card>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* -----------------------------------------------
+   PRICING — anchors (transparent)
    ----------------------------------------------- */
 function Pricing() {
   const plans = [
@@ -280,11 +345,11 @@ function Pricing() {
 }
 
 /* -----------------------------------------------
-   CASE STUDIES (proof)
+   PROOF — case studies & testimonials
    ----------------------------------------------- */
 function CaseStudies() {
   return (
-    <section id="work" className="max-w-7xl mx-auto px-6 pb-12">
+    <section id="work" className="max-w-7xl mx-auto px-6 pb-8">
       <SectionTitle eyebrow="Outcomes" title="Selected Results">
         Small samples of how we reduce audit risk and lift learner outcomes.
       </SectionTitle>
@@ -294,6 +359,21 @@ function CaseStudies() {
             <h3 className="font-semibold text-lg">{c.title}</h3>
             <p className="mt-2 text-sm text-stone-700"><strong>Result:</strong> {c.result}</p>
             <p className="mt-2 text-xs text-stone-600"><strong>Proof:</strong> {c.proof}</p>
+          </Card>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Testimonials() {
+  return (
+    <section className="max-w-7xl mx-auto px-6 pb-12">
+      <div className="grid md:grid-cols-2 gap-6">
+        {TESTIMONIALS.map((t, i) => (
+          <Card key={i}>
+            <blockquote className="text-stone-800">“{t.quote}”</blockquote>
+            <div className="text-xs text-stone-600 mt-2">— {t.author}</div>
           </Card>
         ))}
       </div>
@@ -321,12 +401,37 @@ function FAQ() {
 }
 
 /* -----------------------------------------------
+   CTA BAR
+   ----------------------------------------------- */
+function CtaBar() {
+  return (
+    <div className="w-full bg-stone-900">
+      <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div className="text-white">
+          <div className="text-sm uppercase tracking-widest opacity-80">Next step</div>
+          <div className="text-2xl font-semibold mt-1">Request a sample pack or book a 20-min fit call</div>
+        </div>
+        <div className="flex gap-3">
+          <a href="#contact" className="inline-flex items-center gap-2 rounded-lg px-5 py-3 bg-white text-stone-900">
+            Request Sample <FileText className="h-4 w-4" />
+          </a>
+          <a href={CALENDLY} target="_blank" rel="noreferrer noopener" className="inline-flex items-center gap-2 rounded-lg px-5 py-3 border border-stone-300 bg-stone-900 text-white">
+            Book 20-min Call <PhoneCall className="h-4 w-4" />
+          </a>
+        </div>
+      </div>
+      <ThinDivider />
+    </div>
+  );
+}
+
+/* -----------------------------------------------
    PAGE
    ----------------------------------------------- */
 export default function PortfolioSite() {
   return (
     <div className={`min-h-screen ${THEME.pageBg} ${THEME.text}`}>
-      {/* Schema.org Person + Organization hybrid (basic) */}
+      {/* Schema.org Organization */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -347,9 +452,7 @@ export default function PortfolioSite() {
       <header className="max-w-7xl mx-auto px-6 pt-8 pb-4">
         <nav className="flex items-center justify-between">
           <a href="#top" className="flex items-center gap-3">
-            <div className={`w-9 h-9 rounded-lg ${THEME.accentBg} ${THEME.accentText} flex items-center justify-center text-sm font-semibold`}>
-              {LOGO_MONO}
-            </div>
+            <div className={`w-9 h-9 rounded-lg ${THEME.accentBg} ${THEME.accentText} flex items-center justify-center text-sm font-semibold`}>{LOGO_MONO}</div>
             <div className="leading-tight">
               <div className={`font-semibold tracking-tight ${THEME.brand}`}>APK — RTO Resources</div>
               <div className="text-xs text-stone-500">Editable. LMS-ready. Audit-aware.</div>
@@ -357,6 +460,7 @@ export default function PortfolioSite() {
           </a>
           <div className="hidden md:flex gap-4 text-sm">
             <a href="#offers" className={`hover:underline ${THEME.brandSubtle}`}>Solutions</a>
+            <a href="#process" className={`hover:underline ${THEME.brandSubtle}`}>Process</a>
             <a href="#pricing" className={`hover:underline ${THEME.brandSubtle}`}>Pricing</a>
             <a href="#work" className={`hover:underline ${THEME.brandSubtle}`}>Results</a>
             <a href="#faq" className={`hover:underline ${THEME.brandSubtle}`}>FAQ</a>
@@ -387,8 +491,7 @@ export default function PortfolioSite() {
             <div className="mt-6 flex flex-wrap gap-3">
               <SocialLink href={`mailto:${EMAIL}`}><Mail className="h-4 w-4" /> Email</SocialLink>
               <SocialLink href={LINKEDIN}><Linkedin className="h-4 w-4" /> LinkedIn</SocialLink>
-              {GITHUB && <SocialLink href={GITHUB}><Github className="h-4 w-4" /> GitHub</SocialLink>}
-              {WEBSITE && <SocialLink href={WEBSITE}><Globe className="h-4 w-4" /> Website</SocialLink>}
+              {GITHUB && <SocialLink href={GITHUB}><Globe className="h-4 w-4" /> Portfolio</SocialLink>}
             </div>
 
             <div className="mt-6 flex flex-wrap gap-2">
@@ -403,8 +506,8 @@ export default function PortfolioSite() {
               <a href="#contact" className="inline-flex items-center gap-2 rounded-lg px-6 py-3 bg-stone-900 text-white hover:bg-stone-800">
                 Request Sample Pack <ExternalLink className="h-4 w-4" />
               </a>
-              <a href="#offers" className="inline-flex items-center gap-2 rounded-lg px-6 py-3 border border-stone-300 text-stone-800">
-                See Solutions
+              <a href={CALENDLY} target="_blank" rel="noreferrer noopener" className="inline-flex items-center gap-2 rounded-lg px-6 py-3 border border-stone-300 text-stone-800">
+                Book 20-min Call <PhoneCall className="h-4 w-4" />
               </a>
             </div>
           </div>
@@ -430,14 +533,18 @@ export default function PortfolioSite() {
       {/* OFFERS */}
       <OfferGrid />
 
+      {/* PROCESS */}
+      <Process />
+
       {/* PRICING */}
       <Pricing />
 
-      {/* CASE STUDIES */}
+      {/* PROOF */}
       <CaseStudies />
+      <Testimonials />
 
-      {/* FAQ */}
-      <FAQ />
+      {/* CTA BAR */}
+      <CtaBar />
 
       {/* CONTACT */}
       <section id="contact" className="max-w-7xl mx-auto px-6 pb-16">
@@ -446,7 +553,7 @@ export default function PortfolioSite() {
         </SectionTitle>
         <Card>
           <div className={`rounded-xl overflow-hidden border ${THEME.border}`}>
-            {/* Keep your Google Form embed – neutral, full-width, no extra styling */}
+            {/* Keep your Google Form embed – neutral, full-width */}
             <iframe
               className="w-full h-[900px] md:h-[1000px]"
               src="https://docs.google.com/forms/d/e/1FAIpQLSd0Lr0lRCdfSJeYEplBbO8eokAWYFTYfitfrFNeW5tjPvFT7g/viewform?embedded=true"
@@ -457,7 +564,7 @@ export default function PortfolioSite() {
             />
           </div>
           <div className="mt-3 text-xs text-stone-500">
-            Prefer email? <a className="underline" href={`mailto:${EMAIL}`}>Write to us</a>. For privacy, the form does not display your email publicly.
+            Prefer email? <a className="underline" href={`mailto:${EMAIL}`}>Write to us</a>. For privacy, the form never displays your address publicly.
           </div>
         </Card>
       </section>
@@ -480,25 +587,13 @@ export default function PortfolioSite() {
             </a>
             {GITHUB && (
               <a href={GITHUB} className={`inline-flex items-center gap-1 hover:underline ${THEME.brandSubtle}`}>
-                <Github className="h-4 w-4" /> GitHub
+                <Globe className="h-4 w-4" /> GitHub
               </a>
             )}
           </div>
         </div>
         <div className="mt-4">© {new Date().getFullYear()} {NAME_FULL}. All rights reserved.</div>
       </footer>
-    </div>
-  );
-}
-
-/* -----------------------------------------------
-   SMALL COMPONENT — pill badge
-   ----------------------------------------------- */
-function Badge({ icon, text }: { icon: React.ReactNode; text: string }) {
-  return (
-    <div className="flex items-center gap-2 border border-stone-200 bg-white rounded-lg px-3 py-2">
-      {icon}
-      <span className="text-sm text-stone-800">{text}</span>
     </div>
   );
 }
