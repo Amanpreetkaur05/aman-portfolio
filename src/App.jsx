@@ -1,4 +1,5 @@
 import React from "react";
+import "./brand.css"; // ← add this
 import { motion } from "framer-motion";
 import {
   Mail,
@@ -28,28 +29,24 @@ import {
 } from "lucide-react";
 
 /* -----------------------------------------------
-   THEME — EARTHY palette (sand, sage, clay, sky)
+   THEME — EARTHY palette (uses brand.css classes)
    ----------------------------------------------- */
 const THEME = {
-  // page & text
-  pageBg: "bg-[#F6F1E7]", // sand
+  pageBg: "brand-bg",          // uses CSS var
   text: "text-stone-900",
   brand: "text-stone-900",
   brandSubtle: "text-stone-700",
   border: "border-stone-200",
 
-  // primary action
-  accentBg: "bg-emerald-800", // sage/dark
+  // primary accents now use custom classes
+  accentBg: "brand-logo",
   accentText: "text-white",
 
-  // chips
-  chipBg: "bg-stone-100",
-  chipText: "text-stone-800",
-  chipBorder: "border-stone-200",
-
-  // section tints
+  chipBg: "brand-chip",
+  chipText: "",
+  chipBorder: "",
   sage: { bg: "bg-emerald-50", text: "text-emerald-900", border: "border-emerald-200" },
-  clay: { bg: "bg-orange-50", text: "text-orange-900", border: "border-orange-200" },
+  clay: { bg: "bg-orange-50",  text: "text-orange-900",  border: "border-orange-200" },
   sky:  { bg: "bg-sky-50",     text: "text-sky-900",     border: "border-sky-200" },
 };
 
@@ -123,8 +120,7 @@ const OFFERS = [
 ];
 
 /* -----------------------------------------------
-   CATALOGUE — Nursing Cert III/IV & IT Cert III/IV
-   (use real codes later)
+   CATALOGUE — Nursing & IT (Cert III/IV)
    ----------------------------------------------- */
 const PACKS = [
   {
@@ -211,33 +207,15 @@ const TESTIMONIALS = [
 ];
 
 /* -----------------------------------------------
-   FAQ (human-centred, simple language)
+   FAQ (human-centred)
    ----------------------------------------------- */
 const FAQS = [
-  {
-    q: "What exactly do you sell?",
-    a: "Editable training and assessment resources for RTOs—plus optional eLearning and support.",
-  },
-  {
-    q: "Can I edit everything?",
-    a: "Yes. You get source files (DOCX/PPTX) so you can brand and contextualise.",
-  },
-  {
-    q: "Is it compliant?",
-    a: "We provide mapping and validation. Your audit outcome still depends on how you deliver and assess.",
-  },
-  {
-    q: "Do I need to be an RTO?",
-    a: "No. We sell to RTOs and providers. We don’t deliver nationally recognised training ourselves.",
-  },
-  {
-    q: "How do updates work?",
-    a: "Subscribers get version-diff updates when training packages change, with a short note on what changed and why.",
-  },
-  {
-    q: "Can you customise for us?",
-    a: "Yes. We can tailor units, build eLearning, and run a quick trainer onboarding.",
-  },
+  { q: "What exactly do you sell?", a: "Editable training and assessment resources for RTOs—plus optional eLearning and support." },
+  { q: "Can I edit everything?", a: "Yes. You get source files (DOCX/PPTX) so you can brand and contextualise." },
+  { q: "Is it compliant?", a: "We provide mapping and validation. Your audit outcome still depends on how you deliver and assess." },
+  { q: "Do I need to be an RTO?", a: "No. We sell to RTOs and providers. We don’t deliver nationally recognised training ourselves." },
+  { q: "How do updates work?", a: "Subscribers get version-diff updates when training packages change, with a short note on what changed and why." },
+  { q: "Can you customise for us?", a: "Yes. We can tailor units, build eLearning, and run a quick trainer onboarding." },
 ];
 
 /* -----------------------------------------------
@@ -281,7 +259,7 @@ function TonePill({ tone = "sage", children }) {
 }
 
 /* -----------------------------------------------
-   HERO MONOGRAM (replaces awkward image)
+   HERO MONOGRAM (APK tile)
    ----------------------------------------------- */
 function HeroMonogram() {
   return (
@@ -291,10 +269,7 @@ function HeroMonogram() {
           <TonePill tone="sage">Audit-aware by design</TonePill>
           <TonePill tone="sky">LMS-ready</TonePill>
         </div>
-
-        {/* Monogram block */}
         <div className="relative rounded-xl border border-stone-200 bg-white">
-          {/* layered earthy shapes */}
           <div className="absolute -top-12 -left-12 w-40 h-40 rounded-full bg-emerald-100 opacity-70" />
           <div className="absolute -bottom-10 -right-10 w-48 h-48 rounded-full bg-orange-100 opacity-70" />
           <div className="p-10 md:p-12 relative">
@@ -304,8 +279,6 @@ function HeroMonogram() {
             <div className="mt-2 text-stone-600">Editable • LMS-ready • Audit-aware</div>
           </div>
         </div>
-
-        {/* quick benefits */}
         <div className="grid grid-cols-2 gap-3 mt-4">
           <Badge icon={<FileText className="h-4 w-4" />} text="Editable guides" />
           <Badge icon={<Layers className="h-4 w-4" />} text="SCORM / xAPI" />
@@ -336,7 +309,7 @@ function CredibilityStrip() {
     { icon: <BadgeCheck className="h-4 w-4" />, text: "Clear licences & trainer guides" },
   ];
   return (
-    <div className="w-full bg-[#EFE7D9]"> {/* deeper sand */}
+    <div className="w-full brand-bg-2">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="grid md:grid-cols-3 gap-3">
           {points.map((p, i) => (
@@ -367,13 +340,14 @@ function OfferGrid() {
         {OFFERS.map((o) => (
           <motion.div key={o.title} variants={item}>
             <Card>
-              <div className="inline-flex items-center gap-2 text-xs rounded-full px-2 py-0.5 border
-                bg-opacity-90
-                " style={{ 
+              <div
+                className="inline-flex items-center gap-2 text-xs rounded-full px-2 py-0.5 border"
+                style={{
                   backgroundColor: o.tone === "clay" ? "rgb(255 247 237)" : o.tone === "sky" ? "rgb(240 249 255)" : "rgb(236 253 245)",
                   borderColor:     o.tone === "clay" ? "rgb(254 215 170)" : o.tone === "sky" ? "rgb(186 230 253)" : "rgb(167 243 208)",
                   color:           o.tone === "clay" ? "rgb(124 45 18)"  : o.tone === "sky" ? "rgb(7 89 133)"    : "rgb(6 95 70)"
-                }}>
+                }}
+              >
                 {o.icon} <span>Offer</span>
               </div>
               <h3 className="mt-2 font-semibold text-lg text-stone-900">{o.title}</h3>
@@ -386,7 +360,7 @@ function OfferGrid() {
         ))}
       </motion.div>
       <div className="mt-8 text-center">
-        <a href="#contact" className="inline-flex items-center gap-2 rounded-lg px-6 py-3 bg-emerald-800 text-white hover:bg-emerald-700">
+        <a href="#contact" className="brand-btn inline-flex items-center gap-2 rounded-lg px-6 py-3">
           Request a sample pack <ExternalLink className="h-4 w-4" />
         </a>
       </div>
@@ -395,7 +369,7 @@ function OfferGrid() {
 }
 
 /* -----------------------------------------------
-   WHY US — whitespace we own
+   WHY US
    ----------------------------------------------- */
 function WhyUs() {
   const points = [
@@ -534,7 +508,7 @@ function Testimonials() {
 }
 
 /* -----------------------------------------------
-   ABOUT — founder & ethos
+   ABOUT
    ----------------------------------------------- */
 function About() {
   return (
@@ -564,7 +538,7 @@ function About() {
 }
 
 /* -----------------------------------------------
-   CATALOGUE — interactive filter
+   CATALOGUE
    ----------------------------------------------- */
 function Catalogue() {
   const tabs = [
@@ -581,22 +555,18 @@ function Catalogue() {
         Choose a pack to request a sample and implementation notes.
       </SectionTitle>
 
-      {/* Tabs */}
       <div className="mb-6 flex flex-wrap gap-2">
         {tabs.map((t) => (
           <button
             key={t.key}
             onClick={() => setActive(t.key)}
-            className={`px-3 py-1.5 rounded-full text-sm border ${
-              active === t.key ? "bg-emerald-800 text-white border-emerald-800" : "bg-white text-stone-700 border-stone-200 hover:border-stone-300"
-            }`}
+            className={`px-3 py-1.5 rounded-full text-sm border ${active === t.key ? "brand-btn border-0" : "bg-white text-stone-700 border-stone-200 hover:border-stone-300"}`}
           >
             {t.label}
           </button>
         ))}
       </div>
 
-      {/* Cards */}
       <div className="grid md:grid-cols-2 gap-6">
         {items.map((p) => (
           <Card key={p.id} className="overflow-hidden">
@@ -614,10 +584,10 @@ function Catalogue() {
               Sample units: {p.sampleUnits.join(", ")}
             </div>
             <div className="mt-4 flex gap-3">
-              <a href="#contact" className="inline-flex items-center gap-2 rounded-lg px-4 py-2 bg-emerald-800 text-white hover:bg-emerald-700">
+              <a href="#contact" className="brand-btn inline-flex items-center gap-2 rounded-lg px-4 py-2">
                 Request Sample <ArrowRight className="h-4 w-4" />
               </a>
-              <a href="#why-us" className="inline-flex items-center gap-2 rounded-lg px-4 py-2 border border-stone-300 text-stone-800">
+              <a href="#why-us" className="brand-outline-btn inline-flex items-center gap-2 rounded-lg px-4 py-2">
                 See Why Us
               </a>
             </div>
@@ -629,7 +599,7 @@ function Catalogue() {
 }
 
 /* -----------------------------------------------
-   FAQ — accordion (simple language)
+   FAQ — accordion
    ----------------------------------------------- */
 function FAQ() {
   const [open, setOpen] = React.useState(null);
@@ -680,21 +650,59 @@ function FAQ() {
 }
 
 /* -----------------------------------------------
+   Calendly Inline (embed)
+   ----------------------------------------------- */
+function CalendlyInline() {
+  React.useEffect(() => {
+    // load Calendly assets once
+    const linkId = "calendly-css";
+    const scriptId = "calendly-js";
+    if (!document.getElementById(linkId)) {
+      const l = document.createElement("link");
+      l.id = linkId;
+      l.rel = "stylesheet";
+      l.href = "https://assets.calendly.com/assets/external/widget.css";
+      document.head.appendChild(l);
+    }
+    if (!document.getElementById(scriptId)) {
+      const s = document.createElement("script");
+      s.id = scriptId;
+      s.src = "https://assets.calendly.com/assets/external/widget.js";
+      s.async = true;
+      document.body.appendChild(s);
+    }
+  }, []);
+
+  return (
+    <div className="rounded-xl border border-stone-200 bg-white p-4">
+      <div
+        className="calendly-inline-widget"
+        data-url={CALENDLY}
+        style={{ minWidth: "320px", height: "720px" }}
+      />
+      <div className="mt-2 text-xs text-stone-600">
+        Having issues loading? <a className="underline" href={CALENDLY} target="_blank" rel="noreferrer noopener">Open Calendly in a new tab</a>.
+      </div>
+    </div>
+  );
+}
+
+/* -----------------------------------------------
    CTA BAR
    ----------------------------------------------- */
 function CtaBar() {
   return (
-    <div className="w-full bg-emerald-900">
+    <div className="w-full brand-cta-bar">
       <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="text-white">
           <div className="text-sm uppercase tracking-widest opacity-80">Next step</div>
           <div className="text-2xl font-semibold mt-1">Request a sample pack or book a 20-min fit call</div>
         </div>
         <div className="flex gap-3">
-          <a href="#contact" className="inline-flex items-center gap-2 rounded-lg px-5 py-3 bg-white text-stone-900">
+          <a href="#contact" className="brand-btn inline-flex items-center gap-2 rounded-lg px-5 py-3">
             Request Sample <FileText className="h-4 w-4" />
           </a>
-          <a href={CALENDLY} target="_blank" rel="noreferrer noopener" className="inline-flex items-center gap-2 rounded-lg px-5 py-3 border border-white text-white">
+          <a href="#book-call" className="brand-outline-btn inline-flex items-center gap-2 rounded-lg px-5 py-3">
             Book 20-min Call <PhoneCall className="h-4 w-4" />
           </a>
         </div>
@@ -775,23 +783,23 @@ export default function PortfolioSite() {
 
             <div className="mt-6 flex flex-wrap gap-2">
               {TAGS.map((t) => (
-                <span key={t} className={`text-sm px-3 py-1 rounded-full ${THEME.chipBg} ${THEME.chipText} border ${THEME.chipBorder}`}>
+                <span key={t} className={`text-sm px-3 py-1 rounded-full brand-chip`}>
                   {t}
                 </span>
               ))}
             </div>
 
             <div className="mt-8 flex gap-3">
-              <a href="#contact" className="inline-flex items-center gap-2 rounded-lg px-6 py-3 bg-emerald-800 text-white hover:bg-emerald-700">
+              <a href="#contact" className="brand-btn inline-flex items-center gap-2 rounded-lg px-6 py-3">
                 Request Sample Pack <ExternalLink className="h-4 w-4" />
               </a>
-              <a href={CALENDLY} target="_blank" rel="noreferrer noopener" className="inline-flex items-center gap-2 rounded-lg px-6 py-3 border border-stone-300 text-stone-800">
+              <a href="#book-call" className="brand-outline-btn inline-flex items-center gap-2 rounded-lg px-6 py-3">
                 Book 20-min Call <PhoneCall className="h-4 w-4" />
               </a>
             </div>
           </div>
 
-          {/* New monogram tile replaces the old photo */}
+          {/* Monogram tile */}
           <HeroMonogram />
         </motion.div>
       </section>
@@ -823,6 +831,14 @@ export default function PortfolioSite() {
 
       {/* CTA BAR */}
       <CtaBar />
+
+      {/* BOOK CALL (Calendly embed) */}
+      <section id="book-call" className="max-w-7xl mx-auto px-6 pb-12">
+        <SectionTitle eyebrow="Fast Fit Check" title="Book a 20-minute call">
+          Pick a time that suits you. We’ll confirm fit, scope, and next steps.
+        </SectionTitle>
+        <CalendlyInline />
+      </section>
 
       {/* CONTACT */}
       <section id="contact" className="max-w-7xl mx-auto px-6 pb-16">
