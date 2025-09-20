@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Mail,
   Linkedin,
@@ -17,13 +17,12 @@ import {
   BadgeCheck,
   PhoneCall,
   ClipboardList,
-  Sparkles,
   Activity,
   Accessibility,
   ArrowRight,
-  Image as ImageIcon,
   ChevronDown,
   ChevronUp,
+  LineChart,
 } from "lucide-react";
 
 /* -------------------------------------------------
@@ -36,6 +35,11 @@ const BrandStyles = () => (
       --accent:#065F46; --accent-hover:#047857; --accent-strong:#064E3B;
       --on-accent:#fff;
       --chip-bg:#f5f5f4; --chip-text:#1f2937; --chip-border:#e5e7eb;
+
+      /* supporting accents for variety (earthy) */
+      --sage-50:#ecfdf5; --sage-200:#a7f3d0; --sage-900:#065f46;
+      --clay-50:#fff7ed; --clay-200:#fed7aa; --clay-900:#7c2d12;
+      --sky-50:#f0f9ff;  --sky-200:#bae6fd;  --sky-900:#075985;
     }
     .brand-bg{ background-color:var(--bg); }
     .brand-bg-2{ background-color:var(--bg-2); }
@@ -46,6 +50,24 @@ const BrandStyles = () => (
     .brand-outline-btn{ border:1px solid var(--accent); color:#1f2937; background:transparent; }
     .brand-outline-btn:hover{ background:rgba(6,95,70,.06); }
     .brand-chip{ background-color:var(--chip-bg); color:var(--chip-text); border:1px solid var(--chip-border); }
+
+    /* soft gradient helpers */
+    .soft-sage { background: linear-gradient(180deg, var(--sage-50), #fff); }
+    .soft-clay { background: linear-gradient(180deg, var(--clay-50), #fff); }
+    .soft-sky  { background: linear-gradient(180deg, var(--sky-50),  #fff); }
+
+    /* golden ratio hero columns on md+ */
+    @media (min-width: 768px){
+      .golden-grid{
+        display:grid;
+        grid-template-columns: 1.618fr 1fr; /* 61.8% / 38.2% */
+        gap: 2.5rem;
+        align-items: center;
+      }
+    }
+
+    /* simple focus ring */
+    a, button { outline-color: var(--accent); outline-offset: 2px; }
   `}</style>
 );
 
@@ -81,23 +103,22 @@ const LINKEDIN = "https://www.linkedin.com/in/aman-p-kaur";
 const GITHUB = "https://github.com/amanpreetkaur05";
 const WEBSITE = "";
 const LOGO_MONO = "APK";
-const CALENDLY = "https://calendly.com/your-link/intro-20"; // replace with your real link
+const CALENDLY = "https://calendly.com/amanpeace52/30min";
 
 /* -----------------------------------------------
-   TAGS
+   TAGS (value props)
    ----------------------------------------------- */
 const TAGS = [
   "Editable & audit-ready",
   "SCORM/xAPI eLearning",
   "Traceable mapping",
   "AI contextualiser (beta)",
-  "Automated mapping checks",
   "Version-diff updates",
-  "Accessibility mindset",
+  "Trainer micro-onboarding",
 ];
 
 /* -----------------------------------------------
-   OFFERS
+   OFFERS (Solutions)
    ----------------------------------------------- */
 const OFFERS = [
   {
@@ -138,46 +159,62 @@ const OFFERS = [
 ];
 
 /* -----------------------------------------------
-   CATALOGUE — Nursing & IT (Cert III/IV)
+   CATALOGUE — UPDATED to your request
+   Categories: Individual Support, Disability Support,
+   Community Services, IT, Cyber Security, Business, Project Management
    ----------------------------------------------- */
 const PACKS = [
+  /* Care & Community */
   {
-    id: "nursing-cert-iii",
-    category: "Nursing",
+    id: "indiv-support-iii",
+    category: "Individual Support",
     level: "Certificate III",
-    code: "HLTxxx (sample)",
-    image:
-      "https://images.unsplash.com/photo-1584982751601-97dcc096659c?q=80&w=1200&auto=format&fit=crop",
+    code: "CHC3xx (sample)",
+    image: "https://images.unsplash.com/photo-1551829142-5f4d36d63c6e?q=80&w=1200&auto=format&fit=crop",
     includes: [
       "Editable Learner & Trainer Guides",
       "Assessment Tools + Marking Guides",
       "Mapping Matrix + Implementation Notes",
       "Optional: SCORM/xAPI eLearning",
     ],
-    sampleUnits: ["HLTINF001", "HLTAID011", "HLTWHS002"],
+    sampleUnits: ["CHCCCS015", "CHCDIV001", "HLTWHS002"],
   },
   {
-    id: "nursing-cert-iv",
-    category: "Nursing",
+    id: "disability-support-iv",
+    category: "Disability Support",
     level: "Certificate IV",
-    code: "HLTxxx (sample)",
-    image:
-      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200&auto=format&fit=crop",
+    code: "CHC4xx (sample)",
+    image: "https://images.unsplash.com/photo-1519494080410-f9aa76cb4283?q=80&w=1200&auto=format&fit=crop",
     includes: [
-      "Advanced clinical scenarios (simulated)",
-      "Assessment evidence plans",
+      "Complex scenarios & simulations",
+      "Evidence plans & assessor rubrics",
       "Mapping Matrix + validation checklist",
       "Optional: xAPI analytics dashboard",
     ],
-    sampleUnits: ["HLTENN001", "HLTENN006", "HLTENN008"],
+    sampleUnits: ["CHCDIS019", "CHCDIS011", "CHCADV001"],
   },
   {
-    id: "it-cert-iii",
+    id: "community-services-iii",
+    category: "Community Services",
+    level: "Certificate III",
+    code: "CHC3xx (sample)",
+    image: "https://images.unsplash.com/photo-1544531584-0f6fd07fe6c0?q=80&w=1200&auto=format&fit=crop",
+    includes: [
+      "Workplace tasks + role-play scripts",
+      "Assessor guides & moderation forms",
+      "Mapping Matrix with evidence coverage",
+      "Optional: SCORM modules",
+    ],
+    sampleUnits: ["CHCCOM005", "CHCLEG001", "CHCCCS016"],
+  },
+
+  /* IT & Cyber */
+  {
+    id: "it-iii",
     category: "Information Technology",
     level: "Certificate III",
-    code: "ICTxxx (sample)",
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",
+    code: "ICT3xx (sample)",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",
     includes: [
       "Hands-on labs + task sheets",
       "Assessor guides & rubrics",
@@ -187,19 +224,62 @@ const PACKS = [
     sampleUnits: ["ICTICT213", "ICTSAS214", "ICTICT214"],
   },
   {
-    id: "it-cert-iv",
+    id: "it-iv",
     category: "Information Technology",
     level: "Certificate IV",
-    code: "ICTxxx (sample)",
-    image:
-      "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop",
+    code: "ICT4xx (sample)",
+    image: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop",
     includes: [
       "Project-based tasks + datasets",
-      "Security & networking scenarios",
+      "Networking & admin scenarios",
       "Mapping Matrix + moderation forms",
       "Optional: xAPI analytics dashboard",
     ],
     sampleUnits: ["ICTSAS442", "ICTNWK420", "ICTICT451"],
+  },
+  {
+    id: "cyber-iv",
+    category: "Cyber Security",
+    level: "Certificate IV",
+    code: "ICT4cyb (sample)",
+    image: "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop",
+    includes: [
+      "Threat modelling & incident labs",
+      "Secure config and analysis tasks",
+      "Evidence plans & validation checklist",
+      "Optional: xAPI telemetry",
+    ],
+    sampleUnits: ["ICTSAS432", "ICTPRG431", "ICTNWK421"],
+  },
+
+  /* Business & PM */
+  {
+    id: "business-iii",
+    category: "Business",
+    level: "Certificate III",
+    code: "BSB301 (sample)",
+    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=1200&auto=format&fit=crop",
+    includes: [
+      "Practical admin projects",
+      "Communication templates & checklists",
+      "Mapping Matrix + trainer notes",
+      "Optional: SCORM onboarding modules",
+    ],
+    sampleUnits: ["BSBWHS311", "BSBXCM301", "BSBTEC301"],
+  },
+  {
+    id: "pm-essentials",
+    category: "Project Management",
+    level: "Skill Set / Kit",
+    code: "BSBPMG (kit)",
+    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format&fit=crop",
+    includes: [
+      "Scope, plan, risk & report pack",
+      "Simulated project with milestones",
+      "Assessor rubrics + mapping",
+      "Optional: xAPI dashboards",
+    ],
+    sampleUnits: ["BSBPMG430", "BSBPMG431", "BSBPMG434"],
   },
 ];
 
@@ -276,8 +356,17 @@ function TonePill({ tone = "sage", children }) {
   );
 }
 
+function Badge({ icon, text }) {
+  return (
+    <div className="flex items-center gap-2 border border-stone-200 bg-white rounded-lg px-3 py-2">
+      {icon}
+      <span className="text-sm text-stone-800">{text}</span>
+    </div>
+  );
+}
+
 /* -----------------------------------------------
-   HERO MONOGRAM (APK tile)
+   HERO MONOGRAM (APK tile) — golden ratio layout
    ----------------------------------------------- */
 function HeroMonogram() {
   return (
@@ -287,14 +376,15 @@ function HeroMonogram() {
           <TonePill tone="sage">Audit-aware by design</TonePill>
           <TonePill tone="sky">LMS-ready</TonePill>
         </div>
-        <div className="relative rounded-xl border border-stone-200 bg-white">
-          <div className="absolute -top-12 -left-12 w-40 h-40 rounded-full bg-emerald-100 opacity-70" />
-          <div className="absolute -bottom-10 -right-10 w-48 h-48 rounded-full bg-orange-100 opacity-70" />
+        <div className="relative rounded-xl border border-stone-200 soft-sage">
+          {/* soft layered shapes */}
+          <div className="absolute -top-12 -left-12 w-40 h-40 rounded-full" style={{ background: "rgba(167,243,208,.6)" }} />
+          <div className="absolute -bottom-10 -right-10 w-48 h-48 rounded-full" style={{ background: "rgba(254,215,170,.6)" }} />
           <div className="p-10 md:p-12 relative">
             <div className="text-5xl md:text-7xl font-extrabold tracking-tight text-stone-900">
               {LOGO_MONO}
             </div>
-            <div className="mt-2 text-stone-600">Editable • LMS-ready • Audit-aware</div>
+            <div className="mt-2 text-stone-700">Editable • LMS-ready • Audit-aware</div>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-3 mt-4">
@@ -305,15 +395,6 @@ function HeroMonogram() {
         </div>
       </div>
     </Card>
-  );
-}
-
-function Badge({ icon, text }) {
-  return (
-    <div className="flex items-center gap-2 border border-stone-200 bg-white rounded-lg px-3 py-2">
-      {icon}
-      <span className="text-sm text-stone-800">{text}</span>
-    </div>
   );
 }
 
@@ -344,13 +425,13 @@ function CredibilityStrip() {
 }
 
 /* -----------------------------------------------
-   OFFER GRID
+   OFFER GRID (Solutions)
    ----------------------------------------------- */
 function OfferGrid() {
   const container = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.08 } } };
   const item = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } } };
   return (
-    <section id="offers" className="max-w-7xl mx-auto px-6 pb-12">
+    <section className="max-w-7xl mx-auto px-6 pb-12">
       <SectionTitle eyebrow="Solutions" title="What We Deliver">
         Editable resources, LMS-ready eLearning, and ongoing updates — designed for Australian VET.
       </SectionTitle>
@@ -361,9 +442,9 @@ function OfferGrid() {
               <div
                 className="inline-flex items-center gap-2 text-xs rounded-full px-2 py-0.5 border"
                 style={{
-                  backgroundColor: o.tone === "clay" ? "rgb(255 247 237)" : o.tone === "sky" ? "rgb(240 249 255)" : "rgb(236 253 245)",
-                  borderColor:     o.tone === "clay" ? "rgb(254 215 170)" : o.tone === "sky" ? "rgb(186 230 253)" : "rgb(167 243 208)",
-                  color:           o.tone === "clay" ? "rgb(124 45 18)"  : o.tone === "sky" ? "rgb(7 89 133)"    : "rgb(6 95 70)"
+                  backgroundColor: o.tone === "clay" ? "var(--clay-50)" : o.tone === "sky" ? "var(--sky-50)" : "var(--sage-50)",
+                  borderColor:     o.tone === "clay" ? "var(--clay-200)" : o.tone === "sky" ? "var(--sky-200)" : "var(--sage-200)",
+                  color:           o.tone === "clay" ? "var(--clay-900)" : o.tone === "sky" ? "var(--sky-900)" : "var(--sage-900)"
                 }}
               >
                 {o.icon} <span>Offer</span>
@@ -378,7 +459,7 @@ function OfferGrid() {
         ))}
       </motion.div>
       <div className="mt-8 text-center">
-        <a href="#contact" className="brand-btn inline-flex items-center gap-2 rounded-lg px-6 py-3">
+        <a href="#/contact" className="brand-btn inline-flex items-center gap-2 rounded-lg px-6 py-3">
           Request a sample pack <ExternalLink className="h-4 w-4" />
         </a>
       </div>
@@ -387,7 +468,7 @@ function OfferGrid() {
 }
 
 /* -----------------------------------------------
-   WHY US
+   WHY US — competitive edges (what others lack)
    ----------------------------------------------- */
 function WhyUs() {
   const points = [
@@ -404,9 +485,9 @@ function WhyUs() {
                    `${THEME.sage.bg} ${THEME.sage.text} ${THEME.sage.border}`;
 
   return (
-    <section id="why-us" className="max-w-7xl mx-auto px-6 pb-12">
+    <section className="max-w-7xl mx-auto px-6 pb-12">
       <SectionTitle eyebrow="Differentiators" title="Why Choose APK Resources">
-        We go beyond “editable and compliant” to reduce audit risk and lift delivery quality.
+        Focused on real audit defensibility and delivery quality — areas many providers underinvest in.
       </SectionTitle>
       <div className="grid md:grid-cols-3 gap-6">
         {points.map((p) => (
@@ -435,7 +516,7 @@ function Process() {
     { k: "05", t: "Update", d: "Monitor changes; version-diff updates for subscribers." },
   ];
   return (
-    <section id="process" className="max-w-7xl mx-auto px-6 pb-12">
+    <section className="max-w-7xl mx-auto px-6 pb-12">
       <SectionTitle eyebrow="How It Works" title="A Simple, Defensible Workflow">
         Clear steps. Clear responsibilities. Fewer surprises.
       </SectionTitle>
@@ -463,13 +544,13 @@ function Pricing() {
   ];
   const toneToInline = (t) =>
     t === "clay"
-      ? { backgroundColor: "rgb(255 247 237)", borderColor: "rgb(254 215 170)", color: "rgb(124 45 18)" }
+      ? { backgroundColor: "var(--clay-50)", borderColor: "var(--clay-200)", color: "var(--clay-900)" }
       : t === "sky"
-      ? { backgroundColor: "rgb(240 249 255)", borderColor: "rgb(186 230 253)", color: "rgb(7 89 133)" }
-      : { backgroundColor: "rgb(236 253 245)", borderColor: "rgb(167 243 208)", color: "rgb(6 95 70)" };
+      ? { backgroundColor: "var(--sky-50)", borderColor: "var(--sky-200)", color: "var(--sky-900)" }
+      : { backgroundColor: "var(--sage-50)", borderColor: "var(--sage-200)", color: "var(--sage-900)" };
 
   return (
-    <section id="pricing" className="max-w-7xl mx-auto px-6 pb-12">
+    <section className="max-w-7xl mx-auto px-6 pb-12">
       <SectionTitle eyebrow="Simple & Clear" title="Pricing Anchors" />
       <div className="grid md:grid-cols-3 gap-6">
         {plans.map((p) => (
@@ -493,7 +574,7 @@ function Pricing() {
    ----------------------------------------------- */
 function CaseStudies() {
   return (
-    <section id="work" className="max-w-7xl mx-auto px-6 pb-8">
+    <section className="max-w-7xl mx-auto px-6 pb-8">
       <SectionTitle eyebrow="Outcomes" title="Selected Results">
         A few examples of reduced audit risk and smoother delivery.
       </SectionTitle>
@@ -526,16 +607,16 @@ function Testimonials() {
 }
 
 /* -----------------------------------------------
-   ABOUT
+   ABOUT — richer personal page
    ----------------------------------------------- */
 function About() {
   return (
-    <section id="about" className="max-w-7xl mx-auto px-6 pb-12">
+    <section className="max-w-7xl mx-auto px-6 pb-12">
       <SectionTitle eyebrow="About" title="Meet APK Resources">
-        Founded by {NAME_FULL}. We turn rigorous practice into practical, audit-aware learning resources.
+        Founded by {NAME_FULL}. We turn research depth into practical, audit-aware learning resources.
       </SectionTitle>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="golden-grid">
         <Card>
           <h3 className="font-semibold text-lg">Who we are</h3>
           <p className="mt-2 text-sm text-stone-700">
@@ -544,45 +625,53 @@ function About() {
           </p>
           <ul className="mt-3 text-sm text-stone-700 list-disc pl-4 space-y-1">
             <li>Based in {LOCATION}; serving RTOs across Australia</li>
-            <li>Focus: Nursing (HLT) & IT (ICT) — Certificate III & IV</li>
+            <li>Focus: Care & Community, IT & Cyber, Business & PM</li>
             <li>Mindset: accessible, plain-language, outcomes-first</li>
           </ul>
         </Card>
 
-        <HeroMonogram />
+        <Card className="soft-sky">
+          <h3 className="font-semibold text-lg">About Aman</h3>
+          <ul className="mt-2 text-sm text-stone-700 space-y-2">
+            <li>PhD researcher in digital trust & identity; applied design thinker.</li>
+            <li>Experienced in AI + LMS enablement, change adoption, and trainer support.</li>
+            <li>Advocates for accessible design and evidence-based assessment.</li>
+          </ul>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <SocialLink href={`mailto:${EMAIL}`}><Mail className="h-4 w-4" /> Email</SocialLink>
+            <SocialLink href={LINKEDIN}><Linkedin className="h-4 w-4" /> LinkedIn</SocialLink>
+            {GITHUB && <SocialLink href={GITHUB}><Github className="h-4 w-4" /> GitHub</SocialLink>}
+          </div>
+        </Card>
       </div>
     </section>
   );
 }
 
 /* -----------------------------------------------
-   CATALOGUE
+   CATALOGUE — dynamic category filter
    ----------------------------------------------- */
 function Catalogue() {
-  const tabs = [
-    { key: "all", label: "All" },
-    { key: "Nursing", label: "Nursing" },
-    { key: "Information Technology", label: "IT" },
-  ];
-  const [active, setActive] = React.useState("all");
-  const items = active === "all" ? PACKS : PACKS.filter((p) => p.category === active);
+  const categories = ["All", ...Array.from(new Set(PACKS.map(p => p.category)))];
+  const [active, setActive] = React.useState("All");
+  const items = active === "All" ? PACKS : PACKS.filter((p) => p.category === active);
 
   return (
-    <section id="catalogue" className="max-w-7xl mx-auto px-6 pb-12">
-      <SectionTitle eyebrow="Catalogue" title="Nursing & IT — Certificate III and IV">
+    <section className="max-w-7xl mx-auto px-6 pb-12">
+      <SectionTitle eyebrow="Catalogue" title="Care & Community • IT & Cyber • Business & PM">
         Choose a pack to request a sample and implementation notes.
       </SectionTitle>
 
       <div className="mb-6 flex flex-wrap gap-2">
-        {tabs.map((t) => (
+        {categories.map((label) => (
           <button
-            key={t.key}
-            onClick={() => setActive(t.key)}
+            key={label}
+            onClick={() => setActive(label)}
             className={`px-3 py-1.5 rounded-full text-sm border ${
-              active === t.key ? "brand-btn border-0" : "bg-white text-stone-700 border-stone-200 hover:border-stone-300"
+              active === label ? "brand-btn border-0" : "bg-white text-stone-700 border-stone-200 hover:border-stone-300"
             }`}
           >
-            {t.label}
+            {label}
           </button>
         ))}
       </div>
@@ -604,10 +693,10 @@ function Catalogue() {
               Sample units: {p.sampleUnits.join(", ")}
             </div>
             <div className="mt-4 flex gap-3">
-              <a href="#contact" className="brand-btn inline-flex items-center gap-2 rounded-lg px-4 py-2">
+              <a href="#/contact" className="brand-btn inline-flex items-center gap-2 rounded-lg px-4 py-2">
                 Request Sample <ArrowRight className="h-4 w-4" />
               </a>
-              <a href="#why-us" className="brand-outline-btn inline-flex items-center gap-2 rounded-lg px-4 py-2">
+              <a href="#/why-us" className="brand-outline-btn inline-flex items-center gap-2 rounded-lg px-4 py-2">
                 See Why Us
               </a>
             </div>
@@ -628,13 +717,13 @@ function FAQ() {
   const tone = (idx) => (idx % 3 === 0 ? "sage" : idx % 3 === 1 ? "clay" : "sky");
   const toneToInline = (t) =>
     t === "clay"
-      ? { backgroundColor: "rgb(255 247 237)", borderColor: "rgb(254 215 170)", color: "rgb(124 45 18)" }
+      ? { backgroundColor: "var(--clay-50)", borderColor: "var(--clay-200)", color: "var(--clay-900)" }
       : t === "sky"
-      ? { backgroundColor: "rgb(240 249 255)", borderColor: "rgb(186 230 253)", color: "rgb(7 89 133)" }
-      : { backgroundColor: "rgb(236 253 245)", borderColor: "rgb(167 243 208)", color: "rgb(6 95 70)" };
+      ? { backgroundColor: "var(--sky-50)", borderColor: "var(--sky-200)", color: "var(--sky-900)" }
+      : { backgroundColor: "var(--sage-50)", borderColor: "var(--sage-200)", color: "var(--sage-900)" };
 
   return (
-    <section id="faq" className="max-w-7xl mx-auto px-6 pb-12">
+    <section className="max-w-7xl mx-auto px-6 pb-12">
       <SectionTitle eyebrow="Clarity" title="Questions People Ask">
         Simple answers you can act on today.
       </SectionTitle>
@@ -663,20 +752,17 @@ function FAQ() {
       </div>
 
       <div className="mt-6 text-sm text-stone-700">
-        Still unclear? <a href="#contact" className="underline">Ask us</a> or book a short call — we’ll point you in the right direction.
+        Still unclear? <a href="#/contact" className="underline">Ask us</a> or book a short call — we’ll point you in the right direction.
       </div>
     </section>
   );
 }
 
 /* -----------------------------------------------
-   Calendly Inline (embed)
+   Calendly Inline (embed) — YOUR link
    ----------------------------------------------- */
 function CalendlyInline() {
-  const WIDGET_URL = "https://calendly.com/amanpeace52/30min";
-
   React.useEffect(() => {
-    // Load Calendly assets once
     const linkId = "calendly-css";
     const scriptId = "calendly-js";
     if (!document.getElementById(linkId)) {
@@ -697,34 +783,10 @@ function CalendlyInline() {
 
   return (
     <div className="rounded-xl border border-stone-200 bg-white p-4">
-      {/* This is your snippet converted to JSX */}
-      <div
-        className="calendly-inline-widget"
-        data-url={WIDGET_URL}
-        style={{ minWidth: "320px", height: "700px" }}
-      />
-      <div className="mt-2 text-xs text-stone-600">
-        Having issues loading?{" "}
-        <a
-          className="underline"
-          href={WIDGET_URL}
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          Open Calendly in a new tab
-        </a>.
-      </div>
-    </div>
-  );
-}
-
-
-  return (
-    <div className="rounded-xl border border-stone-200 bg-white p-4">
       <div
         className="calendly-inline-widget"
         data-url={CALENDLY}
-        style={{ minWidth: "320px", height: "720px" }}
+        style={{ minWidth: "320px", height: "700px" }}
       />
       <div className="mt-2 text-xs text-stone-600">
         Having issues loading?{" "}
@@ -748,10 +810,10 @@ function CtaBar() {
           <div className="text-2xl font-semibold mt-1">Request a sample pack or book a 20-min fit call</div>
         </div>
         <div className="flex gap-3">
-          <a href="#contact" className="brand-btn inline-flex items-center gap-2 rounded-lg px-5 py-3">
+          <a href="#/contact" className="brand-btn inline-flex items-center gap-2 rounded-lg px-5 py-3">
             Request Sample <FileText className="h-4 w-4" />
           </a>
-          <a href="#book-call" className="brand-outline-btn inline-flex items-center gap-2 rounded-lg px-5 py-3">
+          <a href="#/book" className="brand-outline-btn inline-flex items-center gap-2 rounded-lg px-5 py-3">
             Book 20-min Call <PhoneCall className="h-4 w-4" />
           </a>
         </div>
@@ -762,59 +824,59 @@ function CtaBar() {
 }
 
 /* -----------------------------------------------
-   PAGE
+   ROUTER (hash-based, simple)
    ----------------------------------------------- */
-export default function PortfolioSite() {
+const routes = {
+  home: "Home",
+  catalogue: "Catalogue",
+  solutions: "Solutions",
+  "why-us": "Why Us",
+  process: "Process",
+  pricing: "Pricing",
+  results: "Results",
+  faq: "FAQ",
+  about: "About",
+  contact: "Contact",
+  book: "Book Call",
+};
+
+function useHashRoute(defaultRoute = "home") {
+  const [route, setRoute] = React.useState(() => {
+    const raw = window.location.hash.replace("#/", "");
+    return raw && routes[raw] ? raw : defaultRoute;
+  });
+  React.useEffect(() => {
+    const onHash = () => {
+      const raw = window.location.hash.replace("#/", "");
+      if (routes[raw]) setRoute(raw);
+      window.scrollTo({ top: 0, behavior: "instant" });
+    };
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+  const go = (r) => {
+    if (routes[r]) window.location.hash = `/${r}`;
+  };
+  return [route, go];
+}
+
+/* -----------------------------------------------
+   PAGE WRAPPERS with transitions
+   ----------------------------------------------- */
+const pageVariants = {
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
+  exit: { opacity: 0, y: -16, transition: { duration: 0.25, ease: "easeIn" } },
+};
+
+/* -----------------------------------------------
+   HOME PAGE (golden ratio hero)
+   ----------------------------------------------- */
+function HomePage() {
   return (
-    <div className={`min-h-screen ${THEME.pageBg} ${THEME.text}`}>
-      <BrandStyles />
-
-      {/* Schema.org Organization */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: `${BRAND} — RTO Resources Publisher`,
-            founder: NAME_FULL,
-            address: LOCATION,
-            url: WEBSITE || LINKEDIN,
-            sameAs: [LINKEDIN, GITHUB].filter(Boolean),
-            contactPoint: [{ "@type": "ContactPoint", email: EMAIL, contactType: "sales" }],
-          }),
-        }}
-      />
-
-      {/* NAV */}
-      <header className="max-w-7xl mx-auto px-6 pt-8 pb-4">
-        <nav className="flex items-center justify-between">
-          <a href="#top" className="flex items-center gap-3">
-            <div className={`w-9 h-9 rounded-lg ${THEME.accentBg} ${THEME.accentText} flex items-center justify-center text-sm font-semibold`}>
-              {LOGO_MONO}
-            </div>
-            <div className="leading-tight">
-              <div className={`font-semibold tracking-tight ${THEME.brand}`}>{BRAND}</div>
-              <div className="text-xs text-stone-600">Editable. LMS-ready. Audit-aware.</div>
-            </div>
-          </a>
-          <div className="hidden md:flex gap-4 text-sm">
-            <a href="#about" className={`hover:underline ${THEME.brandSubtle}`}>About</a>
-            <a href="#catalogue" className={`hover:underline ${THEME.brandSubtle}`}>Catalogue</a>
-            <a href="#offers" className={`hover:underline ${THEME.brandSubtle}`}>Solutions</a>
-            <a href="#why-us" className={`hover:underline ${THEME.brandSubtle}`}>Why Us</a>
-            <a href="#process" className={`hover:underline ${THEME.brandSubtle}`}>Process</a>
-            <a href="#pricing" className={`hover:underline ${THEME.brandSubtle}`}>Pricing</a>
-            <a href="#work" className={`hover:underline ${THEME.brandSubtle}`}>Results</a>
-            <a href="#faq" className={`hover:underline ${THEME.brandSubtle}`}>FAQ</a>
-            <a href="#contact" className={`hover:underline ${THEME.brandSubtle}`}>Contact</a>
-          </div>
-        </nav>
-      </header>
-
-      {/* HERO */}
-      <section id="top" className="max-w-7xl mx-auto px-6 pb-10">
-        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="grid md:grid-cols-2 gap-10 items-center">
+    <>
+      <section className="max-w-7xl mx-auto px-6 pb-10">
+        <div className="golden-grid">
           <div>
             <p className="text-xs uppercase tracking-widest text-stone-600">{LOCATION}</p>
             <h1 className={`text-4xl md:text-6xl font-semibold leading-tight tracking-tight mt-2 ${THEME.brand}`}>
@@ -841,106 +903,194 @@ export default function PortfolioSite() {
             </div>
 
             <div className="mt-8 flex gap-3">
-              <a href="#contact" className="brand-btn inline-flex items-center gap-2 rounded-lg px-6 py-3">
+              <a href="#/contact" className="brand-btn inline-flex items-center gap-2 rounded-lg px-6 py-3">
                 Request Sample Pack <ExternalLink className="h-4 w-4" />
               </a>
-              <a href="#book-call" className="brand-outline-btn inline-flex items-center gap-2 rounded-lg px-6 py-3">
+              <a href="#/book" className="brand-outline-btn inline-flex items-center gap-2 rounded-lg px-6 py-3">
                 Book 20-min Call <PhoneCall className="h-4 w-4" />
               </a>
             </div>
           </div>
 
-          {/* Monogram tile */}
           <HeroMonogram />
-        </motion.div>
+        </div>
       </section>
 
-      {/* STRIP */}
       <CredibilityStrip />
-
-      {/* ABOUT */}
-      <About />
-
-      {/* CATALOGUE */}
-      <Catalogue />
-
-      {/* OFFERS */}
-      <OfferGrid />
-
-      {/* WHY US */}
-      <WhyUs />
-
-      {/* PROCESS */}
-      <Process />
-
-      {/* PRICING */}
-      <Pricing />
-
-      {/* PROOF */}
-      <CaseStudies />
-      <Testimonials />
-
-      {/* CTA BAR */}
       <CtaBar />
+    </>
+  );
+}
 
-      {/* BOOK CALL (Calendly embed) */}
-      <section id="book-call" className="max-w-7xl mx-auto px-6 pb-12">
-        <SectionTitle eyebrow="Fast Fit Check" title="Book a 20-minute call">
-          Pick a time that suits you. We’ll confirm fit, scope, and next steps.
-        </SectionTitle>
-        <CalendlyInline />
-      </section>
+/* -----------------------------------------------
+   CONTACT PAGE (form embed placeholder)
+   ----------------------------------------------- */
+function ContactPage() {
+  return (
+    <section className="max-w-7xl mx-auto px-6 pb-16">
+      <SectionTitle eyebrow="Next Step" title={`Work with ${NAME_SHORT}`}>
+        Request a sample pack, book a 20-min fit call, or ask something specific.
+      </SectionTitle>
+      <Card>
+        <div className={`rounded-xl overflow-hidden border ${THEME.border}`}>
+          <iframe
+            className="w-full h-[900px] md:h-[1000px]"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSd0Lr0lRCdfSJeYEplBbO8eokAWYFTYfitfrFNeW5tjPvFT7g/viewform?embedded=true"
+            title="Contact Enquiry"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            sandbox="allow-forms allow-scripts allow-same-origin allow-popups"
+          />
+        </div>
+        <div className="mt-3 text-xs text-stone-600">
+          Prefer email? <a className="underline" href={`mailto:${EMAIL}`}>Write to us</a>. We keep your details private.
+        </div>
+      </Card>
+    </section>
+  );
+}
 
-      {/* CONTACT */}
-      <section id="contact" className="max-w-7xl mx-auto px-6 pb-16">
-        <SectionTitle eyebrow="Next Step" title={`Work with ${NAME_SHORT}`}>
-          Request a sample pack, book a 20-min fit call, or ask something specific.
-        </SectionTitle>
-        <Card>
-          <div className={`rounded-xl overflow-hidden border ${THEME.border}`}>
-            <iframe
-              className="w-full h-[900px] md:h-[1000px]"
-              src="https://docs.google.com/forms/d/e/1FAIpQLSd0Lr0lRCdfSJeYEplBbO8eokAWYFTYfitfrFNeW5tjPvFT7g/viewform?embedded=true"
-              title="Contact Enquiry"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              sandbox="allow-forms allow-scripts allow-same-origin allow-popups"
-            />
+/* -----------------------------------------------
+   NAV
+   ----------------------------------------------- */
+function Nav({ route, go }) {
+  const Link = ({ to, children }) => (
+    <a
+      href={`#/${to}`}
+      onClick={(e) => { e.preventDefault(); go(to); }}
+      className={`hover:underline ${THEME.brandSubtle} ${route === to ? "font-semibold text-stone-900" : ""}`}
+    >
+      {children}
+    </a>
+  );
+
+  return (
+    <header className="max-w-7xl mx-auto px-6 pt-8 pb-4">
+      <nav className="flex items-center justify-between">
+        <a href="#/home" onClick={(e)=>{e.preventDefault();go("home");}} className="flex items-center gap-3">
+          <div className={`w-9 h-9 rounded-lg ${THEME.accentBg} ${THEME.accentText} flex items-center justify-center text-sm font-semibold`}>
+            {LOGO_MONO}
           </div>
-          <div className="mt-3 text-xs text-stone-600">
-            Prefer email? <a className="underline" href={`mailto:${EMAIL}`}>Write to us</a>. We keep your details private.
+          <div className="leading-tight">
+            <div className={`font-semibold tracking-tight ${THEME.brand}`}>{BRAND}</div>
+            <div className="text-xs text-stone-600">Editable. LMS-ready. Audit-aware.</div>
           </div>
-        </Card>
-      </section>
+        </a>
+        <div className="hidden md:flex gap-4 text-sm">
+          <Link to="home">Home</Link>
+          <Link to="about">About</Link>
+          <Link to="catalogue">Catalogue</Link>
+          <Link to="solutions">Solutions</Link>
+          <Link to="why-us">Why Us</Link>
+          <Link to="process">Process</Link>
+          <Link to="pricing">Pricing</Link>
+          <Link to="results">Results</Link>
+          <Link to="faq">FAQ</Link>
+          <Link to="contact">Contact</Link>
+        </div>
+      </nav>
+    </header>
+  );
+}
 
-      {/* FAQ */}
-      <FAQ />
+/* -----------------------------------------------
+   PAGE SWITCHER
+   ----------------------------------------------- */
+function PageSwitch({ route }) {
+  return (
+    <AnimatePresence mode="wait">
+      <motion.main
+        key={route}
+        variants={pageVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+      >
+        {route === "home"      && <HomePage />}
+        {route === "about"     && <About />}
+        {route === "catalogue" && <Catalogue />}
+        {route === "solutions" && <OfferGrid />}
+        {route === "why-us"    && <WhyUs />}
+        {route === "process"   && <Process />}
+        {route === "pricing"   && <Pricing />}
+        {route === "results"   && (<><CaseStudies /><Testimonials /></>)}
+        {route === "faq"       && <FAQ />}
+        {route === "contact"   && <ContactPage />}
+        {route === "book"      && (
+          <section className="max-w-7xl mx-auto px-6 pb-12">
+            <SectionTitle eyebrow="Fast Fit Check" title="Book a 30-minute call">
+              Pick a time that suits you. We’ll confirm fit, scope, and next steps.
+            </SectionTitle>
+            <CalendlyInline />
+          </section>
+        )}
+      </motion.main>
+    </AnimatePresence>
+  );
+}
 
-      {/* FOOTER */}
-      <footer className="max-w-7xl mx-auto px-6 pb-10 text-sm text-stone-700">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <div className={`w-8 h-8 rounded-lg ${THEME.accentBg} ${THEME.accentText} flex items-center justify-center text-sm font-semibold`}>
-              {LOGO_MONO}
-            </div>
-            <div>
-              <div className={`font-semibold ${THEME.brand}`}>{BRAND}</div>
-              <div className="text-xs text-stone-600">Editable. LMS-ready. Audit-aware.</div>
-            </div>
+/* -----------------------------------------------
+   FOOTER
+   ----------------------------------------------- */
+function Footer() {
+  return (
+    <footer className="max-w-7xl mx-auto px-6 pb-10 text-sm text-stone-700">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className={`w-8 h-8 rounded-lg ${THEME.accentBg} ${THEME.accentText} flex items-center justify-center text-sm font-semibold`}>
+            {LOGO_MONO}
           </div>
-          <div className="flex items-center gap-3">
-            <a href={LINKEDIN} className={`inline-flex items-center gap-1 hover:underline ${THEME.brandSubtle}`}>
-              <Linkedin className="h-4 w-4" /> LinkedIn
-            </a>
-            {GITHUB && (
-              <a href={GITHUB} className={`inline-flex items-center gap-1 hover:underline ${THEME.brandSubtle}`}>
-                <Github className="h-4 w-4" /> GitHub
-              </a>
-            )}
+          <div>
+            <div className={`font-semibold ${THEME.brand}`}>{BRAND}</div>
+            <div className="text-xs text-stone-600">Editable. LMS-ready. Audit-aware.</div>
           </div>
         </div>
-        <div className="mt-4">© {new Date().getFullYear()} {NAME_FULL}. All rights reserved.</div>
-      </footer>
+        <div className="flex items-center gap-3">
+          <a href={LINKEDIN} className={`inline-flex items-center gap-1 hover:underline ${THEME.brandSubtle}`}>
+            <Linkedin className="h-4 w-4" /> LinkedIn
+          </a>
+          {GITHUB && (
+            <a href={GITHUB} className={`inline-flex items-center gap-1 hover:underline ${THEME.brandSubtle}`}>
+              <Github className="h-4 w-4" /> GitHub
+            </a>
+          )}
+        </div>
+      </div>
+      <div className="mt-4">© {new Date().getFullYear()} {NAME_FULL}. All rights reserved.</div>
+    </footer>
+  );
+}
+
+/* -----------------------------------------------
+   APP (single export) — avoids extra braces issues
+   ----------------------------------------------- */
+export default function App() {
+  const [route, go] = useHashRoute("home");
+
+  return (
+    <div className={`min-h-screen ${THEME.pageBg} ${THEME.text}`}>
+      <BrandStyles />
+
+      {/* Schema.org Organization */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: `${BRAND} — RTO Resources Publisher`,
+            founder: NAME_FULL,
+            address: LOCATION,
+            url: WEBSITE || LINKEDIN,
+            sameAs: [LINKEDIN, GITHUB].filter(Boolean),
+            contactPoint: [{ "@type": "ContactPoint", email: EMAIL, contactType: "sales" }],
+          }),
+        }}
+      />
+
+      <Nav route={route} go={go} />
+      <PageSwitch route={route} />
+      <Footer />
     </div>
   );
 }
