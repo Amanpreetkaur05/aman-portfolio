@@ -1018,7 +1018,7 @@ function PageSwitch({ route }) {
         {route === "contact"   && <ContactPage />}
         {route === "book"      && (
           <section className="max-w-7xl mx-auto px-6 pb-12">
-            <SectionTitle eyebrow="Fast Fit Check" title="Book a 30-minute call">
+            <SectionTitle eyebrow="Fast Fit Check" title="Book a 20-minute call">
               Pick a time that suits you. We’ll confirm fit, scope, and next steps.
             </SectionTitle>
             <CalendlyInline />
